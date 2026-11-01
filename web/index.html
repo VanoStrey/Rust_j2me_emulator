@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rust J2ME Web Player — Client-Side WASM MicroEdition Emulator</title>
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --panel-bg: rgba(20, 26, 40, 0.75);
+      --panel-border: rgba(56, 75, 112, 0.45);
+      --accent-cyan: #00e5ff;
+      --accent-glow: rgba(0, 229, 255, 0.25);
+      --accent-magenta: #ff007f;
+      --phone-case: #161a26;
+      --phone-rim: #2d364d;
+      --key-base: #252c3f;
+      --key-hover: #37425f;
+      --key-active: #00e5ff;
+      --text-main: #f0f4fc;
+      --text-muted: #8b9db5;
+      --success: #00e676;
+      --warning: #ffb300;
+      --danger: #ff5252;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 15%, #182238 0%, var(--bg-dark) 75%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .brand-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 10%, var(--accent-cyan) 90%);
+      -webkit-background-clip: text;
+      -webkit-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .badge-capsule {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    .app-nav {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 4px;
+      background: rgba(18, 24, 38, 0.85);
+      border: 1px solid var(--panel-border);
+      border-radius: 9999px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-tab {
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-tab.active {
+      color: #05070a;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .badge-fps {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(0, 229, 255, 0.15);
+      color: var(--accent-cyan);
+    }
+
+    .badge-clean {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(0, 230, 118, 0.15);
+      color: var(--success);
+    }
+
+    .badge-danger {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 82, 82, 0.2);
+      color: var(--danger);
+    }
+
+    .graphs-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sparkline-wrapper, .vu-wrapper {
+      background: #0d121d;
+      border: 1px solid rgba(56, 75, 112, 0.35);
+      border-radius: 8px;
+      padding: 6px 8px;
+      flex: 1;
+    }
+
+    .vu-wrapper {
+      flex: 0 0 106px;
+    }
+
+    .graph-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .workspace {
+      display: flex;
+      gap: 28px;
+      max-width: 1100px;
+      width: 100%;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    /* Handset Chassis */
+    .handset-container {
+      background: linear-gradient(165deg, #222838 0%, var(--phone-case) 60%, #0d1017 100%);
+      border: 3px solid var(--phone-rim);
+      border-radius: 36px;
+      padding: 20px 18px 28px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 320px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .speaker-grille {
+      width: 50px;
+      height: 5px;
+      background: #090c13;
+      border-radius: 3px;
+      margin-bottom: 14px;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+    }
+
+    .screen-well {
+      background: #05070a;
+      border: 2px solid #333d54;
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95);
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #game-canvas {
+      display: block;
+      background: #000;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border-radius: 4px;
+      width: 240px;
+      height: 320px;
+      max-width: 280px;
+      max-height: 360px;
+      object-fit: contain;
+    }
+
+    .screen-overlay-pause {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 14, 23, 0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .screen-overlay-pause.visible {
+      display: flex;
+    }
+
+    /* Authentic Frame Pacer Selector */
+    .fps-pacer-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 14px;
+      width: 100%;
+    }
+
+    .fps-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fps-options {
+      display: flex;
+      gap: 4px;
+      background: #090d16;
+      border: 1px solid #1f2b42;
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    .fps-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 4px 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .fps-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .fps-btn.active {
+      background: var(--accent-cyan);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+    }
+
+    /* Keypad Grid */
+    .keypad-matrix {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .softkey-row {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .dpad-cluster {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .num-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .k-btn {
+      background: linear-gradient(180deg, var(--key-base) 0%, #1a202e 100%);
+      border: 1px solid #3c4661;
+      color: var(--text-main);
+      border-radius: 8px;
+      padding: 10px 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+      transition: all 0.08s ease;
+      touch-action: manipulation;
+    }
+
+    .k-btn:hover {
+      background: linear-gradient(180deg, var(--key-hover) 0%, #262e42 100%);
+      border-color: #55638a;
+    }
+
+    .k-btn:active, .k-btn.active {
+      background: var(--accent-cyan);
+      color: #050b14;
+      border-color: #ffffff;
+      transform: translateY(2px);
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    .k-btn .sub {
+      font-size: 0.58rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .k-btn:active .sub, .k-btn.active .sub {
+      color: #050b14;
+    }
+
+    .k-btn.action {
+      background: linear-gradient(180deg, #2a3449 0%, #1e2638 100%);
+      border-color: #48567a;
+    }
+
+    .k-btn.fire {
+      background: linear-gradient(180deg, #1b4965 0%, #112d40 100%);
+      border-color: #00bcd4;
+      color: #e0f7fa;
+    }
+
+    /* Side Dashboard */
+    .dashboard-panel {
+      flex: 1;
+      min-width: 320px;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .glass-card {
+      background: var(--panel-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    /* Drop zone */
+    .drop-area {
+      border: 2px dashed rgba(0, 229, 255, 0.4);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(0, 229, 255, 0.03);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .drop-area:hover, .drop-area.dragover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.08);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .drop-area input[type="file"] {
+      display: none;
+    }
+
+    /* Quick Game Select */
+    .quick-games {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .game-pill {
+      background: rgba(35, 45, 68, 0.6);
+      border: 1px solid rgba(70, 88, 128, 0.4);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .game-pill:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Manifest info */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 6px 12px;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
+    }
+
+    .meta-val {
+      font-weight: 600;
+      color: #fff;
+      word-break: break-all;
+    }
+
+    /* Resolution & Screen Controls */
+    .control-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    select, button.btn-action {
+      background: #1b2234;
+      border: 1px solid #3c4969;
+      color: var(--text-main);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    select:hover, button.btn-action:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    button.btn-action.primary {
+      background: linear-gradient(135deg, #0088cc, #00b4d8);
+      border: none;
+      color: #fff;
+    }
+
+    button.btn-action.danger {
+      background: rgba(255, 82, 82, 0.15);
+      border-color: rgba(255, 82, 82, 0.4);
+      color: var(--danger);
+    }
+
+    /* Telemetry HUD */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .telemetry-box {
+      background: rgba(15, 20, 32, 0.6);
+      border: 1px solid rgba(45, 58, 86, 0.5);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .telemetry-box .metric-name {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .telemetry-box .metric-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Status badge */
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      margin-right: 6px;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .status-indicator.warn {
+      background: var(--warning);
+      box-shadow: 0 0 8px var(--warning);
+    }
+
+    /* Keyboard help tooltip */
+    .key-help {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+
+    .key-tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #fff;
+      font-family: monospace;
+      font-size: 0.72rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="brand-title">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-cyan);">
+        <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+        <line x1="12" y1="18" x2="12" y2="18.01"></line>
+      </svg>
+      Rust J2ME Web Player
+    </h1>
+    <div class="badge-capsule">
+      <span class="status-indicator" id="core-status-dot"></span>
+      <span id="core-status-text">WASM Core: Ready</span> &bull; Zero-Copy 60 FPS &bull; Soft-Clipped Web Audio
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="app-nav">
+      <a href="index.html" class="nav-tab active">🦀 Rust + WASM J2ME</a>
+      <a href="freej2me.html" class="nav-tab">☕ FreeJ2ME (Java/CheerpJ)</a>
+      <a href="compare.html" class="nav-tab">⚖️ Side-by-Side Benchmark</a>
+    </nav>
+  </header>
+
+  <main class="workspace">
+    <!-- Retro Handset Interface -->
+    <div class="handset-container">
+      <div class="speaker-grille"></div>
+
+      <div class="screen-well">
+        <canvas id="game-canvas" width="240" height="320"></canvas>
+        <div class="screen-overlay-pause" id="pause-overlay">
+          <span>PAUSED</span>
+          <span style="font-size: 0.75rem; font-weight: 500; color: #fff; margin-top: 6px;">Click Resume to continue</span>
+        </div>
+      </div>
+
+      <!-- Speed & Authentic Frame Pacing Selector -->
+      <div class="fps-pacer-bar">
+        <label class="fps-label">Authentic Speed Limiter</label>
+        <div class="fps-options" id="fps-selector">
+          <button class="fps-btn" data-fps="15" title="🐢 15 FPS (Nokia S40 Old)">🐢 15 FPS</button>
+          <button class="fps-btn" data-fps="20" title="📱 20 FPS (Authentic 2004)">📱 20 FPS</button>
+          <button class="fps-btn active" data-fps="30" title="⚡ 30 FPS (Standard MIDP 2.0)">⚡ 30 FPS</button>
+          <button class="fps-btn" data-fps="60" title="🚀 60 FPS (Modern Fast)">🚀 60 FPS</button>
+        </div>
+      </div>
+
+      <!-- Integrated Virtual Keypad -->
+      <div class="keypad-matrix">
+        <div class="softkey-row">
+          <button class="k-btn action" id="key-soft-left" data-code="-6">Soft 1<span class="sub">[Q]</span></button>
+          <button class="k-btn action fire" id="key-fire-center" data-code="-5">FIRE<span class="sub">[Enter]</span></button>
+          <button class="k-btn action" id="key-soft-right" data-code="-7">Soft 2<span class="sub">[E]</span></button>
+        </div>
+
+        <div class="dpad-cluster">
+          <div></div>
+          <button class="k-btn action" id="key-up" data-code="-1">&uarr;<span class="sub">[W]</span></button>
+          <div></div>
+
+          <button class="k-btn action" id="key-left" data-code="-3">&larr;<span class="sub">[A]</span></button>
+          <button class="k-btn action fire" id="key-fire" data-code="-5">&bull;</button>
+          <button class="k-btn action" id="key-right" data-code="-4">&rarr;<span class="sub">[D]</span></button>
+
+          <div></div>
+          <button class="k-btn action" id="key-down" data-code="-2">&darr;<span class="sub">[S]</span></button>
+          <div></div>
+        </div>
+
+        <div class="num-matrix">
+          <button class="k-btn" data-code="49">1 <span class="sub">.,_</span></button>
+          <button class="k-btn" data-code="50">2 <span class="sub">ABC</span></button>
+          <button class="k-btn" data-code="51">3 <span class="sub">DEF</span></button>
+
+          <button class="k-btn" data-code="52">4 <span class="sub">GHI</span></button>
+          <button class="k-btn" data-code="53">5 <span class="sub">JKL</span></button>
+          <button class="k-btn" data-code="54">6 <span class="sub">MNO</span></button>
+
+          <button class="k-btn" data-code="55">7 <span class="sub">PQRS</span></button>
+          <button class="k-btn" data-code="56">8 <span class="sub">TUV</span></button>
+          <button class="k-btn" data-code="57">9 <span class="sub">WXYZ</span></button>
+
+          <button class="k-btn" data-code="42">* <span class="sub">+</span></button>
+          <button class="k-btn" data-code="48">0 <span class="sub">[space]</span></button>
+          <button class="k-btn" data-code="35"># <span class="sub">&boxminus;</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Control & Telemetry Panel -->
+    <div class="dashboard-panel">
+
+      <!-- JAR Loader & Quick Launcher -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>Game Cartridge / .JAR</span>
+          <span style="font-size: 0.75rem; color: var(--accent-cyan);" id="game-status-badge">No Game Loaded</span>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div class="drop-area" id="drop-zone">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto 8px; color: var(--accent-cyan); display: block;">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <p style="font-weight: 700; margin-bottom: 2px;">Drag & Drop .JAR + .JAD files here</p>
+          <p style="font-size: 0.75rem; color: var(--text-muted);">Supports simultaneous .JAR + .JAD drop &bull; 0 server dependency</p>
+          <input type="file" id="file-picker" accept=".jar,.jad" multiple />
+        </div>
+
+        <!-- Quick Game Picker -->
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; margin-bottom: 6px; font-weight: 600;">CANONICAL PRESETS:</p>
+        <div class="quick-games">
+          <div class="game-pill" data-src="bounce_tales.jar" data-res="240x320">Bounce Tales</div>
+          <div class="game-pill" data-src="gravity_defied.jar" data-res="176x220">Gravity Defied</div>
+          <div class="game-pill" data-src="doom_rpg.jar" data-res="240x320">Doom RPG</div>
+          <div class="game-pill" data-src="prince_sands.jar" data-res="176x208">Prince of Persia</div>
+          <div class="game-pill" data-src="castlevania.jar" data-res="240x320">Castlevania</div>
+          <div class="game-pill" data-src="heroes_lore.jar" data-res="240x320">Heroes Lore</div>
+          <div class="game-pill" data-src="cyberpunk.jar" data-res="240x320">Cyberpunk: Arasaka</div>
+        </div>
+      </div>
+
+      <!-- Custom JAD Properties & Injections -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>Custom JAD Properties</span>
+          <span style="font-size: 0.72rem; color: var(--accent-cyan);" id="jad-prop-badge">Active: Auto</span>
+        </div>
+        <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px;">
+          Override or inject JAD attributes (format: <code>Key: Value</code>). Automatically applies <code>HO-Demo: PAID</code> for Heroes Lore.
+        </p>
+        <textarea id="jad-properties-input" rows="3" style="width: 100%; background: #0c101c; border: 1px solid #2d3b58; border-radius: 8px; color: #00e5ff; font-family: monospace; font-size: 0.75rem; padding: 8px; resize: vertical; margin-bottom: 8px;" placeholder="HO-Demo: PAID&#10;Custom-Property: Value"></textarea>
+        <div class="control-row" style="margin-top: 0;">
+          <button class="btn-action primary" id="btn-apply-props">Apply Properties</button>
+          <button class="btn-action" id="btn-load-jad-file">Load .JAD File</button>
+          <input type="file" id="jad-file-picker" accept=".jad" style="display: none;" />
+        </div>
+      </div>
+
+      <!-- MIDlet Metadata & Resolution Config -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>MIDlet Manifest Profile</span>
+          <span style="font-size: 0.72rem; color: var(--text-muted);" id="res-source-badge">AUTO-DETECT</span>
+        </div>
+
+        <div class="meta-grid">
+          <span class="meta-label">Title:</span>
+          <span class="meta-val" id="meta-title">&mdash;</span>
+
+          <span class="meta-label">Vendor:</span>
+          <span class="meta-val" id="meta-vendor">&mdash;</span>
+
+          <span class="meta-label">Version:</span>
+          <span class="meta-val" id="meta-version">&mdash;</span>
+
+          <span class="meta-label">Main Class:</span>
+          <span class="meta-val" id="meta-class">&mdash;</span>
+        </div>
+
+        <div class="control-row">
+          <label style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Display Resolution:</label>
+          <select id="screen-res-select">
+            <option value="128x128">128 x 128 (Series 40 v1)</option>
+            <option value="128x160">128 x 160 (Nokia 3110)</option>
+            <option value="176x208">176 x 208 (Series 60 v1/v2)</option>
+            <option value="176x220">176 x 220 (SE K700/K750)</option>
+            <option value="208x208">208 x 208 (Nokia 6230)</option>
+            <option value="240x320" selected>240 x 320 (Series 60 v3 QVGA)</option>
+            <option value="320x240">320 x 240 (Landscape QVGA)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Emulation Controls & RMS Save State -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>Emulation & RMS State</span>
+          <span style="font-size: 0.72rem; color: var(--success);" id="rms-badge">RMS: Synced</span>
+        </div>
+
+        <div class="control-row">
+          <button class="btn-action" id="btn-pause">Pause</button>
+          <button class="btn-action" id="btn-reset">Reset</button>
+          <button class="btn-action" id="btn-audio-mute">Mute Audio</button>
+          <button class="btn-action" id="btn-screenshot">Screenshot</button>
+          <button class="btn-action" id="btn-export-rms">Export RMS</button>
+          <button class="btn-action" id="btn-import-rms">Import RMS</button>
+          <input type="file" id="rms-file-picker" accept=".bin" style="display:none;" />
+        </div>
+
+        <div class="key-help">
+          <strong>Desktop Keyboard Map:</strong> <span class="key-tag">Arrows/WASD</span> Move &bull; <span class="key-tag">Enter/Space</span> FIRE/OK &bull; <span class="key-tag">Q</span> SoftLeft &bull; <span class="key-tag">E</span> SoftRight &bull; <span class="key-tag">0-9, *, #</span> Numpad.
+        </div>
+      </div>
+
+      <!-- Live Performance & Telemetry HUD -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>Live Engine Telemetry</span>
+          <span id="live-fps" style="color: var(--accent-cyan); font-weight: 800;">60 FPS</span>
+        </div>
+
+        <div class="telemetry-grid">
+          <div class="telemetry-box">
+            <div class="metric-name">VM Step Latency</div>
+            <div class="metric-value" id="stat-vm-time">0.12 ms</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="metric-name">Instructions Executed</div>
+            <div class="metric-value" id="stat-inst-count">0</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="metric-name">Framebuffer Publishes</div>
+            <div class="metric-value" id="stat-publishes">0</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="metric-name">WASM Memory Heap</div>
+            <div class="metric-value" id="stat-heap-mem">0.0 MB</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="metric-name">Audio Engine Stream</div>
+            <div class="metric-value" id="stat-audio-stream">0 samples</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unified Telemetry HUD & Sparklines -->
+      <div id="telemetry-container"></div>
+
+    </div>
+  </main>
+
+  <script type="module">
+    import { TelemetryTracker, TelemetryUI } from "./telemetry.js";
+
+    // Telemetry Engine
+    const tracker = new TelemetryTracker("Rust WASM");
+    let telemetryUI = null;
+
+    // State
+    let wasm = null;
+    let memory = null;
+    let audioCtx = null;
+    let masterGainNode = null;
+    let compressorNode = null;
+    let biquadFilter = null;
+    let scriptNode = null;
+    let audioBufferPtr = null;
+    let audioPrebuffered = false;
+    let lastAudioSample = 0.0;
+    let isMuted = false;
+    let isPaused = false;
+    let currentJarHash = "default_session";
+    let currentJarBytes = null;
+    let screenW = 240;
+    let screenH = 320;
+
+    // Timing & Metrics
+    let lastTimestamp = performance.now();
+    let frameCounter = 0;
+    let lastFpsUpdate = performance.now();
+    let lastRmsSync = performance.now();
+    let targetFps = 30;
+    let lastTickTime = performance.now();
+
+    // DOM Elements
+    const canvas = document.getElementById("game-canvas");
+    const ctx = canvas.getContext("2d", { alpha: false });
+    const pauseOverlay = document.getElementById("pause-overlay");
+    const resSelect = document.getElementById("screen-res-select");
+    const dropZone = document.getElementById("drop-zone");
+    const filePicker = document.getElementById("file-picker");
+    const rmsFilePicker = document.getElementById("rms-file-picker");
+
+    // Telemetry DOM
+    const liveFps = document.getElementById("live-fps");
+    const statVmTime = document.getElementById("stat-vm-time");
+    const statInstCount = document.getElementById("stat-inst-count");
+    const statPublishes = document.getElementById("stat-publishes");
+    const statHeapMem = document.getElementById("stat-heap-mem");
+    const statAudioStream = document.getElementById("stat-audio-stream");
+    const rmsBadge = document.getElementById("rms-badge");
+    const gameStatusBadge = document.getElementById("game-status-badge");
+
+    // JAD & Manifest DOM
+    const metaTitle = document.getElementById("meta-title");
+    const metaVendor = document.getElementById("meta-vendor");
+    const metaVersion = document.getElementById("meta-version");
+    const metaClass = document.getElementById("meta-class");
+    const resSourceBadge = document.getElementById("res-source-badge");
+    const jadPropInput = document.getElementById("jad-properties-input");
+    const jadPropBadge = document.getElementById("jad-prop-badge");
+    const btnApplyProps = document.getElementById("btn-apply-props");
+    const btnLoadJadFile = document.getElementById("btn-load-jad-file");
+    const jadFilePicker = document.getElementById("jad-file-picker");
+
+    // --- JAD Properties Resolver ---
+    function applyJadPropertiesFromText(text) {
+      if (!wasm) return;
+      const enc = new TextEncoder();
+      const jadBytes = enc.encode(text);
+      if (wasm.emu_load_jad) {
+        const ptr = wasm.emu_alloc_buffer(jadBytes.length);
+        new Uint8Array(memory.buffer, ptr, jadBytes.length).set(jadBytes);
+        wasm.emu_load_jad(ptr, jadBytes.length);
+        wasm.emu_free_buffer(ptr, jadBytes.length);
+      }
+      let count = 0;
+      for (const line of text.split("\n")) {
+        const clean = line.trim();
+        if (!clean || clean.startsWith("#")) continue;
+        const idx = clean.indexOf(":");
+        if (idx > 0) {
+          const k = clean.slice(0, idx).trim();
+          const v = clean.slice(idx + 1).trim();
+          const kBytes = enc.encode(k);
+          const vBytes = enc.encode(v);
+          const kPtr = wasm.emu_alloc_buffer(kBytes.length);
+          const vPtr = wasm.emu_alloc_buffer(vBytes.length);
+          new Uint8Array(memory.buffer, kPtr, kBytes.length).set(kBytes);
+          new Uint8Array(memory.buffer, vPtr, vBytes.length).set(vBytes);
+          wasm.emu_set_app_property(kPtr, kBytes.length, vPtr, vBytes.length);
+          wasm.emu_free_buffer(kPtr, kBytes.length);
+          wasm.emu_free_buffer(vPtr, vBytes.length);
+          count++;
+        }
+      }
+      if (jadPropBadge) {
+        jadPropBadge.textContent = `Applied (${count} props)`;
+        jadPropBadge.style.color = "var(--success)";
+      }
+    }
+
+    // --- 1. WASM Core Initialization ---
+    async function initEmulator() {
+      try {
+        const telEl = document.getElementById("telemetry-container");
+        if (telEl) {
+          telemetryUI = new TelemetryUI(telEl, tracker);
+        }
+
+        let response = await fetch("./j2me_wasm.wasm");
+        if (!response.ok) {
+          response = await fetch("./emulator.wasm");
+        }
+        if (!response.ok) {
+          response = await fetch("../target/wasm32-unknown-unknown/release/j2me_wasm.wasm");
+        }
+        const wasmBytes = await response.arrayBuffer();
+        const { instance } = await WebAssembly.instantiate(wasmBytes, {});
+        wasm = instance.exports;
+        memory = wasm.memory;
+
+        wasm.emu_init(screenW, screenH, 44100);
+        audioBufferPtr = wasm.emu_alloc_buffer(4096 * 4); // 4096 floats (16KB)
+
+        tracker.recordColdBoot();
+
+        // Expose on window for automation & diagnostics
+        window.wasm = wasm;
+        window.memory = memory;
+        window.telemetryTracker = tracker;
+        window.loadJarBuffer = loadJarBuffer;
+        window.setScreenResolution = setScreenResolution;
+        window.setTargetFps = setTargetFps;
+        window.getTargetFps = () => targetFps;
+        window.saveRmsToLocalStorage = saveRmsToLocalStorage;
+        window.restoreRmsFromLocalStorage = restoreRmsFromLocalStorage;
+        window.applyJadPropertiesFromText = applyJadPropertiesFromText;
+        window.canvas = canvas;
+        window.ctx = ctx;
+        window.emu_get_auto_healing_count = () => {
+          return wasm && wasm.emu_get_auto_healing_count ? wasm.emu_get_auto_healing_count() : 0;
+        };
+        window.emu_get_last_auto_healing_signature = () => {
+          if (!wasm || !wasm.emu_get_last_auto_healing_signature_ptr) return "";
+          const ptr = wasm.emu_get_last_auto_healing_signature_ptr();
+          const len = wasm.emu_get_last_auto_healing_signature_len();
+          if (!ptr || !len) return "";
+          return new TextDecoder().decode(new Uint8Array(memory.buffer, ptr, len));
+        };
+
+        if (wasm.emu_set_target_fps) {
+          wasm.emu_set_target_fps(targetFps);
+        }
+
+        document.getElementById("core-status-text").textContent = "WASM Core: Active";
+        console.log("[J2ME-WASM] Core initialized successfully (240x320 @ 44.1kHz).");
+
+        // Polling interval for deep telemetry
+        setInterval(() => {
+          if (!wasm) return;
+          let peak = 0;
+          let clipped = 0;
+          let guestObjs = 0;
+          let gcRuns = 0;
+          if (wasm.emu_get_audio_peak_level) peak = wasm.emu_get_audio_peak_level();
+          if (wasm.emu_get_clipped_samples) clipped = Number(wasm.emu_get_clipped_samples());
+          if (wasm.emu_get_heap_object_count) guestObjs = wasm.emu_get_heap_object_count();
+          if (wasm.emu_get_gc_count) gcRuns = wasm.emu_get_gc_count();
+
+          tracker.updateMetrics({
+            wasmMemoryBuffer: memory.buffer,
+            vmHeapObjects: guestObjs,
+            gcRuns: gcRuns,
+            audioPeak: peak,
+            audioClippedSamples: clipped
+          });
+          if (telemetryUI) telemetryUI.render();
+        }, 200);
+
+        // Support ?game=<url_or_filename> for automated fuzzing and testing
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameParam = urlParams.get("game");
+        if (gameParam) {
+          try {
+            console.log(`[AutoLoad] Loading game from query param: ${gameParam}`);
+            const resp = await fetch(gameParam);
+            if (resp.ok) {
+              const buf = await resp.arrayBuffer();
+              await loadJarBuffer(new Uint8Array(buf), gameParam);
+            } else {
+              console.error(`[AutoLoad] HTTP error ${resp.status} fetching ${gameParam}`);
+            }
+          } catch (e) {
+            console.error(`[AutoLoad] Exception loading game ${gameParam}:`, e);
+          }
+        }
+
+        requestAnimationFrame(renderLoop);
+      } catch (err) {
+        console.error("[FATAL] WASM Initialization failed:", err);
+        document.getElementById("core-status-text").textContent = "WASM Core: Failed";
+        document.getElementById("core-status-dot").className = "status-indicator warn";
+      }
+    }
+
+    function setTargetFps(fps) {
+      targetFps = Number(fps) || 30;
+      if (wasm && wasm.emu_set_target_fps) {
+        wasm.emu_set_target_fps(targetFps);
+      }
+      document.querySelectorAll('#fps-selector .fps-btn').forEach(b => {
+        b.classList.toggle('active', Number(b.dataset.fps) === targetFps);
+      });
+    }
+
+    document.querySelectorAll('#fps-selector .fps-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        setTargetFps(Number(b.dataset.fps));
+      });
+    });
+
+    // --- 2. Zero-Copy Authentic Framerate Pacing & Audio Loop ---
+    function renderLoop(timestamp) {
+      frameCounter++;
+      if (timestamp - lastFpsUpdate >= 1000) {
+        liveFps.textContent = `${frameCounter} FPS`;
+        frameCounter = 0;
+        lastFpsUpdate = timestamp;
+      }
+
+      if (wasm && !isPaused) {
+        const frameInterval = 1000 / targetFps;
+        if (timestamp - lastTickTime >= frameInterval) {
+          lastTickTime = timestamp - ((timestamp - lastTickTime) % frameInterval);
+
+          const stepStart = performance.now();
+          wasm.emu_tick(frameInterval);
+          const stepTime = performance.now() - stepStart;
+          tracker.recordFrame(stepTime);
+
+          // Render Framebuffer
+          const fbPtr = wasm.emu_get_framebuffer_ptr();
+          const fbLen = wasm.emu_get_framebuffer_len();
+
+          if (fbPtr && fbLen) {
+            const bufferView = new Uint8ClampedArray(memory.buffer, fbPtr, fbLen);
+            let imgData;
+            try {
+              imgData = new ImageData(bufferView, screenW, screenH);
+            } catch (_) {
+              imgData = ctx.createImageData(screenW, screenH);
+              imgData.data.set(bufferView);
+            }
+            ctx.putImageData(imgData, 0, 0);
+            tracker.recordPaint();
+          }
+
+          // Stream Audio
+          if (!isMuted) {
+            streamAudio();
+          }
+
+          // Update telemetry
+          statVmTime.textContent = `${stepTime.toFixed(2)} ms`;
+          const totalInst = Number(wasm.emu_get_instructions_executed());
+          statInstCount.textContent = totalInst.toLocaleString();
+          tracker.recordInstructions(totalInst);
+          statPublishes.textContent = wasm.emu_get_framebuffer_publications();
+          statHeapMem.textContent = `${(memory.buffer.byteLength / (1024 * 1024)).toFixed(1)} MB`;
+
+          // Periodic RMS sync to localStorage every 5 seconds
+          if (timestamp - lastRmsSync > 5000) {
+            saveRmsToLocalStorage();
+            lastRmsSync = timestamp;
+          }
+        }
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    // --- 3. Hardware-Clocked Web Audio Streaming with DC Highpass & DynamicsCompressor ---
+    let totalAudioSamples = 0;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        audioCtx = new AudioContextClass({ sampleRate: 44100 });
+
+        // 1. Hardware High-Pass DC Blocking Filter (35 Hz cutoff, Butterworth Q=0.7071)
+        biquadFilter = audioCtx.createBiquadFilter();
+        biquadFilter.type = "highpass";
+        biquadFilter.frequency.setValueAtTime(35, audioCtx.currentTime);
+        biquadFilter.Q.setValueAtTime(0.7071, audioCtx.currentTime);
+
+        // 2. Master Gain Control
+        masterGainNode = audioCtx.createGain();
+        masterGainNode.gain.setValueAtTime(isMuted ? 0.0 : 0.85, audioCtx.currentTime);
+
+        // 3. Dynamics Compressor (transparent soft limiter, prevents digital clipping)
+        compressorNode = audioCtx.createDynamicsCompressor();
+        compressorNode.threshold.setValueAtTime(-6, audioCtx.currentTime);
+        compressorNode.knee.setValueAtTime(6, audioCtx.currentTime);
+        compressorNode.ratio.setValueAtTime(4, audioCtx.currentTime);
+        compressorNode.attack.setValueAtTime(0.003, audioCtx.currentTime);
+        compressorNode.release.setValueAtTime(0.100, audioCtx.currentTime);
+
+        // 4. Hardware-Clocked Pull Audio Node (2048 samples = ~46.4ms buffer @ 44.1kHz)
+        // Clocked strictly by soundcard DAC hardware; eliminates 100% of RAF timer jitter, GC pressure, and 60Hz step-function hum
+        scriptNode = audioCtx.createScriptProcessor(2048, 0, 1);
+        scriptNode.onaudioprocess = function(e) {
+          const out = e.outputBuffer.getChannelData(0);
+          const bufLen = out.length;
+
+          if (!wasm || !audioBufferPtr || isPaused) {
+            out.fill(0.0);
+            lastAudioSample = 0.0;
+            return;
+          }
+
+          const queueLen = wasm.emu_get_audio_queue_len ? wasm.emu_get_audio_queue_len() : 0;
+          
+          // Jitter buffer pre-buffering: when starting from empty queue, wait for 1024 samples (~23ms)
+          if (!audioPrebuffered) {
+            if (queueLen >= 1024) {
+              audioPrebuffered = true;
+            } else {
+              out.fill(0.0);
+              lastAudioSample = 0.0;
+              return;
+            }
+          }
+
+          const samplesToRead = Math.min(bufLen, queueLen);
+          let readCount = 0;
+          if (samplesToRead > 0) {
+            readCount = wasm.emu_read_audio_samples(audioBufferPtr, samplesToRead);
+          }
+
+          if (readCount > 0) {
+            totalAudioSamples += readCount;
+            const samples = new Float32Array(memory.buffer, audioBufferPtr, readCount);
+            out.set(samples);
+
+            // If queue underran before full buffer was populated, smooth fade-out to zero
+            if (readCount < bufLen) {
+              const cur = samples[readCount - 1];
+              const fadeLen = Math.min(16, bufLen - readCount);
+              for (let i = 0; i < fadeLen; i++) {
+                out[readCount + i] = cur * (1.0 - (i + 1) / fadeLen);
+              }
+              for (let i = readCount + fadeLen; i < bufLen; i++) {
+                out[i] = 0.0;
+              }
+              lastAudioSample = 0.0;
+              audioPrebuffered = false; // Wait for emulator to queue fresh samples
+            } else {
+              lastAudioSample = samples[bufLen - 1];
+            }
+          } else {
+            // Queue empty: smooth fade-out last sample if non-zero to eliminate DC step click
+            if (Math.abs(lastAudioSample) > 0.0001) {
+              const fadeLen = Math.min(16, bufLen);
+              for (let i = 0; i < fadeLen; i++) {
+                out[i] = lastAudioSample * (1.0 - (i + 1) / fadeLen);
+              }
+              for (let i = fadeLen; i < bufLen; i++) {
+                out[i] = 0.0;
+              }
+              lastAudioSample = 0.0;
+            } else {
+              out.fill(0.0);
+            }
+            audioPrebuffered = false;
+          }
+        };
+
+        // Graph: scriptNode -> biquadFilter -> masterGainNode -> compressorNode -> destination
+        scriptNode.connect(biquadFilter);
+        biquadFilter.connect(masterGainNode);
+        masterGainNode.connect(compressorNode);
+        compressorNode.connect(audioCtx.destination);
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+    }
+
+    window.addEventListener("pointerdown", () => initAudioContext(), { passive: true });
+    window.addEventListener("keydown", () => initAudioContext(), { passive: true });
+
+    function streamAudio() {
+      if (statAudioStream) {
+        const stateStr = audioCtx ? audioCtx.state : "ready";
+        const qLen = (wasm && wasm.emu_get_audio_queue_len) ? wasm.emu_get_audio_queue_len() : 0;
+        statAudioStream.textContent = `${totalAudioSamples.toLocaleString()} spls (q:${qLen}, ${stateStr})`;
+      }
+    }
+
+
+    // --- 4. Profile Detection & Dynamic Resolution ---
+    function analyzeAndApplyJarProfile(bytes) {
+      if (!wasm || !wasm.detect_jar_profile) return null;
+
+      const ptr = wasm.emu_alloc_buffer(bytes.length);
+      const view = new Uint8Array(memory.buffer, ptr, bytes.length);
+      view.set(bytes);
+
+      const jsonPtr = wasm.detect_jar_profile(ptr, bytes.length);
+      const jsonLen = wasm.detect_jar_profile_len();
+
+      let profile = null;
+      if (jsonPtr && jsonLen > 0) {
+        const jsonBytes = new Uint8Array(memory.buffer, jsonPtr, jsonLen);
+        const jsonStr = new TextDecoder("utf-8").decode(jsonBytes);
+        try {
+          profile = JSON.parse(jsonStr);
+        } catch (e) {
+          console.error("Failed to parse detected profile JSON:", e);
+        }
+      }
+      wasm.emu_free_buffer(ptr, bytes.length);
+
+      if (profile) {
+        metaTitle.textContent = profile.name || "Unknown";
+        metaVendor.textContent = profile.vendor || "Unknown";
+        metaVersion.textContent = profile.version || "1.0.0";
+        resSourceBadge.textContent = (profile.resolution_source || "AUTO").toUpperCase();
+
+        if (profile.midlets && profile.midlets.length > 0) {
+          metaClass.textContent = profile.midlets[0].class || "Main Entry";
+        } else {
+          metaClass.textContent = "Default Entry";
+        }
+
+        // Apply recommended screen size
+        if (profile.suggested_width && profile.suggested_height) {
+          setScreenResolution(profile.suggested_width, profile.suggested_height);
+          resSelect.value = `${profile.suggested_width}x${profile.suggested_height}`;
+        }
+      }
+      return profile;
+    }
+    window.analyzeAndApplyJarProfile = analyzeAndApplyJarProfile;
+
+    function setScreenResolution(w, h) {
+      screenW = w;
+      screenH = h;
+      canvas.width = w;
+      canvas.height = h;
+
+      if (wasm && wasm.emu_set_screen_size) {
+        wasm.emu_set_screen_size(w, h);
+      }
+      console.log(`[J2ME-WASM] Display resolution set to ${w}x${h}`);
+    }
+
+    resSelect.addEventListener("change", (e) => {
+      const parts = e.target.value.split("x");
+      if (parts.length === 2) {
+        setScreenResolution(parseInt(parts[0]), parseInt(parts[1]));
+      }
+    });
+
+    // --- 5. Loading JAR & RMS Persistence ---
+    async function loadJarBuffer(bytes, nameHint = "game") {
+      if (!wasm) return;
+      tracker.recordJarLoadStart();
+      initAudioContext();
+      totalAudioSamples = 0;
+      audioPrebuffered = false;
+      lastAudioSample = 0.0;
+      currentJarBytes = bytes;
+
+      // Auto-inject HO-Demo: PAID for Heroes Lore if not already present
+      if (nameHint.toLowerCase().includes("heroes") || nameHint.toLowerCase().includes("rpg.gamemidlet")) {
+        if (!jadPropInput.value.includes("HO-Demo: PAID")) {
+          jadPropInput.value = (jadPropInput.value.trim() ? jadPropInput.value.trim() + "\n" : "") + "HO-Demo: PAID";
+        }
+      }
+
+      // Hash or identifier
+      currentJarHash = `${nameHint}_${bytes.length}`;
+
+      // Profile detection
+      analyzeAndApplyJarProfile(bytes);
+
+      // Alloc and load into emulator
+      const ptr = wasm.emu_alloc_buffer(bytes.length);
+      const wasmBuf = new Uint8Array(memory.buffer, ptr, bytes.length);
+      wasmBuf.set(bytes);
+
+      const ok = wasm.emu_load_jar(ptr, bytes.length);
+      wasm.emu_free_buffer(ptr, bytes.length);
+
+      if (ok) {
+        gameStatusBadge.textContent = "Running";
+        gameStatusBadge.style.color = "var(--success)";
+
+        // Apply custom JAD properties if any are configured
+        if (jadPropInput.value.trim()) {
+          applyJadPropertiesFromText(jadPropInput.value);
+        }
+
+        // Restore RMS save if exists in localStorage
+        restoreRmsFromLocalStorage();
+      } else {
+        gameStatusBadge.textContent = "Load Failed";
+        gameStatusBadge.style.color = "var(--danger)";
+        alert("Failed to start MIDlet from JAR.");
+      }
+    }
+
+    function saveRmsToLocalStorage() {
+      if (!wasm || !wasm.emu_export_rms) return;
+      const ptr = wasm.emu_export_rms();
+      const len = wasm.emu_export_rms_len();
+      if (ptr && len > 0) {
+        const rawBytes = new Uint8Array(memory.buffer, ptr, len);
+        let binary = "";
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(rawBytes[i]);
+        }
+        const b64 = btoa(binary);
+        localStorage.setItem(`j2me_rms_${currentJarHash}`, b64);
+        rmsBadge.textContent = `RMS: Saved (${len} B)`;
+        rmsBadge.style.color = "var(--success)";
+      }
+    }
+
+    function restoreRmsFromLocalStorage() {
+      if (!wasm || !wasm.emu_import_rms) return;
+      const b64 = localStorage.getItem(`j2me_rms_${currentJarHash}`);
+      if (!b64) {
+        rmsBadge.textContent = "RMS: Clean";
+        return;
+      }
+      try {
+        const binary = atob(b64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        const ptr = wasm.emu_alloc_buffer(bytes.length);
+        new Uint8Array(memory.buffer, ptr, bytes.length).set(bytes);
+        const res = wasm.emu_import_rms(ptr, bytes.length);
+        wasm.emu_free_buffer(ptr, bytes.length);
+
+        if (res) {
+          rmsBadge.textContent = `RMS: Restored (${bytes.length} B)`;
+          rmsBadge.style.color = "var(--accent-cyan)";
+        }
+      } catch (e) {
+        console.warn("Failed to restore RMS:", e);
+      }
+    }
+
+    // --- 6. Controls & Drag-Drop Listeners ---
+    async function handleIncomingFiles(fileList) {
+      if (!fileList || fileList.length === 0) return;
+      let jarFile = null;
+      let jadFile = null;
+
+      for (const f of fileList) {
+        const lower = f.name.toLowerCase();
+        if (lower.endsWith(".jar")) jarFile = f;
+        if (lower.endsWith(".jad")) jadFile = f;
+      }
+
+      if (jadFile) {
+        const jadText = await jadFile.text();
+        jadPropInput.value = jadText;
+        applyJadPropertiesFromText(jadText);
+      }
+
+      if (jarFile) {
+        const ab = await jarFile.arrayBuffer();
+        await loadJarBuffer(new Uint8Array(ab), jarFile.name);
+      } else if (!jadFile && fileList.length > 0) {
+        const f = fileList[0];
+        const ab = await f.arrayBuffer();
+        await loadJarBuffer(new Uint8Array(ab), f.name);
+      }
+    }
+
+    dropZone.addEventListener("click", () => filePicker.click());
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
+    dropZone.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("dragover");
+      await handleIncomingFiles(e.dataTransfer.files);
+    });
+
+    filePicker.addEventListener("change", async (e) => {
+      await handleIncomingFiles(e.target.files);
+    });
+
+    btnApplyProps.addEventListener("click", () => {
+      applyJadPropertiesFromText(jadPropInput.value);
+    });
+
+    btnLoadJadFile.addEventListener("click", () => jadFilePicker.click());
+    jadFilePicker.addEventListener("change", async (e) => {
+      if (e.target.files.length) {
+        const f = e.target.files[0];
+        const text = await f.text();
+        jadPropInput.value = text;
+        applyJadPropertiesFromText(text);
+      }
+    });
+
+    // Quick Game Launcher
+    document.querySelectorAll(".game-pill").forEach((pill) => {
+      pill.addEventListener("click", async () => {
+        const src = pill.dataset.src;
+        const res = pill.dataset.res;
+        if (res) {
+          const parts = res.split("x");
+          if (parts.length === 2) {
+            setScreenResolution(parseInt(parts[0]), parseInt(parts[1]));
+            resSelect.value = res;
+          }
+        }
+        if (src.includes("heroes_lore")) {
+          if (!jadPropInput.value.includes("HO-Demo: PAID")) {
+            jadPropInput.value = (jadPropInput.value.trim() ? jadPropInput.value.trim() + "\n" : "") + "HO-Demo: PAID";
+          }
+        }
+        try {
+          const resObj = await fetch(src);
+          if (!resObj.ok) throw new Error(`HTTP ${resObj.status}`);
+          const ab = await resObj.arrayBuffer();
+          loadJarBuffer(new Uint8Array(ab), src);
+        } catch (err) {
+          alert(`Failed to load preset ${src}: ${err.message}`);
+        }
+      });
+    });
+
+    // Buttons
+    document.getElementById("btn-pause").addEventListener("click", () => {
+      isPaused = !isPaused;
+      document.getElementById("btn-pause").textContent = isPaused ? "Resume" : "Pause";
+      pauseOverlay.className = isPaused ? "screen-overlay-pause visible" : "screen-overlay-pause";
+      if (isPaused) {
+        saveRmsToLocalStorage();
+        if (audioCtx && audioCtx.state === "running") {
+          audioCtx.suspend();
+        }
+      } else {
+        if (audioCtx && audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+      }
+    });
+
+    document.getElementById("btn-reset").addEventListener("click", () => {
+      if (currentJarBytes) {
+        loadJarBuffer(currentJarBytes, currentJarHash);
+      }
+    });
+
+    document.getElementById("btn-audio-mute").addEventListener("click", () => {
+      isMuted = !isMuted;
+      document.getElementById("btn-audio-mute").textContent = isMuted ? "Unmute Audio" : "Mute Audio";
+      if (masterGainNode && audioCtx) {
+        masterGainNode.gain.setValueAtTime(isMuted ? 0.0 : 0.85, audioCtx.currentTime);
+      }
+    });
+
+    document.getElementById("btn-screenshot").addEventListener("click", () => {
+      const a = document.createElement("a");
+      a.download = `j2me_screenshot_${Date.now()}.png`;
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    });
+
+    document.getElementById("btn-export-rms").addEventListener("click", () => {
+      if (!wasm || !wasm.emu_export_rms) return;
+      const ptr = wasm.emu_export_rms();
+      const len = wasm.emu_export_rms_len();
+      if (!ptr || len === 0) {
+        alert("No RMS data currently stored.");
+        return;
+      }
+      const raw = new Uint8Array(memory.buffer, ptr, len);
+      const blob = new Blob([raw], { type: "application/octet-stream" });
+      const a = document.createElement("a");
+      a.download = `${currentJarHash}_rms.bin`;
+      a.href = URL.createObjectURL(blob);
+      a.click();
+    });
+
+    document.getElementById("btn-import-rms").addEventListener("click", () => rmsFilePicker.click());
+    rmsFilePicker.addEventListener("change", async (e) => {
+      if (e.target.files.length) {
+        const file = e.target.files[0];
+        const ab = await file.arrayBuffer();
+        const bytes = new Uint8Array(ab);
+        const ptr = wasm.emu_alloc_buffer(bytes.length);
+        new Uint8Array(memory.buffer, ptr, bytes.length).set(bytes);
+        const ok = wasm.emu_import_rms(ptr, bytes.length);
+        wasm.emu_free_buffer(ptr, bytes.length);
+        if (ok) {
+          saveRmsToLocalStorage();
+          alert(`RMS state successfully imported (${bytes.length} bytes).`);
+        } else {
+          alert("Failed to import RMS binary format.");
+        }
+      }
+    });
+
+    // --- 7. Keypad Touch & Pointer Handlers ---
+    function sendKey(code, pressed) {
+      if (wasm) {
+        wasm.emu_key_event(code, pressed ? 1 : 0);
+      }
+    }
+    window.sendKey = sendKey;
+
+    document.querySelectorAll(".k-btn").forEach((btn) => {
+      const code = parseInt(btn.dataset.code);
+      btn.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        btn.classList.add("active");
+        initAudioContext();
+        sendKey(code, true);
+      });
+      const release = (e) => {
+        if (btn.classList.contains("active")) {
+          btn.classList.remove("active");
+          sendKey(code, false);
+        }
+      };
+      btn.addEventListener("pointerup", release);
+      btn.addEventListener("pointercancel", release);
+      btn.addEventListener("pointerleave", release);
+    });
+
+    // --- 8. Comprehensive Desktop Keyboard Mapping ---
+    const KEY_MAPPINGS = {
+      // D-Pad / Movement
+      "ArrowUp": -1, "KeyW": -1,
+      "ArrowDown": -2, "KeyS": -2,
+      "ArrowLeft": -3, "KeyA": -3,
+      "ArrowRight": -4, "KeyD": -4,
+
+      // Fire / OK
+      "Enter": -5, "Space": -5, "KeyF": -5, "Numpad5": 53,
+
+      // Softkeys
+      "KeyQ": -6, "F1": -6, "Numpad7": -6,
+      "KeyE": -7, "F2": -7, "Numpad9": -7,
+
+      // Digits
+      "Digit1": 49, "Digit2": 50, "Digit3": 51,
+      "Digit4": 52, "Digit5": 53, "Digit6": 54,
+      "Digit7": 55, "Digit8": 56, "Digit9": 57,
+      "Digit0": 48,
+
+      "Numpad1": 49, "Numpad2": 50, "Numpad3": 51,
+      "Numpad4": 52, "Numpad6": 54,
+      "Numpad8": 56, "Numpad0": 48,
+
+      // Symbols
+      "KeyP": 42, "NumpadMultiply": 42,
+      "KeyH": 35, "NumpadDivide": 35
+    };
+
+    window.addEventListener("keydown", (e) => {
+      const code = KEY_MAPPINGS[e.code] || KEY_MAPPINGS[e.key];
+      if (code !== undefined) {
+        initAudioContext();
+        sendKey(code, true);
+        highlightButton(code, true);
+      }
+    });
+
+    window.addEventListener("keyup", (e) => {
+      const code = KEY_MAPPINGS[e.code] || KEY_MAPPINGS[e.key];
+      if (code !== undefined) {
+        sendKey(code, false);
+        highlightButton(code, false);
+      }
+    });
+
+    function highlightButton(code, active) {
+      const btn = document.querySelector(`.k-btn[data-code="${code}"]`);
+      if (btn) {
+        if (active) btn.classList.add("active");
+        else btn.classList.remove("active");
+      }
+    }
+
+    // Auto-save on tab close / reload
+    window.addEventListener("beforeunload", () => {
+      saveRmsToLocalStorage();
+    });
+
+    // Start
+    initEmulator();
+  </script>
+</body>
+</html>

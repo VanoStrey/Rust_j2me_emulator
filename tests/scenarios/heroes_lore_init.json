@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "heroes_lore",
+  "jar_file": "heroes_lore.jar",
+  "jar_sha256": "f7348e00fe222af207638880cc4baaa642dd1bb5a25ef9c55acc52b239611b90",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot through EA Mobile Korea / Hands-On logo to title cinematic.",
+  "total_ticks": 250,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    60,
+    160,
+    250
+  ],
+  "expected_behavior": "Cold boot through EA Mobile Korea / Hands-On logo to title cinematic."
+}

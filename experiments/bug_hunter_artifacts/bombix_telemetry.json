@@ -1,0 +1,19 @@
+{
+  "gameId": "bombix",
+  "gameName": "Bombix",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/bombix_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9719,
+    "instructions": 0,
+    "publishes": 11,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

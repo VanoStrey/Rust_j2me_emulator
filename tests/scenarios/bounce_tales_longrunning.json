@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "game_id": "bounce_tales",
+  "jar_file": "bounce_tales.jar",
+  "jar_sha256": "f768bbd2366f6d739d170b8cfa8383a98c4830d03555f5b44a0ab88c61a8028e",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "LONGRUNNING",
+  "description": "Extended 1200-tick session verifying active rendering loops, GC, and physics stability.",
+  "total_ticks": 1200,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 65,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 120,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 125,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 180,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 185,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 220,
+      "key": 54,
+      "action": "press",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 450,
+      "key": 54,
+      "action": "release",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 480,
+      "key": 52,
+      "action": "press",
+      "free_key": "Digit4"
+    },
+    {
+      "tick": 700,
+      "key": 52,
+      "action": "release",
+      "free_key": "Digit4"
+    },
+    {
+      "tick": 750,
+      "key": 53,
+      "action": "press",
+      "free_key": "Digit5"
+    },
+    {
+      "tick": 780,
+      "key": 53,
+      "action": "release",
+      "free_key": "Digit5"
+    },
+    {
+      "tick": 850,
+      "key": 54,
+      "action": "press",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 1100,
+      "key": 54,
+      "action": "release",
+      "free_key": "Digit6"
+    }
+  ],
+  "snapshot_ticks": [
+    300,
+    600,
+    900,
+    1200
+  ],
+  "expected_behavior": "Extended 1200-tick session verifying active rendering loops, GC, and physics stability."
+}

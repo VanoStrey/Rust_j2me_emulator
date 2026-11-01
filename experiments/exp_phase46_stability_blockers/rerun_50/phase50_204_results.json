@@ -1,0 +1,4263 @@
+[
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/EverythingExplodes-128.jar",
+    "entry_point": "EverythingExplodes",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "c.readInt()I -> Int(0)",
+      "c.read([B)I -> Int(0)",
+      "javax/microedition/lcdui/Image.createImage([BII)Ljavax/microedition/lcdui/Image; -> Obj(924)",
+      "java/lang/System.gc()V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(1)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(1)",
+      "c.close()V -> Void",
+      "java/lang/System.gc()V -> Void"
+    ],
+    "unhandled_natives": [
+      "c.readInt()I",
+      "c.close()V",
+      "c.read([B)I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LuminesInthehouseIbiza10-240.jar",
+    "entry_point": "A",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.skip(J)J -> Long(345)",
+      "java/io/DataInputStream.skip(J)J -> Long(2)",
+      "java/io/DataInputStream.readUTF()Ljava/lang/String; -> Obj(803)",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "j.setFullScreenMode(Z)V -> Void",
+      "j.getHeight()I -> Int(320)",
+      "j.getWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Err(EXC:java/lang/IllegalArgumentException: width and height must be > 0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SkyForce-176.jar",
+    "entry_point": "engine.midlet.nokia7650.Start",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/media/Player.setLoopCount(I)V -> Void",
+      "javax/microedition/media/Player.start()V -> Void",
+      "g.repaint()V -> Void",
+      "g.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1416)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/StringBuffer.getChars(II[CI)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Halloween_Rezonator.jar",
+    "entry_point": "Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/IllegalStateException",
+    "recent_native_calls": [
+      "java/lang/String.getBytes()[B -> Obj(22)",
+      "java/security/MessageDigest.getInstance(Ljava/lang/String;)Ljava/security/MessageDigest; -> Null",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(27)",
+      "java/lang/NullPointerException.getMessage()Ljava/lang/String; -> Null",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(27)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(31)",
+      "java/lang/IllegalStateException.<init>(Ljava/lang/String;)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/security/MessageDigest.getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FerreroVsMoyaTennis.jar",
+    "entry_point": "CTmidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/IllegalArgumentException",
+    "recent_native_calls": [
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([SZIIIIIIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(1218)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([SZIIIIIIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(1219)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([SZIIIIIIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(1221)",
+      "com/nokia/mid/ui/DirectGraphics.getNativePixelFormat()I -> Int(0)",
+      "com/nokia/mid/ui/DirectGraphics.getPixels([SIIIIIII)V -> Err(EXC:java/lang/IllegalArgumentException:1222)"
+    ],
+    "unhandled_natives": [
+      "com/nokia/mid/ui/DirectGraphics.getNativePixelFormat()I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ESPNSummerXGames-240.jar",
+    "entry_point": "xgames.Xgames",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/io/ByteArrayOutputStream.close()V -> Void",
+      "java/io/DataOutputStream.close()V -> Void",
+      "a.repaint()V -> Void",
+      "a.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BallMania.jar",
+    "entry_point": "main.CKI_Main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/RuntimeException",
+    "recent_native_calls": [
+      "java/lang/Math.min(II)I -> Int(0)",
+      "java/lang/Math.max(II)I -> Int(240)",
+      "java/lang/Math.min(II)I -> Int(0)",
+      "java/lang/Math.max(II)I -> Int(320)",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "java/util/Vector.size()I -> Int(1)",
+      "javax/microedition/lcdui/Graphics.translate(II)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NeredesinFiruze.jar",
+    "entry_point": "firuze.FiruzeMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/System.gc()V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextField.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/OutRoad2.jar",
+    "entry_point": "OutRoad2.MainPRG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/m3g/Material.setColor(II)V -> Void",
+      "javax/microedition/m3g/Appearance.setMaterial(Ljavax/microedition/m3g/Material;)V -> Void",
+      "javax/microedition/m3g/Appearance.setTexture(ILjavax/microedition/m3g/Texture2D;)V -> Void",
+      "javax/microedition/m3g/Appearance.setFog(Ljavax/microedition/m3g/Fog;)V -> Void",
+      "javax/microedition/m3g/World.getChildCount()I -> Int(0)",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "javax/microedition/m3g/PolygonMode.setPerspectiveCorrectionEnable(Z)V -> Void",
+      "javax/microedition/m3g/World.addChild(Ljavax/microedition/m3g/Node;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AquaDriller.jar",
+    "entry_point": "com.southend.AquaDriller.DrillMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/media/Player.setLoopCount(I)V -> Void",
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "java/util/Vector.size()I -> Int(6)",
+      "javax/microedition/media/Player.getControls()[Ljavax/microedition/media/Control; -> Null",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "a.getWidth()I -> Int(240)",
+      "a.getHeight()I -> Int(320)",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/game/Sprite.setRefPixelPosition(II)V",
+      "javax/microedition/media/Player.getControls()[Ljavax/microedition/media/Control;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chuzzle-N5800-240x432.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 74,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.fillRoundRect(IIIIII)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DND.jar",
+    "entry_point": "dnd.DND",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(176)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(208)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Dakar2010.jar",
+    "entry_point": "dakar.MainMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FreeCell.jar",
+    "entry_point": "game.freecell.FreeCell",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Random.nextInt()I -> Int(766227307)",
+      "java/util/Random.nextInt()I -> Int(846358459)",
+      "java/util/Random.nextInt()I -> Int(1550466676)",
+      "java/util/Random.nextInt()I -> Int(1556285289)",
+      "java/util/Random.nextInt()I -> Int(657432862)",
+      "java/util/Random.nextInt()I -> Int(228880295)",
+      "java/util/Random.nextInt()I -> Int(1955884291)",
+      "java/util/Random.nextInt()I -> Int(1591100171)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Jeweleon-Rus.jar",
+    "entry_point": "com.softdp.Application",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(301)",
+      "java/lang/NullPointerException.toString()Ljava/lang/String; -> Obj(305)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(301)",
+      "java/lang/StringBuffer.append(C)Ljava/lang/StringBuffer; -> Obj(301)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(307)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(292)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(292)",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AD1066WilliamtheConqueror.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(276)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readShort()S -> Err(EXC:java/io/IOException:278)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(24)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(282)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(283)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PangReturns.jar",
+    "entry_point": "MainClass",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(13)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(1263)",
+      "java/lang/String.length()I -> Int(3752)",
+      "java/lang/String.length()I -> Int(3752)",
+      "java/lang/String.hashCode()I -> Int(874)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/String.length()I -> Int(12)",
+      "java/lang/String.charAt(I)C -> Int(64)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ThePromise.jar",
+    "entry_point": "cMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/System.gc()V -> Void",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(2256)",
+      "java/io/ByteArrayInputStream.close()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/io/ByteArrayInputStream.<init>([B)V -> Void",
+      "javax/microedition/media/Manager.createPlayer(Ljava/io/InputStream;Ljava/lang/String;)Ljavax/microedition/media/Player; -> Obj(313)",
+      "javax/microedition/media/Player.realize()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LaraCroftPokerParty.jar",
+    "entry_point": "Lara_Crofts_Poker_Party",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/media/Player.start()V -> Void",
+      "m.repaint()V -> Void",
+      "m.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "b.readFully([B)V",
+      "b.read()I",
+      "b.readByte()B",
+      "b.close()V",
+      "b.readUTF()Ljava/lang/String;",
+      "b.readInt()I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BigfootRacing.jar",
+    "entry_point": "Bigfoot.Mototrax",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "Bigfoot/a.setFullScreenMode(Z)V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(229)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(230)",
+      "javax/microedition/lcdui/Graphics.getFont()Ljavax/microedition/lcdui/Font; -> Obj(231)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(233)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AgentCodenStationX.jar",
+    "entry_point": "mittSpel",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(4466)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4516)",
+      "java/lang/System.currentTimeMillis()J -> Long(4516)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/YetiSports9FinalSpit.jar",
+    "entry_point": "M",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 22,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1733)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1750)",
+      "java/lang/System.currentTimeMillis()J -> Long(1750)",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "c.repaint()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Rainbow6UC.jar",
+    "entry_point": "Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Thread.yield()V -> Void",
+      "java/io/ByteArrayInputStream.close()V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(618)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(619)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(620)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:621)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AirBuster3D.jar",
+    "entry_point": "Airburster.MainPRG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/StringIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/StringBuffer.<init>(I)V -> Void",
+      "java/lang/StringBuffer.setLength(I)V -> Void",
+      "java/lang/StringBuffer.setCharAt(IC)V -> Err(EXC:java/lang/StringIndexOutOfBoundsException:49)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/WarriorsChronicle.jar",
+    "entry_point": "rpg.rpg",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(94)",
+      "java/lang/String.charAt(I)C -> Int(95)",
+      "java/lang/String.charAt(I)C -> Int(96)",
+      "java/lang/String.length()I -> Int(1588)",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.charAt(I)C -> Err(EXC:java/lang/StringIndexOutOfBoundsException: index 262132 out of bounds for length 448)",
+      "java/lang/String.charAt(I)C -> Err(EXC:java/lang/StringIndexOutOfBoundsException: index 262133 out of bounds for length 448)",
+      "java/lang/String.charAt(I)C -> Err(EXC:java/lang/StringIndexOutOfBoundsException: index 262134 out of bounds for length 448)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SonicTheHedgehogPartTwo-176.jar",
+    "entry_point": "Sonic",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "Sonic.getAppProperty(Ljava/lang/String;)Ljava/lang/String; -> Null",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljavax/microedition/rms/RecordStore; -> Obj(1164)",
+      "javax/microedition/rms/RecordStore.setRecord(I[BII)V -> Void",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)",
+      "javax/microedition/lcdui/Graphics.getFont()Ljavax/microedition/lcdui/Font; -> Obj(1170)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chokeshin.jar",
+    "entry_point": "chokeshinMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.gc()V -> Void",
+      "chokeshinMidlet.getClass()Ljava/lang/Class; -> Obj(437)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(831)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(24)",
+      "java/lang/System.gc()V -> Void",
+      "chokeshinMidlet.getClass()Ljava/lang/Class; -> Obj(437)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Null",
+      "java/lang/System.gc()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BTetris.jar",
+    "entry_point": "tetris.core.TetrisMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.getTranslateX()I -> Int(165)",
+      "javax/microedition/lcdui/Graphics.getTranslateY()I -> Int(10)",
+      "javax/microedition/lcdui/Graphics.translate(II)V -> Void",
+      "javax/microedition/lcdui/Graphics.translate(II)V -> Void",
+      "tetris/tetris/TetrisCanvas.getWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.getTranslateX()I -> Int(151)",
+      "javax/microedition/lcdui/Graphics.translate(II)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V",
+      "tetris/core/MainMenu.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",
+      "tetris/core/MainMenu.setSelectCommand(Ljavax/microedition/lcdui/Command;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Falldown-LaurentHerbin.jar",
+    "entry_point": "Falldown",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Obj(15)",
+      "java/lang/String.toLowerCase()Ljava/lang/String; -> Obj(16)",
+      "java/lang/String.startsWith(Ljava/lang/String;)Z -> Int(1)",
+      "java/lang/Object.<init>()V -> Void",
+      "FalldownCanvas.getWidth()I -> Int(240)",
+      "FalldownCanvas.getHeight()I -> Int(320)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(19)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(20)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AlexaEp2.jar",
+    "entry_point": "z.playw.alexa.GameMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(167)",
+      "z/a.getClass()Ljava/lang/Class; -> Obj(144)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Null",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/ByteArrayOutputStream.<init>()V -> Void",
+      "java/io/DataInputStream.read([B)I -> Int(-1)",
+      "java/io/ByteArrayOutputStream.toByteArray()[B -> Obj(172)",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SuperTaxiDriver.jar",
+    "entry_point": "STDriver.MainPRG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(2731)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(2731)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(2735)",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "javax/microedition/m3g/PolygonMode.setPerspectiveCorrectionEnable(Z)V -> Void",
+      "javax/microedition/m3g/World.addChild(Ljavax/microedition/m3g/Node;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TrackAndFieldDeluxe.jar",
+    "entry_point": "M",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.getClipX()I -> Int(0)",
+      "javax/microedition/lcdui/Graphics.getClipY()I -> Int(0)",
+      "javax/microedition/lcdui/Graphics.getClipWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.getClipHeight()I -> Int(204)",
+      "java/util/Vector.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NeedforSpeedUndercoverVelocity3D.jar",
+    "entry_point": "com.ea.nfsmw2.MonkeyApp",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 22,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.getClipWidth()I -> Int(102)",
+      "javax/microedition/lcdui/Graphics.getClipHeight()I -> Int(5)",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(816)",
+      "javax/microedition/m3g/Loader.load(Ljava/lang/String;)[Ljavax/microedition/m3g/Object3D; -> Obj(10)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/m3g/World.duplicate()Ljavax/microedition/m3g/Object3D;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RainbowSixBrokenWing.jar",
+    "entry_point": "R6.r6Main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(474)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:475)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/KlitschkoBoxChallenge.jar",
+    "entry_point": "z",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Form.addCommand(Ljavax/microedition/lcdui/Command;)V -> Void",
+      "javax/microedition/lcdui/Form.addCommand(Ljavax/microedition/lcdui/Command;)V -> Void",
+      "javax/microedition/lcdui/Form.setCommandListener(Ljavax/microedition/lcdui/CommandListener;)V -> Void",
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V -> Void",
+      "javax/microedition/lcdui/Command.getLabel()Ljava/lang/String; -> Obj(88)",
+      "javax/microedition/lcdui/List.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I -> Int(0)",
+      "javax/microedition/lcdui/Command.getLabel()Ljava/lang/String; -> Obj(75)",
+      "javax/microedition/lcdui/List.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I -> Int(0)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextBox.<init>(Ljava/lang/String;Ljava/lang/String;II)V",
+      "javax/microedition/lcdui/List.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V",
+      "javax/microedition/lcdui/StringItem.<init>(Ljava/lang/String;Ljava/lang/String;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GhostBladeBW.jar",
+    "entry_point": "mobilegame.Ghostblade",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "mobilegame/b.repaint()V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(416)",
+      "mobilegame/b.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(418)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:419)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:420)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/HungryCats-160.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(105)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Goozer'sFireFrenzy.jar",
+    "entry_point": "Mid",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "a.repaint()V -> Void",
+      "a.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(137)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/M-Shift.jar",
+    "entry_point": "MShift",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(120)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(120)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(120)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(120)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/Byte.parseByte(Ljava/lang/String;)B"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/gridracer3d.jar",
+    "entry_point": "GridRacer",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(100)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(367)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(136)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(368)",
+      "java/lang/String.length()I -> Int(137)",
+      "java/lang/String.charAt(I)C -> Int(10)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(369)",
+      "java/lang/String.length()I -> Int(137)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Minesweeper_MichaelGeorge.jar",
+    "entry_point": "net.sf.j2me.games.Minesweeper",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillArc(IIIIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Haunts.jar",
+    "entry_point": "haunts.GameAppBase",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 53,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "java/util/Random.nextInt()I -> Int(89401895)",
+      "java/util/Random.nextInt()I -> Int(379337186)",
+      "java/util/Random.nextInt()I -> Int(782977366)"
+    ],
+    "unhandled_natives": [
+      "java/util/Date.<init>()V",
+      "java/util/Date.getTime()J"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SpyroDawnoftheDragon.jar",
+    "entry_point": "STDHMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.readShort()S -> Int(4)",
+      "java/io/DataInputStream.readShort()S -> Int(11)",
+      "java/io/DataInputStream.readShort()S -> Int(100)",
+      "java/io/DataInputStream.readUnsignedByte()I -> Int(1)",
+      "java/io/DataInputStream.readUnsignedByte()I -> Int(8)",
+      "java/io/DataInputStream.readShort()S -> Int(4)",
+      "java/io/DataInputStream.readShort()S -> Int(13)",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TetrisMania-ES-128.jar",
+    "entry_point": "kor",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(30)",
+      "java/lang/System.currentTimeMillis()J -> Long(3050)",
+      "c.notify()V -> Void",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(163)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(116)",
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "c.getWidth()I -> Int(240)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Taxi.jar",
+    "entry_point": "Taxi.Taxi",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/HashtableEnumerator.hasMoreElements()Z -> Int(1)",
+      "java/util/HashtableEnumerator.nextElement()Ljava/lang/Object; -> Obj(27677)",
+      "java/lang/Integer.intValue()I -> Int(230)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(27676)",
+      "java/util/HashtableEnumerator.hasMoreElements()Z -> Int(0)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(27659)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SubcultureFight.jar",
+    "entry_point": "Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 2,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/media/Manager.createPlayer(Ljava/io/InputStream;Ljava/lang/String;)Ljavax/microedition/media/Player; -> Obj(912)",
+      "javax/microedition/media/Player.prefetch()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "f.getClass()Ljava/lang/Class; -> Obj(894)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(916)",
+      "javax/microedition/media/Manager.createPlayer(Ljava/io/InputStream;Ljava/lang/String;)Ljavax/microedition/media/Player; -> Obj(918)",
+      "javax/microedition/media/Player.prefetch()V -> Void",
+      "javax/microedition/media/Player.getControls()[Ljavax/microedition/media/Control; -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/media/Player.getControls()[Ljavax/microedition/media/Control;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NeetuAlienKiller.jar",
+    "entry_point": "MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Random.<init>()V -> Void",
+      "javax/microedition/m3g/Loader.load(Ljava/lang/String;)[Ljavax/microedition/m3g/Object3D; -> Obj(121)",
+      "javax/microedition/m3g/World.getChild(I)Ljavax/microedition/m3g/Node; -> Null",
+      "javax/microedition/m3g/Transform.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "javax/microedition/m3g/Transform.set([F)V -> Void",
+      "javax/microedition/m3g/Transform.postRotate(FFFF)V -> Void",
+      "javax/microedition/m3g/Transform.get([F)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/m3g/World.getChild(I)Ljavax/microedition/m3g/Node;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RedBaron.jar",
+    "entry_point": "M",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/m3g/World.addChild(Ljavax/microedition/m3g/Node;)V -> Void",
+      "javax/microedition/m3g/World.setActiveCamera(Ljavax/microedition/m3g/Camera;)V -> Void",
+      "javax/microedition/m3g/World.addChild(Ljavax/microedition/m3g/Node;)V -> Void",
+      "javax/microedition/m3g/World.addChild(Ljavax/microedition/m3g/Node;)V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(458)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(459)",
+      "java/lang/Math.toRadians(D)D -> Double(0)",
+      "java/lang/Math.tan(D)D -> Double(0)"
+    ],
+    "unhandled_natives": [
+      "java/lang/Math.toRadians(D)D"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BoardersBall.jar",
+    "entry_point": "Pinball",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 2,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(3000)",
+      "java/lang/System.currentTimeMillis()J -> Long(3000)",
+      "java/lang/System.currentTimeMillis()J -> Long(3000)",
+      "java/lang/System.currentTimeMillis()J -> Long(3000)",
+      "java/lang/System.currentTimeMillis()J -> Long(3016)",
+      "ag.repaint()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.gc()V -> Void"
+    ],
+    "unhandled_natives": [
+      "g.readInt()I",
+      "g.readLong()J"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/StreetFighter-WorldWarrior.jar",
+    "entry_point": "StreetFighterMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "javax/microedition/lcdui/Graphics.getClipX()I -> Int(0)",
+      "javax/microedition/lcdui/Graphics.getClipY()I -> Int(0)",
+      "javax/microedition/lcdui/Graphics.getClipWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.getClipHeight()I -> Int(320)",
+      "javax/microedition/lcdui/Graphics.clipRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SimEmpire.jar",
+    "entry_point": "cz.dj.simtown.SimTownMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/media/Player.deallocate()V -> Void",
+      "javax/microedition/media/Player.close()V -> Void",
+      "e.getClass()Ljava/lang/Class; -> Obj(200)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(215)",
+      "javax/microedition/media/Manager.createPlayer(Ljava/io/InputStream;Ljava/lang/String;)Ljavax/microedition/media/Player; -> Obj(217)",
+      "javax/microedition/media/Player.prefetch()V -> Void",
+      "javax/microedition/media/Player.deallocate()V -> Void",
+      "javax/microedition/media/Player.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DizzyVI-PrinceOfTheYolkfolk-240.jar",
+    "entry_point": "Dizzy",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "java/lang/String.toLowerCase()Ljava/lang/String; -> Obj(3616)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(3616)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(3614)",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ShrekParty-v1.0.7-240.jar",
+    "entry_point": "GloftSHKP",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "h.getWidth()I -> Int(240)",
+      "h.getHeight()I -> Int(320)",
+      "h.repaint()V -> Void",
+      "h.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(83)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "d.containsKey(Ljava/lang/Object;)Z",
+      "d.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "d.get(Ljava/lang/Object;)Ljava/lang/Object;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ChipNDaleRescueRangers-Rus.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "i.repaint()V -> Void",
+      "i.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GreatLegendsBillyTheKid2.jar",
+    "entry_point": "common.MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(5816)",
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(5943)",
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(6059)",
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(6264)",
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(6466)",
+      "java/io/DataInputStream.readUnsignedShort()I -> Int(6595)",
+      "main/b.repaint()V -> Void",
+      "main/b.serviceRepaints()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheSims3Supernatural.jar",
+    "entry_point": "com.ea.sdk.SDKMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(4216)",
+      "java/lang/StringBuffer.append(I)Ljava/lang/StringBuffer; -> Obj(4216)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(4223)",
+      "com/ea/sdk/SDKMIDlet.getClass()Ljava/lang/Class; -> Obj(57)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(4225)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readByte()B -> Err(EXC:java/io/IOException:4226)",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PhantomMansion.jar",
+    "entry_point": "PhantomMansion",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "b.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.gc()V -> Void"
+    ],
+    "unhandled_natives": [
+      "h.readInt()I",
+      "h.close()V",
+      "h.read([B)I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Alexander.jar",
+    "entry_point": "com.playw.alexander.AlexanderMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(616)",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(617)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(617)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(621)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(623)",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BubbleBobbleEvolution-N2610-CS-128.jar",
+    "entry_point": "ProjectMain",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/Integer.parseInt(Ljava/lang/String;)I -> Int(4)",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4933)",
+      "java/lang/System.currentTimeMillis()J -> Long(4933)",
+      "java/lang/System.currentTimeMillis()J -> Long(4933)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.setGrayScale(I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GloryoftheRomanEmpire.jar",
+    "entry_point": "GridPuzzle",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(366)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(366)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(370)"
+    ],
+    "unhandled_natives": [
+      "java/lang/String.replace(CC)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DogSim-Rus.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(438)",
+      "java/lang/StringBuffer.append(C)Ljava/lang/StringBuffer; -> Obj(438)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(444)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(429)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(429)",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/YetiSports8JungleSwing.jar",
+    "entry_point": "M",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 25,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1583)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1600)",
+      "java/lang/System.currentTimeMillis()J -> Long(1600)",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "c.repaint()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/EdgeRally.jar",
+    "entry_point": "EdgeRally",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/3DBuddyRacing.jar",
+    "entry_point": "root.BuddyRacingMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(48)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/WirelessBoxing.jar",
+    "entry_point": "WB_z600",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/midlet/MIDlet.<init>()V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(34)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Bubbeleon-Rus.jar",
+    "entry_point": "com.softdp.Application",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(311)",
+      "java/lang/NullPointerException.toString()Ljava/lang/String; -> Obj(315)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(311)",
+      "java/lang/StringBuffer.append(C)Ljava/lang/StringBuffer; -> Obj(311)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(317)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(302)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(302)",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Iceblox.jar",
+    "entry_point": "ice",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Thread.start()V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(93)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:94)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Loptice.jar",
+    "entry_point": "fixed.MainMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 50,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "fixed/g.getWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/StringBuffer.<init>(Ljava/lang/String;)V -> Void",
+      "java/lang/StringBuffer.append(I)Ljava/lang/StringBuffer; -> Obj(686)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(686)",
+      "java/lang/String.valueOf(Ljava/lang/Object;)Ljava/lang/String; -> Obj(692)",
+      "java/lang/String.valueOf(Ljava/lang/Object;)Ljava/lang/String; -> Obj(693)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(694)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextField.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MagneticJoe2-128.jar",
+    "entry_point": "magneticjoe2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(50)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Hydro-v1.0-240.jar",
+    "entry_point": "start",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.getFont()Ljavax/microedition/lcdui/Font; -> Obj(1047)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "e.repaint()V -> Void",
+      "e.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "e.getWidth()I -> Int(240)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/List.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/War2056-128.jar",
+    "entry_point": "war2056.War2056",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(86)",
+      "java/lang/String.charAt(I)C -> Int(41)",
+      "java/lang/String.length()I -> Int(86)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(621)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TagHeuerIndy500.jar",
+    "entry_point": "TagHeuerIndy500",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/m3g/VertexBuffer.setPositions(Ljavax/microedition/m3g/VertexArray;F[F)V -> Void",
+      "javax/microedition/m3g/VertexBuffer.setTexCoords(ILjavax/microedition/m3g/VertexArray;F[F)V -> Void",
+      "java/io/ByteArrayInputStream.close()V -> Void",
+      "javax/microedition/m3g/Loader.load(Ljava/lang/String;)[Ljavax/microedition/m3g/Object3D; -> Obj(708)",
+      "javax/microedition/m3g/PolygonMode.<init>()V -> Void",
+      "javax/microedition/m3g/PolygonMode.setCulling(I)V -> Void",
+      "javax/microedition/m3g/Appearance.<init>()V -> Void",
+      "javax/microedition/m3g/Appearance.setPolygonMode(Ljavax/microedition/m3g/PolygonMode;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RedHotRally-128.jar",
+    "entry_point": "b",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/Thread.yield()V -> Void",
+      "a.repaint()V -> Void",
+      "a.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TetrisMania-128.jar",
+    "entry_point": "kor",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(30)",
+      "java/lang/System.currentTimeMillis()J -> Long(3050)",
+      "c.notify()V -> Void",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(169)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(121)",
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "c.getWidth()I -> Int(240)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DemonHunter2.jar",
+    "entry_point": "CMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRGB([IIIIIIIZ)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRGB([IIIIIIIZ)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Toro-CN-128.jar",
+    "entry_point": "Toro",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(53)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/CuteHandyCatKiki.jar",
+    "entry_point": "MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(98)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AcesOfTheLuftwaffe.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1550)",
+      "java/lang/System.currentTimeMillis()J -> Long(1550)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/util/Stack.removeAllElements()V -> Void",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/game/TiledLayer.<init>(IILjavax/microedition/lcdui/Image;II)V",
+      "javax/microedition/lcdui/game/TiledLayer.setCell(III)V",
+      "javax/microedition/lcdui/game/LayerManager.<init>()V",
+      "java/lang/String.replace(CC)Ljava/lang/String;",
+      "javax/microedition/lcdui/game/LayerManager.append(Ljavax/microedition/lcdui/game/Layer;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ShrekParty-v1.2.9-240.jar",
+    "entry_point": "GloftSHKP",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 53,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "g.getWidth()I -> Int(240)",
+      "g.repaint()V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(574)",
+      "javax/microedition/lcdui/Display.callSerially(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "c.read()I",
+      "c.close()V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/9Rota-132.jar",
+    "entry_point": "Main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(610)",
+      "java/lang/String.length()I -> Int(11)",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(611)",
+      "java/lang/String.length()I -> Int(11)",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(612)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BulldozerInc.jar",
+    "entry_point": "Destructor",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.clipRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.clipRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4933)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/String.replace(CC)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Blocks2.jar",
+    "entry_point": "blocks2.BlocksK700",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/DataOutputStream.writeInt(I)V -> Void",
+      "java/io/ByteArrayOutputStream.toByteArray()[B -> Obj(435)",
+      "javax/microedition/rms/RecordStore.setRecord(I[BII)V -> Void",
+      "java/io/DataOutputStream.close()V -> Void",
+      "java/io/ByteArrayOutputStream.close()V -> Void",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/String.trim()Ljava/lang/String; -> Obj(436)",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LadaRacingClub.jar",
+    "entry_point": "MainClass",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(364)",
+      "java/lang/String.length()I -> Int(11)",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(365)",
+      "java/lang/String.length()I -> Int(11)",
+      "java/lang/String.charAt(I)C -> Int(65533)",
+      "java/lang/String.valueOf(C)Ljava/lang/String; -> Obj(366)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/CaveCab.jar",
+    "entry_point": "CaveCab",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(454)",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(2)",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(480)",
+      "java/lang/Object.<init>()V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(457)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(458)",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(459)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:460)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SnakoMania.jar",
+    "entry_point": "SnakoMania",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "b.getHeight()I -> Int(320)",
+      "b.getWidth()I -> Int(240)",
+      "b.getHeight()I -> Int(320)",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Obj(91)",
+      "java/lang/String.startsWith(Ljava/lang/String;)Z -> Int(0)",
+      "java/lang/String.startsWith(Ljava/lang/String;)Z -> Int(0)",
+      "java/lang/String.startsWith(Ljava/lang/String;)Z -> Int(0)",
+      "java/lang/String.startsWith(Ljava/lang/String;)Z -> Int(0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Branch-Rus.jar",
+    "entry_point": "Vetka",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "java/lang/String.toLowerCase()Ljava/lang/String; -> Obj(18291)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(18291)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(18293)",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/KingOfParties-Rus.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(122)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(122)",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Anarchy2087-128.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "G.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/String.replace(CC)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SilentScope-original.jar",
+    "entry_point": "SilentScope",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "javax/microedition/midlet/MIDletStateChangeException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "SilentScopeCore.getWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "SilentScopeCore.getWidth()I -> Int(240)",
+      "SilentScopeCore.getWidth()I -> Int(240)",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "SilentScope.platformRequest(Ljava/lang/String;)Z"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BubbleBobbleEvolution-N95-RU-240.jar",
+    "entry_point": "ProjectMain",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/Integer.parseInt(Ljava/lang/String;)I -> Int(0)",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.setGrayScale(I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chuzzle-176.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 74,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.fillRoundRect(IIIIII)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PuzzleBobbleEvolution.jar",
+    "entry_point": "ProjectMain",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "java/lang/System.arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/EverythingExplodes.jar",
+    "entry_point": "EverythingExplodes",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "b.getWidth()I -> Int(240)",
+      "b.getHeight()I -> Int(320)",
+      "java/lang/Object.getClass()Ljava/lang/Class; -> Obj(12)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(367)",
+      "java/lang/System.gc()V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "h.readInt()I -> Int(0)",
+      "h.close()V -> Void"
+    ],
+    "unhandled_natives": [
+      "h.readFully([B)V",
+      "h.close()V",
+      "h.readInt()I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/I-PlayBowling-N3220-128.jar",
+    "entry_point": "com.iplay.bowling.Bowling",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(47)",
+      "java/lang/String.replace(CC)Ljava/lang/String; -> Null",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/Object.getClass()Ljava/lang/Class; -> Obj(40)",
+      "java/lang/Class.getClass()Ljava/lang/Class; -> Obj(43)",
+      "java/lang/String.length()I -> Int(31)",
+      "java/lang/String.charAt(I)C -> Int(47)",
+      "java/lang/String.replace(CC)Ljava/lang/String; -> Null"
+    ],
+    "unhandled_natives": [
+      "java/lang/String.replace(CC)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheEgyptians.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(601)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readShort()S -> Err(EXC:java/io/IOException:603)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(32)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(607)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(608)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BubbleBobbleEvolution-N2700-240.jar",
+    "entry_point": "ProjectMain",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "java/lang/System.arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.setGrayScale(I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SnowySpaceTrip.jar",
+    "entry_point": "SpaceTrip",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read()I -> Int(122)",
+      "java/io/ByteArrayInputStream.read()I -> Int(152)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(105)",
+      "q.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/io/ByteArrayInputStream.read()I -> Int(-1)",
+      "java/io/ByteArrayInputStream.close()V -> Void",
+      "q.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "q.remove(Ljava/lang/Object;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": [
+      "q.get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "q.clear()V",
+      "q.remove(Ljava/lang/Object;)Ljava/lang/Object;",
+      "q.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/X-Project.jar",
+    "entry_point": "GameMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.getClipWidth()I -> Int(176)",
+      "javax/microedition/lcdui/Graphics.getClipHeight()I -> Int(220)",
+      "javax/microedition/lcdui/Graphics.clipRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/String.charAt(I)C -> Int(32)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "f.wait(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GoldHunter.jar",
+    "entry_point": "org.cesar.inmotion.gold.GameMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(136)",
+      "org/cesar/inmotion/gold/languages/Game_en_US.do(Ljava/lang/String;)Ljava/lang/Object; -> Null",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(136)",
+      "org/cesar/inmotion/gold/languages/Game_en_US.do(Ljava/lang/String;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": [
+      "org/cesar/inmotion/gold/languages/Game_en_US.a(Lorg/cesar/inmotion/a/a;)V",
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V",
+      "org/cesar/inmotion/gold/languages/Game_en_US.do(Ljava/lang/String;)Ljava/lang/Object;",
+      "org/cesar/inmotion/a/c.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",
+      "javax/microedition/lcdui/StringItem.<init>(Ljava/lang/String;Ljava/lang/String;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/CupidsArrow.jar",
+    "entry_point": "CupidsArrow",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(131)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(133)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(135)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(137)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(139)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(141)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(143)",
+      "java/lang/String.length()I -> Int(224)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheIncredibles-arcade-96.jar",
+    "entry_point": "game.GameMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "java/util/Vector.size()I -> Int(0)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(62)",
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "java/util/Vector.size()I -> Int(1)",
+      "java/util/Vector.elementAt(I)Ljava/lang/Object; -> Obj(61)",
+      "java/util/Vector.size()I -> Int(1)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RescueForce.jar",
+    "entry_point": "rescue",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/3DRiverStorm2.jar",
+    "entry_point": "root.MyMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(640)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(640)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(640)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(640)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/StarSim.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(148)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MiniPoccha.jar",
+    "entry_point": "MPMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(188)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(201)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Err(EXC:javax/microedition/rms/RecordStoreNotFoundException:208)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FastandFuriousTheMovie.jar",
+    "entry_point": "common.MainMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Warp5.jar",
+    "entry_point": "warpdemo",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(99)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/util/Random.nextInt()I -> Int(3077991)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:100)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Nascar07.jar",
+    "entry_point": "nascar2k7.Nascar2k7",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(1)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "cq.flushGraphics()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "com/sprintpcs/util/Muglet.getMuglet()Lcom/sprintpcs/util/Muglet;",
+      "javax/microedition/io/Connector.open(Ljava/lang/String;I)Ljavax/microedition/io/Connection;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chuzzle-N95-240.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 74,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.fillRoundRect(IIIIII)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TributeToArkanoid.jar",
+    "entry_point": "Arkanoid",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Vector.<init>()V -> Void",
+      "sprites/Broker.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "sprites/Broker.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(19)",
+      "javax/microedition/lcdui/Display.numAlphaLevels()I -> Int(256)",
+      "javax/microedition/lcdui/Display.getCurrent()Ljavax/microedition/lcdui/Displayable; -> Null",
+      "sprites/Broker.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void"
+    ],
+    "unhandled_natives": [
+      "sprites/Broker.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "sprites/Broker.get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "javax/microedition/lcdui/game/LayerManager.<init>()V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Nor-128.jar",
+    "entry_point": "game.MainMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read()I -> Int(0)",
+      "java/lang/System.gc()V -> Void",
+      "java/io/ByteArrayInputStream.read()I -> Int(1)",
+      "java/lang/System.gc()V -> Void",
+      "java/io/ByteArrayInputStream.read()I -> Int(1)",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/util/Random.nextInt()I -> Int(3077991)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Hydro-v1.1-240.jar",
+    "entry_point": "start",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.getFont()Ljavax/microedition/lcdui/Font; -> Obj(1072)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "e.repaint()V -> Void",
+      "e.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "e.getWidth()I -> Int(240)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V",
+      "javax/microedition/lcdui/List.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SkillBallBingo-240.jar",
+    "entry_point": "SkillBingo",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "b.isShown()Z -> Int(1)",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/util/Random.nextInt()I -> Int(1131826953)",
+      "b.repaint()V -> Void",
+      "b.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.setGrayScale(I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BigRangeHunting2.jar",
+    "entry_point": "GloftHUN2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "i.repaint()V -> Void",
+      "i.serviceRepaints()V -> Void",
+      "java/lang/NullPointerException.printStackTrace()V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/NullPointerException.printStackTrace()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NamcoArcadeGolf-160.jar",
+    "entry_point": "NamcoGolf",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "b.repaint()V -> Void",
+      "b.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Traffic.jar",
+    "entry_point": "Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/Thread.yield()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1016)",
+      "java/util/Random.setSeed(J)V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(2090)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AtomicSpaceRocks.jar",
+    "entry_point": "Main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.valueOf(I)Ljava/lang/String; -> Obj(2444)",
+      "java/lang/StringBuffer.<init>(Ljava/lang/String;)V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(2443)",
+      "java/lang/Math.max(II)I -> Int(41)",
+      "java/lang/StringBuffer.append(I)Ljava/lang/StringBuffer; -> Obj(2443)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(2448)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(2405)",
+      "java/lang/Integer.intValue()I -> Int(160)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/EarthInvasion.jar",
+    "entry_point": "a.e",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:85)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/HarryPotter.jar",
+    "entry_point": "TopDownTile.main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(1)",
+      "java/lang/System.gc()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/String.equals(Ljava/lang/Object;)Z -> Int(1)",
+      "a.getWidth()I -> Int(240)",
+      "java/lang/String.equals(Ljava/lang/Object;)Z -> Int(1)",
+      "a.getHeight()I -> Int(296)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/InfinityRacer.jar",
+    "entry_point": "MIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Math.max(II)I -> Int(6)",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "ResourcesEN.getString(I)Ljava/lang/String; -> Null",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "c.getWidth()I -> Int(240)",
+      "c.getHeight()I -> Int(320)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void"
+    ],
+    "unhandled_natives": [
+      "ResourcesEN.getString(I)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FroggerQuest.jar",
+    "entry_point": "sandeep.rz2.leapingfrogs.FroggerQuest320",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/media/Player.stop()V -> Void",
+      "javax/microedition/media/Player.stop()V -> Void",
+      "javax/microedition/media/Player.stop()V -> Void",
+      "javax/microedition/media/Player.stop()V -> Void",
+      "javax/microedition/media/Player.stop()V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(174)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/game/Sprite.setFrameSequence([I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SiberianStrikeBW.jar",
+    "entry_point": "a.d",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/rms/RecordEnumeration.destroy()V -> Void",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "com/nokia/mid/ui/DeviceControl.stopVibra()V -> Void",
+      "a/b.repaint()V -> Void",
+      "com/nokia/mid/ui/DeviceControl.stopVibra()V -> Void",
+      "a/b.serviceRepaints()V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(124)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:125)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DivineComedy-Hell.jar",
+    "entry_point": "DComedy",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Err(EXC:javax/microedition/rms/RecordStoreNotFoundException:251)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Err(EXC:javax/microedition/rms/RecordStoreNotFoundException:254)",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(256)",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "Info.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FatalAttack.jar",
+    "entry_point": "main.GameMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/RuntimeException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/Object;)Ljava/lang/StringBuffer; -> Obj(4153)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(4153)",
+      "java/lang/StringBuffer.append(I)Ljava/lang/StringBuffer; -> Obj(4153)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(4153)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(4162)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(4150)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(4163)",
+      "java/util/Vector.size()I -> Int(0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DizzyIV-MagiclandDizzy-UnDemo-240.jar",
+    "entry_point": "Dizzy",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.setLength(I)V -> Void",
+      "java/io/DataInputStream.read()I -> Int(-1)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(42)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(371)",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(371)",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/String.length()I -> Int(2)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/JeremiahManfordAthletic.jar",
+    "entry_point": "Manford",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "f.close()V -> Void",
+      "f.close()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/Thread.yield()V -> Void",
+      "b.repaint()V -> Void",
+      "b.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": [
+      "f.readInt()I",
+      "f.close()V",
+      "f.readFully([B)V",
+      "f.readByte()B"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SnakeMIDlet.jar",
+    "entry_point": "com.luizzfar.snake.SnakeMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/IllegalArgumentException",
+    "recent_native_calls": [
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/IllegalArgumentException.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I[Ljava/lang/String;[Ljavax/microedition/lcdui/Image;)V",
+      "javax/microedition/lcdui/ChoiceGroup.<init>(Ljava/lang/String;I)V",
+      "javax/microedition/lcdui/ChoiceGroup.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",
+      "java/util/Date.<init>()V",
+      "java/util/Date.getTime()J"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GrizzleDizzle.jar",
+    "entry_point": "MIDlet.GrizzleDizzleMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/game/Sprite.setRefPixelPosition(II)V -> Void",
+      "javax/microedition/lcdui/game/Sprite.getWidth()I -> Int(16)",
+      "javax/microedition/lcdui/game/Sprite.getHeight()I -> Int(16)",
+      "javax/microedition/lcdui/game/Sprite.defineReferencePixel(II)V -> Void",
+      "javax/microedition/lcdui/game/Sprite.setRefPixelPosition(II)V -> Void",
+      "javax/microedition/lcdui/game/Sprite.getWidth()I -> Int(16)",
+      "javax/microedition/lcdui/game/Sprite.getHeight()I -> Int(16)",
+      "javax/microedition/lcdui/game/LayerManager.getLayerAt(I)Ljavax/microedition/lcdui/game/Layer; -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/game/LayerManager.append(Ljavax/microedition/lcdui/game/Layer;)V",
+      "javax/microedition/lcdui/game/LayerManager.getLayerAt(I)Ljavax/microedition/lcdui/game/Layer;",
+      "javax/microedition/lcdui/game/Sprite.nextFrame()V",
+      "javax/microedition/lcdui/game/Sprite.setFrameSequence([I)V",
+      "javax/microedition/lcdui/game/Sprite.defineReferencePixel(II)V",
+      "javax/microedition/lcdui/game/Sprite.setRefPixelPosition(II)V",
+      "javax/microedition/lcdui/game/LayerManager.<init>()V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/StoptheTrain.jar",
+    "entry_point": "st.StopMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 22,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/String.length()I -> Int(23)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/Runtime.getRuntime()Ljava/lang/Runtime; -> Obj(181)",
+      "java/lang/Runtime.gc()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/3DDiamondFever.jar",
+    "entry_point": "application.WagonsMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/RuntimeException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(616)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FightItOut.jar",
+    "entry_point": "M3GMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(33)",
+      "java/lang/StringBuffer.append(Ljava/lang/Object;)Ljava/lang/StringBuffer; -> Obj(33)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(33)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(39)",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "M3GMidlet.notifyDestroyed()V -> Void",
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void"
+    ],
+    "unhandled_natives": [
+      "M3GMidlet.notifyDestroyed()V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Wizardry.jar",
+    "entry_point": "wizardry1",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "com/siemens/mp/game/Light.setLightOn()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(108)",
+      "com/siemens/mp/game/ExtendedImage.<init>(Ljavax/microedition/lcdui/Image;)V -> Void",
+      "com/siemens/mp/game/ExtendedImage.clear(B)V -> Void",
+      "com/siemens/mp/game/ExtendedImage.getImage()Ljavax/microedition/lcdui/Image; -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/io/Connector.openInputStream(Ljava/lang/String;)Ljava/io/InputStream;",
+      "com/siemens/mp/game/Light.setLightOn()V",
+      "com/siemens/mp/game/ExtendedImage.<init>(Ljavax/microedition/lcdui/Image;)V",
+      "com/siemens/mp/game/ExtendedImage.clear(B)V",
+      "com/siemens/mp/game/ExtendedImage.getImage()Ljavax/microedition/lcdui/Image;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Wormnoid2.jar",
+    "entry_point": "Application.CMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Null",
+      "java/lang/String.<init>([B)V -> Void",
+      "java/lang/String.<init>([B)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MewSim2Kotovasiya-Summer.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LuxorQuest-128.jar",
+    "entry_point": "com.iplay.luxor3.Luxor",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.lastIndexOf(I)I -> Int(6)",
+      "java/lang/StringBuffer.insert(I[C)Ljava/lang/StringBuffer; -> Obj(1374)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(1377)",
+      "java/lang/Object.getClass()Ljava/lang/Class; -> Obj(36)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Null",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readUnsignedByte()I -> Err(EXC:java/lang/NullPointerException:1379)",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/mobiQix.jar",
+    "entry_point": "mobiQixMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawLine(IIII)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/String.getBytes()[B -> Obj(30)",
+      "javax/microedition/rms/RecordStore.getNextRecordID()I -> Int(1)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/List.<init>(Ljava/lang/String;I)V",
+      "c.append(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chuzzle-208.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 74,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/String.length()I -> Int(22)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.fillRoundRect(IIIIII)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LamentIsland.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(163)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(121)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SonicTheHedgehogPartTwo-KnucklesMod-240.jar",
+    "entry_point": "Sonic",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "Sonic.getAppProperty(Ljava/lang/String;)Ljava/lang/String; -> Null",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljavax/microedition/rms/RecordStore; -> Obj(1164)",
+      "javax/microedition/rms/RecordStore.setRecord(I[BII)V -> Void",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)",
+      "javax/microedition/lcdui/Graphics.getFont()Ljavax/microedition/lcdui/Font; -> Obj(1170)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BreakQuestMobile.jar",
+    "entry_point": "app.BreakQuestMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/RuntimeException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(1933)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(1933)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(1946)",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(1947)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(1947)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(1951)",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/200Promil.jar",
+    "entry_point": "promil.PromilMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextField.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/operamini31.jar",
+    "entry_point": "Browser",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(32)",
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(32)",
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(0)",
+      "javax/microedition/lcdui/TextBox.<init>(Ljava/lang/String;Ljava/lang/String;II)V -> Void",
+      "a.getLabel()Ljava/lang/String; -> Null",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(0)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextBox.<init>(Ljava/lang/String;Ljava/lang/String;II)V",
+      "a.getLabel()Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ShrekTheThird.jar",
+    "entry_point": "GloftSTTH",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(41)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(33)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(65)",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(71)",
+      "javax/microedition/lcdui/Image.getHeight()I -> Int(31)",
+      "javax/microedition/lcdui/Graphics.drawRegion(Ljavax/microedition/lcdui/Image;IIIIIIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/HungryCats-240.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(105)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/KillorbeKilled.jar",
+    "entry_point": "KillorbeKilled",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(137)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(138)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(139)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(141)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MasterBlasterSachin.jar",
+    "entry_point": "MasterBlasterSachin",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(174)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(176)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(178)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(180)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(182)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(185)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LOTRTheTwoTowers.jar",
+    "entry_point": "lotrtt.lotrtt",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "java/lang/Short.<init>(S)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(1826)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(9690)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TreasureTrove3D.jar",
+    "entry_point": "MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(176)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(176)",
+      "javax/microedition/lcdui/Image.createRGBImage([IIIZ)Ljavax/microedition/lcdui/Image; -> Obj(171)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(173)",
+      "javax/microedition/m3g/Transform.<init>()V -> Void",
+      "javax/microedition/m3g/Loader.load(Ljava/lang/String;)[Ljavax/microedition/m3g/Object3D; -> Obj(178)",
+      "javax/microedition/m3g/World.getChild(I)Ljavax/microedition/m3g/Node; -> Null",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/m3g/World.getChild(I)Ljavax/microedition/m3g/Node;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TopGun.jar",
+    "entry_point": "mo.ntc.TopGun",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "javax/microedition/midlet/MIDlet.<init>()V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(3)",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Null",
+      "java/lang/Integer.parseInt(Ljava/lang/String;)I -> Int(0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SlamSkate.jar",
+    "entry_point": "a.a",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "a/d.serviceRepaints()V -> Void",
+      "com/nokia/mid/ui/DeviceControl.stopVibra()V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(302)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:303)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Gothic3.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(167)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readShort()S -> Err(EXC:java/io/IOException:169)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(32)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(173)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(174)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/HugoBlackDiamondFever2.jar",
+    "entry_point": "HugoBDF2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(108)",
+      "java/lang/String.charAt(I)C -> Int(108)",
+      "java/lang/String.length()I -> Int(480)",
+      "java/lang/String.charAt(I)C -> Int(32)",
+      "java/lang/String.charAt(I)C -> Int(32)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(9097)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(152)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(9098)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/HungryCatsHibernation-Rus.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(107)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Escape.jar",
+    "entry_point": "Escape",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/IllegalArgumentException.toString()Ljava/lang/String; -> Obj(45)",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(46)",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(50)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GemJam.jar",
+    "entry_point": "z",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/midlet/MIDlet.<init>()V -> Void",
+      "java/util/Hashtable.<init>()V -> Void",
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "java/lang/Thread.currentThread()Ljava/lang/Thread; -> Obj(1)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DizzyIV-MagiclandDizzy-240.jar",
+    "entry_point": "Dizzy",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "java/lang/String.toLowerCase()Ljava/lang/String; -> Obj(4402)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(4402)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(4400)",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TrackAndField.jar",
+    "entry_point": "TrackAndField",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "javax/microedition/midlet/MIDletStateChangeException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(13)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(14)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(16)",
+      "TrackAndField.platformRequest(Ljava/lang/String;)Z -> Int(0)",
+      "javax/microedition/midlet/MIDletStateChangeException.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "TrackAndField.platformRequest(Ljava/lang/String;)Z"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/UltraPhoenix-Resurgence-orig.jar",
+    "entry_point": "com.uwan.UltraPhoenix",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/IllegalAccessException",
+    "recent_native_calls": [
+      "java/lang/String.equals(Ljava/lang/Object;)Z -> Int(0)",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Obj(854)",
+      "java/lang/String.length()I -> Int(11)",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Obj(855)",
+      "java/lang/String.substring(II)Ljava/lang/String; -> Obj(856)",
+      "java/lang/String.equals(Ljava/lang/Object;)Z -> Int(1)",
+      "com/uwan/a.getWidth()I -> Int(240)",
+      "java/lang/IllegalAccessException.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/util/Date.<init>(J)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MagneticJoe2.jar",
+    "entry_point": "magneticjoe2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/lang/Thread.start()V -> Void",
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(50)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Asmali_Konak.jar",
+    "entry_point": "asmali.h",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Toro-128.jar",
+    "entry_point": "Toro",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(53)",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setFont(Ljavax/microedition/lcdui/Font;)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(33)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheSims3Supernatural-128.jar",
+    "entry_point": "com.ea.sdk.SDKMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(I)Ljava/lang/StringBuffer; -> Obj(406)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(413)",
+      "com/ea/sdk/SDKMIDlet.getClass()Ljava/lang/Class; -> Obj(340)",
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(415)",
+      "java/io/ByteArrayInputStream.skip(J)J -> Long(376)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readUnsignedByte()I -> Err(EXC:java/io/IOException:419)",
+      "java/io/DataInputStream.close()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FruitPuyo2.jar",
+    "entry_point": "FruitPuyo2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.<init>([C)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/util/Random.<init>()V -> Void",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "j.setFullScreenMode(Z)V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(326)",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ZombieSiege.jar",
+    "entry_point": "common.com.mbounce.game.midlet.MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/ByteArrayOutputStream.<init>()V -> Void",
+      "java/io/DataInputStream.read()I -> Int(-1)",
+      "java/io/ByteArrayOutputStream.toByteArray()[B -> Obj(157)",
+      "java/io/ByteArrayOutputStream.close()V -> Void",
+      "java/io/DataInputStream.close()V -> Void",
+      "java/io/ByteArrayOutputStream.close()V -> Void",
+      "java/util/Hashtable.<init>(I)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/String.replace(CC)Ljava/lang/String;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Underwater3D.jar",
+    "entry_point": "Underwater3D",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/m3g/Transform.postScale(FFF)V -> Void",
+      "javax/microedition/m3g/VertexBuffer.<init>()V -> Void",
+      "javax/microedition/m3g/VertexBuffer.setPositions(Ljavax/microedition/m3g/VertexArray;F[F)V -> Void",
+      "javax/microedition/m3g/VertexBuffer.setTexCoords(ILjavax/microedition/m3g/VertexArray;F[F)V -> Void",
+      "javax/microedition/m3g/Mesh.<init>(Ljavax/microedition/m3g/VertexBuffer;Ljavax/microedition/m3g/IndexBuffer;Ljavax/microedition/m3g/Appearance;)V -> Void",
+      "javax/microedition/m3g/Mesh.setTransform(Ljavax/microedition/m3g/Transform;)V -> Void",
+      "javax/microedition/m3g/Appearance.<init>()V -> Void",
+      "javax/microedition/m3g/Graphics3D.getProperties()Ljava/util/Hashtable; -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/m3g/Graphics3D.getProperties()Ljava/util/Hashtable;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/GoalDefense-Rus.jar",
+    "entry_point": "com.softdp.Application",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(C)Ljava/lang/StringBuffer; -> Obj(244)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(250)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(235)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(235)",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BombSweeperA.jar",
+    "entry_point": "BombSweeperA.BombSweeperA",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/midlet/MIDlet.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "com/nokia/mid/sound/Sound.getSupportedFormats()[I -> Null"
+    ],
+    "unhandled_natives": [
+      "com/nokia/mid/sound/Sound.getSupportedFormats()[I"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/War2056-RU-176.jar",
+    "entry_point": "war2056.War2056",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(86)",
+      "java/lang/String.charAt(I)C -> Int(41)",
+      "java/lang/String.length()I -> Int(86)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(651)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Fireball-original.jar",
+    "entry_point": "ng.games.fireball.FireballMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "ng/games/fireball/g.repaint()V -> Void",
+      "ng/games/fireball/g.serviceRepaints()V -> Void",
+      "ng/games/fireball/g.isShown()Z -> Int(1)",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(2866)",
+      "java/lang/Thread.currentThread()Ljava/lang/Thread; -> Obj(1)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(3016)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SkyForce-208.jar",
+    "entry_point": "engine.midlet.nokia6230i.Start",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 54,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4950)",
+      "d.repaint()V -> Void",
+      "javax/microedition/lcdui/Display.callSerially(Ljava/lang/Runnable;)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "d.repaint()V -> Void",
+      "javax/microedition/lcdui/Display.callSerially(Ljava/lang/Runnable;)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/StringBuffer.getChars(II[CI)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/DizzyVI-PrinceOfTheYolkfolk-UnDemo-240.jar",
+    "entry_point": "Dizzy",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.setLength(I)V -> Void",
+      "java/io/DataInputStream.read()I -> Int(-1)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(42)",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(372)",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/String.intern()Ljava/lang/String; -> Obj(372)",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/String.length()I -> Int(2)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MewSim2Kotovasiya-Winter.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AlexiaTheGreat.jar",
+    "entry_point": "MainMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(227)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(229)",
+      "javax/microedition/m3g/Camera.setPerspective(FFFF)V -> Void",
+      "javax/microedition/m3g/Transform.set([F)V -> Void",
+      "javax/microedition/m3g/Graphics3D.setCamera(Ljavax/microedition/m3g/Camera;Ljavax/microedition/m3g/Transform;)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "javax/microedition/m3g/Transform.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/m3g/World.getChild(I)Ljavax/microedition/m3g/Node;"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/the_elder_scrolls_oblivion_240x320-17026.jar",
+    "entry_point": "blt.Main",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.read()I -> Int(124)",
+      "java/io/DataInputStream.close()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(378)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(378)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(382)",
+      "javax/microedition/lcdui/Graphics.drawString(Ljava/lang/String;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RomansandBarbarians.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Class.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; -> Obj(1148)",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readShort()S -> Err(EXC:java/io/IOException:1150)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.stringWidth(Ljava/lang/String;)I -> Int(24)",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Obj(1154)",
+      "javax/microedition/lcdui/Image.getGraphics()Ljavax/microedition/lcdui/Graphics; -> Obj(1155)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NamcoArcadeGolf-128.jar",
+    "entry_point": "NamcoGolf",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TalebanVSRobot-Demo.jar",
+    "entry_point": "Taleban",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(798)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(798)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(802)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(301)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(303)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(237)",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Obj(235)",
+      "mjg/MJGame$1.isAlive()Z -> Int(1)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/RaymanGolf-3410.jar",
+    "entry_point": "a.a",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:94)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Dakar2009.jar",
+    "entry_point": "MainMidlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BigWhiteBoarding.jar",
+    "entry_point": "main.AppMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.drawRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/BrickCampion.jar",
+    "entry_point": "gpong.BrickCC",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArithmeticException",
+    "recent_native_calls": [
+      "java/util/Vector.<init>()V -> Void",
+      "javax/microedition/rms/RecordStore.getNumRecords()I -> Int(0)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "java/lang/String.<init>([B)V -> Void",
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "java/lang/Integer.<init>(I)V -> Void",
+      "java/util/Vector.addElement(Ljava/lang/Object;)V -> Void",
+      "javax/microedition/rms/RecordStore.getNumRecords()I -> Int(0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AmyPumpkin.jar",
+    "entry_point": "app.App",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/util/Vector.removeAllElements()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "c.repaint()V -> Void",
+      "c.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "java/lang/String.length()I -> Int(15)",
+      "java/lang/String.charAt(I)C -> Int(97)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FruitPuyo2-original.jar",
+    "entry_point": "FruitPuyo2",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/String.<init>([C)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/util/Random.<init>()V -> Void",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "j.setFullScreenMode(Z)V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(326)",
+      "java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String; -> Null"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ClubTycoon.jar",
+    "entry_point": "phone.Midlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(125)",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(125)",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(16)",
+      "java/util/Random.<init>(J)V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/operamini65c.jar",
+    "entry_point": "Browser",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "javax/microedition/lcdui/Image.getRGB([IIIIIII)V -> Void",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextBox.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SoccerUnlimited.jar",
+    "entry_point": "b",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/rms/RecordStore.getNumRecords()I -> Int(0)",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/String.equals(Ljava/lang/Object;)Z -> Int(0)",
+      "java/io/DataInputStream.close()V -> Void",
+      "java/io/ByteArrayInputStream.<init>([B)V -> Void",
+      "java/io/DataInputStream.<init>(Ljava/io/InputStream;)V -> Void",
+      "java/io/DataInputStream.readShort()S -> Err(EXC:java/io/IOException:164)",
+      "java/lang/Object.<init>()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Chuzzle-N5200-160.jar",
+    "entry_point": "Game",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 74,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/String.length()I -> Int(18)",
+      "java/lang/System.currentTimeMillis()J -> Long(4983)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.fillRoundRect(IIIIII)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ChampionshipManager2008.jar",
+    "entry_point": "CMMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/Math.abs(I)I -> Int(16)",
+      "java/lang/Math.abs(I)I -> Int(8)",
+      "java/lang/Math.abs(I)I -> Int(4)",
+      "java/lang/Math.abs(I)I -> Int(2)",
+      "java/lang/Thread.currentThread()Ljava/lang/Thread; -> Obj(1)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/Thread.currentThread()Ljava/lang/Thread; -> Obj(1)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "java/lang/Integer.byteValue()B"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/NightWatch-176.jar",
+    "entry_point": "dozor.Dozor",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Display.setCurrent(Ljavax/microedition/lcdui/Displayable;)V -> Void",
+      "dozor/b.repaint()V -> Void",
+      "dozor/b.serviceRepaints()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "java/util/Hashtable.get(Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(1624)",
+      "java/util/Hashtable.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; -> Null",
+      "javax/microedition/lcdui/Graphics.drawImage(Ljavax/microedition/lcdui/Image;III)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheGlassCube-Demo.jar",
+    "entry_point": "CubeCode.GlassCubeTrial",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(285)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/StringItem.<init>(Ljava/lang/String;Ljava/lang/String;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PrinceofPersiaBW.jar",
+    "entry_point": "a.h",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read([B)I -> Int(1)",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(1)",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(1)",
+      "java/io/ByteArrayInputStream.read([B)I -> Int(1)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(780)",
+      "java/io/ByteArrayInputStream.close()V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:383)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/ClusterPirate.jar",
+    "entry_point": "a.c",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "java/io/ByteArrayInputStream.read([BII)I -> Int(5)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "com/nokia/mid/ui/DirectUtils.getDirectGraphics(Ljavax/microedition/lcdui/Graphics;)Lcom/nokia/mid/ui/DirectGraphics; -> Obj(334)",
+      "com/nokia/mid/ui/DirectGraphics.drawPixels([B[BIIIIIIII)V -> Err(EXC:java/lang/ArrayIndexOutOfBoundsException:335)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/WuKangMonk-176.jar",
+    "entry_point": "WuKangMonk_N60",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(199)",
+      "java/lang/StringBuffer.append(Ljava/lang/Object;)Ljava/lang/StringBuffer; -> Obj(199)",
+      "java/lang/StringBuffer.toString()Ljava/lang/String; -> Obj(203)",
+      "java/io/PrintStream.println(Ljava/lang/String;)V -> Void",
+      "java/lang/StringBuffer.<init>()V -> Void",
+      "java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer; -> Obj(204)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextField.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AcesoftheLuftwaffe-2011.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1550)",
+      "java/lang/System.currentTimeMillis()J -> Long(1550)",
+      "java/lang/Thread.sleep(J)V -> Void",
+      "java/util/Stack.removeAllElements()V -> Void",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)",
+      "javax/microedition/lcdui/Font.getHeight()I -> Int(13)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/game/TiledLayer.setCell(III)V",
+      "javax/microedition/lcdui/game/TiledLayer.<init>(IILjavax/microedition/lcdui/Image;II)V",
+      "java/lang/String.replace(CC)Ljava/lang/String;",
+      "javax/microedition/lcdui/game/LayerManager.<init>()V",
+      "javax/microedition/lcdui/game/LayerManager.append(Ljavax/microedition/lcdui/game/Layer;)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/H1N1.jar",
+    "entry_point": "H1N1",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(137)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(138)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(139)",
+      "javax/microedition/rms/RecordStore.openRecordStore(Ljava/lang/String;Z)Ljavax/microedition/rms/RecordStore; -> Obj(141)",
+      "javax/microedition/rms/RecordStore.getRecord(I)[B -> Null",
+      "javax/microedition/rms/RecordStore.closeRecordStore()V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/EDGE-N95-240.jar",
+    "entry_point": "CGame",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(523)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(524)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(525)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(526)",
+      "javax/microedition/lcdui/Font.getFont(III)Ljavax/microedition/lcdui/Font; -> Obj(527)",
+      "javax/microedition/lcdui/Canvas.<init>()V -> Void",
+      "c.setFullScreenMode(Z)V -> Void",
+      "javax/microedition/lcdui/Image.createImage(II)Ljavax/microedition/lcdui/Image; -> Err(EXC:java/lang/IllegalArgumentException: width and height must be > 0)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/SkillBallBingo-352.jar",
+    "entry_point": "SkillBingo",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "COMPLETED_WINDOW",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": null,
+    "recent_native_calls": [
+      "b.isShown()Z -> Int(1)",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/util/Random.nextInt()I -> Int(1131826953)",
+      "b.repaint()V -> Void",
+      "b.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/System.currentTimeMillis()J -> Long(4966)",
+      "java/lang/Thread.sleep(J)V -> Void"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/Graphics.setGrayScale(I)V"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Gradius-176-original.jar",
+    "entry_point": "Gradius",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "javax/microedition/midlet/MIDletStateChangeException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void",
+      "javax/microedition/lcdui/Command.<init>(Ljava/lang/String;II)V -> Void",
+      "javax/microedition/lcdui/Command.getCommandType()I -> Int(3)",
+      "javax/microedition/lcdui/Command.getCommandType()I -> Int(4)",
+      "Game.setCommandListener(Ljavax/microedition/lcdui/CommandListener;)V -> Void",
+      "java/lang/Thread.<init>(Ljava/lang/Runnable;)V -> Void",
+      "Gradius.platformRequest(Ljava/lang/String;)Z -> Int(0)",
+      "javax/microedition/midlet/MIDletStateChangeException.<init>()V -> Void"
+    ],
+    "unhandled_natives": [
+      "Gradius.platformRequest(Ljava/lang/String;)Z"
+    ]
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/LuchaLibreDT.jar",
+    "entry_point": "GloftLucha",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1383)",
+      "d.repaint()V -> Void",
+      "d.serviceRepaints()V -> Void",
+      "java/lang/System.currentTimeMillis()J -> Long(1383)",
+      "javax/microedition/lcdui/Graphics.setColor(I)V -> Void",
+      "javax/microedition/lcdui/Graphics.fillRect(IIII)V -> Void",
+      "javax/microedition/lcdui/Graphics.setClip(IIII)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/AcesoftheLuftwaffe2.jar",
+    "entry_point": "HG",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 150,
+    "last_exception_class": "java/lang/NullPointerException",
+    "recent_native_calls": [
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/System.currentTimeMillis()J -> Long(5000)",
+      "java/lang/Thread.yield()V -> Void",
+      "i.repaint()V -> Void",
+      "javax/microedition/lcdui/Display.getDisplay(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display; -> Obj(20939)",
+      "javax/microedition/lcdui/Display.callSerially(Ljava/lang/Runnable;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PoP-WW.jar",
+    "entry_point": "cMIDlet",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/lang/String.charAt(I)C -> Int(84)",
+      "java/lang/String.charAt(I)C -> Int(82)",
+      "java/lang/String.charAt(I)C -> Int(73)",
+      "java/lang/String.charAt(I)C -> Int(69)",
+      "java/lang/String.charAt(I)C -> Int(83)",
+      "java/lang/String.charAt(I)C -> Int(46)",
+      "java/lang/String.charAt(I)C -> Int(0)",
+      "java/lang/String.charAt(I)C -> Int(65533)"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/Worms_2007-128.jar",
+    "entry_point": "Worms2007.Worms2007",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/ArrayIndexOutOfBoundsException",
+    "recent_native_calls": [
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(159)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(159)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(159)",
+      "javax/microedition/lcdui/Image.getWidth()I -> Int(159)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(441)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(443)",
+      "javax/microedition/lcdui/Image.createImage(Ljava/lang/String;)Ljavax/microedition/lcdui/Image; -> Obj(445)",
+      "com/nokia/mid/sound/Sound.<init>(IJ)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MotoGP09-360.jar",
+    "entry_point": "com.iplay.motogp2009.MotoGP2009",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 0,
+    "last_exception_class": "java/lang/RuntimeException",
+    "recent_native_calls": [
+      "af.setFullScreenMode(Z)V -> Void",
+      "af.getWidth()I -> Int(240)",
+      "af.getHeight()I -> Int(320)",
+      "java/util/Vector.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "java/lang/Object.<init>()V -> Void",
+      "af.hasPointerEvents()Z -> Int(0)",
+      "java/lang/RuntimeException.<init>(Ljava/lang/String;)V -> Void"
+    ],
+    "unhandled_natives": []
+  },
+  {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/TheInfernalGate.jar",
+    "entry_point": "z",
+    "old_status": "GUEST_EXCEPTION",
+    "new_status": "GUEST_EXCEPTION",
+    "instructions": 0,
+    "paint_calls": 1,
+    "last_exception_class": "java/lang/IndexOutOfBoundsException",
+    "recent_native_calls": [
+      "java/io/DataInputStream.read()I -> Int(157)",
+      "java/io/DataInputStream.read()I -> Int(248)",
+      "java/io/DataInputStream.read()I -> Int(137)",
+      "java/io/DataInputStream.read()I -> Int(0)",
+      "java/io/DataInputStream.close()V -> Void",
+      "java/lang/System.gc()V -> Void",
+      "java/lang/System.arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V -> Void",
+      "java/lang/System.arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V -> Err(EXC:java/lang/IndexOutOfBoundsException:4115)"
+    ],
+    "unhandled_natives": [
+      "javax/microedition/lcdui/TextBox.<init>(Ljava/lang/String;Ljava/lang/String;II)V"
+    ]
+  }
+]

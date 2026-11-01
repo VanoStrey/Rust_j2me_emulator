@@ -1,0 +1,107 @@
+{
+  "game_id": "doom_rpg",
+  "scenario_type": "GAMEPLAY",
+  "scenario_file": "doom_rpg_gameplay.json",
+  "timestamp": "2026-10-31T18:21:10.086Z",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "rust_execution": {
+    "wall_time_ms": 40.265125,
+    "ticks_per_sec": 12417.693972140903,
+    "instructions_executed": 270546,
+    "peak_heap_objects": 1752,
+    "final_heap_objects": 1752,
+    "gc_count": 0,
+    "verdict": "Pass",
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    }
+  },
+  "snapshot_comparisons": [
+    {
+      "tick": 120,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 2070 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 220,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 9514 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 350,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 12130 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 500,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 12740 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "gameId": "bomberman_panic",
+  "gameName": "Bomberman Panic",
+  "durationSec": 10,
+  "anomalies": [
+    "MEMORY_GARBAGE_RENDER"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/bomberman_panic_artifact.png",
+  "summary": "MEMORY_GARBAGE_RENDER",
+  "finalTelemetry": {
+    "elapsedMs": 9665,
+    "instructions": 2805012,
+    "publishes": 113,
+    "autoHealing": 0,
+    "anomalies": [
+      "MEMORY_GARBAGE_RENDER"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+MIDlet-Name: Heroes Lore
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: EA Mobile
+MIDlet-1: Heroes Lore,/icon.png,rpg.GameMIDlet
+HO-Demo: PAID
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1

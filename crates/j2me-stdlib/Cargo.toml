@@ -1,0 +1,13 @@
+[package]
+name = "j2me-stdlib"
+version = "0.1.0"
+edition = "2021"
+authors = ["Antigravity Systems Architect"]
+description = "Native implementations and standard libraries for J2ME CLDC 1.1 / MIDP 2.0 / Nokia UI / MMAPI"
+
+[dependencies]
+j2me-core = { path = "../j2me-core" }
+miniz_oxide = { version = "0.8", default-features = false, features = ["with-alloc"] }
+serde = { version = "1.0", default-features = false, features = ["derive", "alloc"] }
+
+[dev-dependencies]

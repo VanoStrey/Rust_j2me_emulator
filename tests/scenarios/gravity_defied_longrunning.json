@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "game_id": "gravity_defied",
+  "jar_file": "gravity_defied.jar",
+  "jar_sha256": "8c120d5eee9875061078d47016d9a850f0ceb1ec9d4b923e585d48d8d8b83f88",
+  "resolution": {
+    "width": 176,
+    "height": 220
+  },
+  "scenario_type": "LONGRUNNING",
+  "description": "1200 ticks of full fixed-point ragdoll physics, spring suspensions, and vector line drawing.",
+  "total_ticks": 1200,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 70,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 120,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 130,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 180,
+      "key": 51,
+      "action": "press",
+      "free_key": "Digit3"
+    },
+    {
+      "tick": 600,
+      "key": 54,
+      "action": "press",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 680,
+      "key": 54,
+      "action": "release",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 800,
+      "key": 52,
+      "action": "press",
+      "free_key": "Digit4"
+    },
+    {
+      "tick": 880,
+      "key": 52,
+      "action": "release",
+      "free_key": "Digit4"
+    },
+    {
+      "tick": 1100,
+      "key": 51,
+      "action": "release",
+      "free_key": "Digit3"
+    }
+  ],
+  "snapshot_ticks": [
+    300,
+    600,
+    900,
+    1200
+  ],
+  "expected_behavior": "1200 ticks of full fixed-point ragdoll physics, spring suspensions, and vector line drawing."
+}

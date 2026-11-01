@@ -1,0 +1,88 @@
+{
+  "game_id": "doom_rpg",
+  "scenario_type": "GAMEPLAY",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/doom_rpg_gameplay.json",
+  "jar_file": "doom_rpg.jar",
+  "jar_sha256": "a07ff089ec4b124220a52008ab3adaa205c51f40476c64258d91006604bbc6b3",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "total_ticks_executed": 500,
+  "wall_time_ms": 40.265125,
+  "ticks_per_sec": 12417.693972140903,
+  "instructions_executed": 270546,
+  "snapshots": [
+    {
+      "tick": 120,
+      "png_file": "rust_tick_0120.png",
+      "raw_file": "rust_tick_0120.raw",
+      "raw_sha256": "e20bc18ebebaa586528805c2383e3c8289cdbfdf29c7c86e5ab05040e788dd39",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 2070
+    },
+    {
+      "tick": 220,
+      "png_file": "rust_tick_0220.png",
+      "raw_file": "rust_tick_0220.raw",
+      "raw_sha256": "85f6150cbf9e10bd00fded09916714297671153061dfabcecacfa2b7586d8501",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 9514
+    },
+    {
+      "tick": 350,
+      "png_file": "rust_tick_0350.png",
+      "raw_file": "rust_tick_0350.raw",
+      "raw_sha256": "a00ac42493494e232c0baffbe74b4a21292e1102001ecfbeed7c0cdee75f2202",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 12130
+    },
+    {
+      "tick": 500,
+      "png_file": "rust_tick_0500.png",
+      "raw_file": "rust_tick_0500.raw",
+      "raw_sha256": "953a6aa462db897533ca0d9b3b01f8ead3acf96f0acd9637044d63af15f608ee",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 12740
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 270546,
+    "fb_publishes_count": 16,
+    "fb_changes_count": 8,
+    "input_events_count": 12,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 1752,
+  "final_heap_objects": 1752,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

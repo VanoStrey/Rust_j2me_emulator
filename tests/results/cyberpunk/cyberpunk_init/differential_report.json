@@ -1,0 +1,90 @@
+{
+  "game_id": "cyberpunk",
+  "scenario_type": "INIT",
+  "scenario_file": "cyberpunk_init.json",
+  "timestamp": "2026-10-31T18:21:09.616Z",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "rust_execution": {
+    "wall_time_ms": 34.116875,
+    "ticks_per_sec": 7034.64194771649,
+    "instructions_executed": 155464,
+    "peak_heap_objects": 843,
+    "final_heap_objects": 843,
+    "gc_count": 0,
+    "verdict": "Pass",
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    }
+  },
+  "snapshot_comparisons": [
+    {
+      "tick": 60,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 36608,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 859 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 150,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 36608,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 4865 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 240,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 36608,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 4865 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    }
+  ]
+}

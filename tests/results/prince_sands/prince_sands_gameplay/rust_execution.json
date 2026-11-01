@@ -1,0 +1,88 @@
+{
+  "game_id": "prince_sands",
+  "scenario_type": "GAMEPLAY",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/prince_sands_gameplay.json",
+  "jar_file": "prince_sands.jar",
+  "jar_sha256": "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "total_ticks_executed": 500,
+  "wall_time_ms": 954.030625,
+  "ticks_per_sec": 524.0921904367588,
+  "instructions_executed": 6343736,
+  "snapshots": [
+    {
+      "tick": 280,
+      "png_file": "rust_tick_0280.png",
+      "raw_file": "rust_tick_0280.raw",
+      "raw_sha256": "d9662b8db64675e4d9e65a7146d3f8fc5d4428fe22ee6b7d693e3b287f54b96b",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 29122
+    },
+    {
+      "tick": 410,
+      "png_file": "rust_tick_0410.png",
+      "raw_file": "rust_tick_0410.raw",
+      "raw_sha256": "e3e3aaf1b336f24323756ceab5cdebf0b739462f721d0c248d99ea00253e5e88",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 36608
+    },
+    {
+      "tick": 460,
+      "png_file": "rust_tick_0460.png",
+      "raw_file": "rust_tick_0460.raw",
+      "raw_sha256": "cf72a4e2e55cd8a4892a05e2a1b017ff5f1d7fa27989acbe4a1c2ff5efe4d6f5",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 29456
+    },
+    {
+      "tick": 500,
+      "png_file": "rust_tick_0500.png",
+      "raw_file": "rust_tick_0500.raw",
+      "raw_sha256": "34136cf783842b7ec8b9b3ccb3885b348b71c87edf82d6c09cea81363d9daa7b",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 36114
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": false,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 6343736,
+    "fb_publishes_count": 200,
+    "fb_changes_count": 36,
+    "input_events_count": 12,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 7091,
+  "final_heap_objects": 1710,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

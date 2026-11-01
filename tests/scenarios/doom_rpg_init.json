@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "doom_rpg",
+  "jar_file": "doom_rpg.jar",
+  "jar_sha256": "a07ff089ec4b124220a52008ab3adaa205c51f40476c64258d91006604bbc6b3",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot to id Software / EA Mobile static title screen.",
+  "total_ticks": 240,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    60,
+    150,
+    240
+  ],
+  "expected_behavior": "Cold boot to id Software / EA Mobile static title screen."
+}

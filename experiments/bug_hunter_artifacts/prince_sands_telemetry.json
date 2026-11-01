@@ -1,0 +1,23 @@
+{
+  "gameId": "prince_sands",
+  "gameName": "Prince of Persia: Sands of Time",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/prince_sands_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG",
+  "finalTelemetry": {
+    "elapsedMs": 9817,
+    "instructions": 6349639,
+    "publishes": 206,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG"
+    ]
+  }
+}

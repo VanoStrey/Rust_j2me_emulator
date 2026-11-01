@@ -1,0 +1,107 @@
+{
+  "game_id": "bounce_tales",
+  "scenario_type": "LONGRUNNING",
+  "scenario_file": "bounce_tales_longrunning.json",
+  "timestamp": "2026-10-31T18:21:06.356Z",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "rust_execution": {
+    "wall_time_ms": 8355.318875,
+    "ticks_per_sec": 143.62108950629369,
+    "instructions_executed": 74120541,
+    "peak_heap_objects": 7148,
+    "final_heap_objects": 1616,
+    "gc_count": 0,
+    "verdict": "Pass",
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": true,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    }
+  },
+  "snapshot_comparisons": [
+    {
+      "tick": 300,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 69631 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 600,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 69631 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 900,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 69631 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    },
+    {
+      "tick": 1200,
+      "metrics": {
+        "exactPixelMatchPct": 100,
+        "meanAbsoluteError": 0,
+        "rootMeanSquareError": 0,
+        "percentageChangedPixelsStrict": 0,
+        "percentageChangedPixelsTolerant": 0,
+        "structuralSimilarityIndex": 1
+      },
+      "differingPixels": 0,
+      "totalPixels": 76800,
+      "primaryCategory": "SELF_VERIFIED",
+      "categoryExplanation": "Rust standalone frame published 69631 non-black pixels.",
+      "diffPpmFile": null,
+      "boundingBox": null
+    }
+  ]
+}

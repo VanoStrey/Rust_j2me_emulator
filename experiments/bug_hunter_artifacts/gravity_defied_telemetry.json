@@ -1,0 +1,19 @@
+{
+  "gameId": "gravity_defied",
+  "gameName": "Gravity Defied",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/gravity_defied_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9982,
+    "instructions": 12569446,
+    "publishes": 145,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

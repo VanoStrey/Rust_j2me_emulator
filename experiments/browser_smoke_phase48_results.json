@@ -1,0 +1,25 @@
+{
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "bounce_tales": {
+    "frames": 300,
+    "fb_publishes": 300,
+    "paint_calls": 1,
+    "uncaught_exceptions": 0,
+    "passed": true
+  },
+  "prince_of_persia": {
+    "frames": 300,
+    "fb_publishes": 300,
+    "paint_calls": 159,
+    "uncaught_exceptions": 0,
+    "passed": true
+  },
+  "all_passed": true,
+  "castlevania": {
+    "frames": 300,
+    "fb_publishes": 300,
+    "paint_calls": 39,
+    "uncaught_exceptions": 0,
+    "passed": true
+  }
+}

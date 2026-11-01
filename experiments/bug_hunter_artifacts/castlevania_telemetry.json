@@ -1,0 +1,23 @@
+{
+  "gameId": "castlevania",
+  "gameName": "Castlevania: Aria of Sorrow",
+  "durationSec": 10,
+  "anomalies": [
+    "BLACK_SCREEN"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/castlevania_artifact.png",
+  "summary": "BLACK_SCREEN",
+  "finalTelemetry": {
+    "elapsedMs": 9958,
+    "instructions": 7267279,
+    "publishes": 107,
+    "autoHealing": 0,
+    "anomalies": [
+      "BLACK_SCREEN"
+    ]
+  }
+}

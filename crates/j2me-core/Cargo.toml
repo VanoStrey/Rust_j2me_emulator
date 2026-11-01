@@ -1,0 +1,11 @@
+[package]
+name = "j2me-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Antigravity Systems Architect"]
+description = "Pure Rust J2ME CLDC 1.1 KVM Virtual Machine Core Engine"
+
+[dependencies]
+miniz_oxide = { version = "0.8", default-features = false, features = ["with-alloc"] }
+
+[dev-dependencies]

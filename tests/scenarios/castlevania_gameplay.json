@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "game_id": "castlevania",
+  "jar_file": "castlevania.jar",
+  "jar_sha256": "dac5726ba3b9bb419a3b147e540415117b2f7c68909ea9a96b9d6de0d4da439b",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "GAMEPLAY",
+  "description": "Pass language & sound dialogs, start New Game, move Soma right (-4).",
+  "total_ticks": 650,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 70,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 140,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 150,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 520,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 535,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 600,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 615,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 630,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    }
+  ],
+  "snapshot_ticks": [
+    140,
+    520,
+    600,
+    650
+  ],
+  "expected_behavior": "Pass language & sound dialogs, start New Game, move Soma right (-4)."
+}

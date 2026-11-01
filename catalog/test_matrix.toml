@@ -1,0 +1,183 @@
+# Canonical Test Matrix for J2ME Emulator Benchmark Suite
+# Conforms to Phase 3.2 Specification
+
+[catalog]
+version = "3.2.0"
+canonical_count = 16
+description = "Canonical 16-game evaluation matrix for J2ME MIDP 2.0 / CLDC 1.1 emulator"
+
+[[game]]
+canonical_id = "gow_betrayal"
+display_name = "God of War: Betrayal"
+expected_vendor = "Sony Pictures"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/gow_betrayal.jar"
+jad_path = ""
+jar_sha256 = "12a0166f5e0717914b0ccad3f029e546d4c8960505ea955874a7eca38b0d6e0d"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "SOE company logo active; requires interactive navigation to reach main menu"
+
+[[game]]
+canonical_id = "cyberpunk"
+display_name = "Cyberpunk: The Arasaka's Plot"
+expected_vendor = "Mayhem Studio"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/cyberpunk.jar"
+jad_path = ""
+jar_sha256 = "73f22974060deed62746b7cebe0cbda168cb72d03965f003fd386587bfbb4851"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "Requires custom Nokia UI key mapping to advance past company splash screen"
+
+[[game]]
+canonical_id = "sc_chaos_theory"
+display_name = "Tom Clancy's Splinter Cell: Chaos Theory"
+expected_vendor = "Gameloft SA"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/sc_chaos_theory.jar"
+jad_path = ""
+jar_sha256 = "4dcce6624f1446faa2cdf274d778c04f9f9be1f3fa7cfd56b04c037949738a5a"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Heavy 2D/3D sprite pipeline, waiting for user language selection menu response"
+
+[[game]]
+canonical_id = "castlevania_aria"
+display_name = "Castlevania: Aria of Sorrow"
+expected_vendor = "Konami"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/castlevania_aria.jar"
+jad_path = ""
+jar_sha256 = "dac5726ba3b9bb419a3b147e540415117b2f7c68909ea9a96b9d6de0d4da439b"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Language selection menu (English, French, Italian, German, Spanish, Portuguese) active"
+
+[[game]]
+canonical_id = "bounce_tales"
+display_name = "Bounce Tales"
+expected_vendor = "Nokia"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/bounce_tales.jar"
+jad_path = ""
+jar_sha256 = "f768bbd2366f6d739d170b8cfa8383a98c4830d03555f5b44a0ab88c61a8028e"
+catalog_source = "canonical_archive"
+status = "GAMEPLAY_INPUT_VERIFIED"
+blocker = ""
+
+[[game]]
+canonical_id = "doom_rpg"
+display_name = "Doom RPG"
+expected_vendor = "JAMDAT Mobile Inc."
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/doom_rpg.jar"
+jad_path = ""
+jar_sha256 = "a07ff089ec4b124220a52008ab3adaa205c51f40476c64258d91006604bbc6b3"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Awaiting menu navigation inputs; title logo active"
+
+[[game]]
+canonical_id = "wolfenstein_rpg"
+display_name = "Wolfenstein RPG"
+expected_vendor = "Electronic Arts"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/wolfenstein_rpg.jar"
+jad_path = ""
+jar_sha256 = "d464bd130a79766f6939112963d8223f54c6868cc0d863f17dfb0487b51e7a7a"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "EA logo sequence with procedural palette decompression"
+
+[[game]]
+canonical_id = "sh_orphan"
+display_name = "Silent Hill: Orphan"
+expected_vendor = "Konami"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/sh_orphan.jar"
+jad_path = ""
+jar_sha256 = ""
+catalog_source = "canonical_archive"
+status = "MISSING"
+blocker = "Canonical ROM Silent Hill: Orphan is absent from the disk archive. Previous alias incorrectly pointed to silent_hill_3.jar."
+
+[[game]]
+canonical_id = "re_deg"
+display_name = "Resident Evil: Degeneration"
+expected_vendor = "Glu Mobile"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/re_deg.jar"
+jad_path = ""
+jar_sha256 = "4df7aa89dec82d81370f69fe17f79bd709b661453b307ae0fe91b0ed911c6c92"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Glu Mobile logo and main menu prompt active"
+
+[[game]]
+canonical_id = "gravity_defied"
+display_name = "Gravity Defied: Trial Racing (2X Mod)"
+expected_vendor = "Codebrew Software"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/gravity_defied.jar"
+jad_path = ""
+jar_sha256 = "8c120d5eee9875061078d47016d9a850f0ceb1ec9d4b923e585d48d8d8b83f88"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "Codebrew Software splash screen; menu not yet reached autonomously without scripted key-sequence"
+
+[[game]]
+canonical_id = "nfs_most_wanted"
+display_name = "Need for Speed: Most Wanted"
+expected_vendor = "Electronic Arts"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/nfs_most_wanted.jar"
+jad_path = ""
+jar_sha256 = "928820bdb8c0402232a087e9d1e9d0227af49612a48d00a08027155b45baddf2"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "EA splash and main menu selection active"
+
+[[game]]
+canonical_id = "heroes_lore"
+display_name = "Heroes Lore: Wind of Soltia"
+expected_vendor = "Hands-On Mobile"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/heroes_lore.jar"
+jad_path = ""
+jar_sha256 = "f7348e00fe222af207638880cc4baaa642dd1bb5a25ef9c55acc52b239611b90"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Character selection menu reached; gameplay world scene requires in-menu confirmation"
+
+[[game]]
+canonical_id = "prince_sands"
+display_name = "Prince of Persia: The Sands of Time"
+expected_vendor = "Gameloft SA"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/prince_sands.jar"
+jad_path = ""
+jar_sha256 = "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f"
+catalog_source = "canonical_archive"
+status = "GAMEPLAY_REACHED"
+blocker = "In-game gameplay scene reached at tick 300 after fixing graphics repaint race condition NPE; continuous update/render active"
+
+[[game]]
+canonical_id = "assassins_creed"
+display_name = "Assassin's Creed"
+expected_vendor = "Gameloft SA"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/assassins_creed.jar"
+jad_path = ""
+jar_sha256 = "a4a714c93281691d52158bf426c8ec129dba3616db121b2b90c39f7eb8d79a31"
+catalog_source = "canonical_archive"
+status = "MENU"
+blocker = "Language selection screen"
+
+[[game]]
+canonical_id = "deep_3d"
+display_name = "Deep 3D"
+expected_vendor = "Player X"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/deep_3d.jar"
+jad_path = ""
+jar_sha256 = "29e34b63e5ebeae281e982d68fd1750287785b46314e7544b4eb514c234f7e87"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "Fishlabs intro splash reached; M3G Background bridge implemented, but full 3D scene graph and rasterizer layers are in progress"
+
+[[game]]
+canonical_id = "stalker_mobile"
+display_name = "S.T.A.L.K.E.R. Mobile"
+expected_vendor = "Qplaze"
+jar_path = "/Users/foolvan/Desktop/j2me_market/roms/raw/stalker_mobile.jar"
+jad_path = ""
+jar_sha256 = "7f2f5cc0d6ac283a395da5fe624e0a0bf0982d3e58932ca4fd9e6b47db3f80bb"
+catalog_source = "canonical_archive"
+status = "SPLASH"
+blocker = "Qplaze / GSC Game World intro sequence"

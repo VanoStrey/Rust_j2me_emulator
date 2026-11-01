@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "prince_sands",
+  "jar_file": "prince_sands.jar",
+  "jar_sha256": "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot through Gameloft logo to title / main menu screen.",
+  "total_ticks": 280,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    60,
+    180,
+    280
+  ],
+  "expected_behavior": "Cold boot through Gameloft logo to title / main menu screen."
+}

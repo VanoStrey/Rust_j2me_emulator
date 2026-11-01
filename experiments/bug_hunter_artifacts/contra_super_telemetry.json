@@ -1,0 +1,25 @@
+{
+  "gameId": "contra_super",
+  "gameName": "Contra: Super Spirits",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG",
+    "SOFTLOCK_DEADLOCK"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": true,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/contra_super_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG, SOFTLOCK_DEADLOCK",
+  "finalTelemetry": {
+    "elapsedMs": 9900,
+    "instructions": 165414,
+    "publishes": 123,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG",
+      "SOFTLOCK_DEADLOCK"
+    ]
+  }
+}

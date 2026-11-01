@@ -1,0 +1,79 @@
+{
+  "game_id": "doom_rpg",
+  "scenario_type": "INIT",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/doom_rpg_init.json",
+  "jar_file": "doom_rpg.jar",
+  "jar_sha256": "a07ff089ec4b124220a52008ab3adaa205c51f40476c64258d91006604bbc6b3",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "total_ticks_executed": 240,
+  "wall_time_ms": 16.210583,
+  "ticks_per_sec": 14805.143035262827,
+  "instructions_executed": 4837,
+  "snapshots": [
+    {
+      "tick": 60,
+      "png_file": "rust_tick_0060.png",
+      "raw_file": "rust_tick_0060.raw",
+      "raw_sha256": "d1caedf338135eaf912b911ccbaa6299aada8520cdfc6e92251c8f0026a7efcd",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 2443
+    },
+    {
+      "tick": 150,
+      "png_file": "rust_tick_0150.png",
+      "raw_file": "rust_tick_0150.raw",
+      "raw_sha256": "d1caedf338135eaf912b911ccbaa6299aada8520cdfc6e92251c8f0026a7efcd",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 2443
+    },
+    {
+      "tick": 240,
+      "png_file": "rust_tick_0240.png",
+      "raw_file": "rust_tick_0240.raw",
+      "raw_sha256": "d1caedf338135eaf912b911ccbaa6299aada8520cdfc6e92251c8f0026a7efcd",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 2443
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 4837,
+    "fb_publishes_count": 2,
+    "fb_changes_count": 1,
+    "input_events_count": 0,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 60,
+  "final_heap_objects": 60,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

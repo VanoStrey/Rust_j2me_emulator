@@ -1,0 +1,79 @@
+{
+  "game_id": "heroes_lore",
+  "scenario_type": "INIT",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/heroes_lore_init.json",
+  "jar_file": "heroes_lore.jar",
+  "jar_sha256": "f7348e00fe222af207638880cc4baaa642dd1bb5a25ef9c55acc52b239611b90",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "total_ticks_executed": 250,
+  "wall_time_ms": 53.661167000000006,
+  "ticks_per_sec": 4658.862525296924,
+  "instructions_executed": 438153,
+  "snapshots": [
+    {
+      "tick": 60,
+      "png_file": "rust_tick_0060.png",
+      "raw_file": "rust_tick_0060.raw",
+      "raw_sha256": "3fce815d15758f192d79826711ac77a99d87db6ebc0492e2bbd586dda619926f",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 76800
+    },
+    {
+      "tick": 160,
+      "png_file": "rust_tick_0160.png",
+      "raw_file": "rust_tick_0160.raw",
+      "raw_sha256": "c0f128662c6361bc516803bcfd37391ac2c40fd2ca6b1e87172bf71e4441e1a2",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 76800
+    },
+    {
+      "tick": 250,
+      "png_file": "rust_tick_0250.png",
+      "raw_file": "rust_tick_0250.raw",
+      "raw_sha256": "2de1adb6f6b6b4da4983cc4c9a5de138e43060c4c111c51e02a066bd67ca1b0e",
+      "width": 240,
+      "height": 320,
+      "non_black_pixels": 76800
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": true,
+      "rms_write_read_ok": true,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 438153,
+    "fb_publishes_count": 75,
+    "fb_changes_count": 37,
+    "input_events_count": 0,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 1194,
+  "final_heap_objects": 1194,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

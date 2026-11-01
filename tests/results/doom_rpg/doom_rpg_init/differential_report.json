@@ -1,0 +1,105 @@
+{
+  "game_id": "doom_rpg",
+  "scenario_type": "INIT",
+  "scenario_file": "doom_rpg_init.json",
+  "timestamp": "2026-10-31T18:21:10.310Z",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "rust_execution": {
+    "wall_time_ms": 16.210583,
+    "ticks_per_sec": 14805.143035262827,
+    "instructions_executed": 4837,
+    "peak_heap_objects": 60,
+    "final_heap_objects": 60,
+    "gc_count": 0,
+    "verdict": "Pass",
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    }
+  },
+  "snapshot_comparisons": [
+    {
+      "tick": 60,
+      "metrics": {
+        "exactPixelMatchPct": 96.82,
+        "meanAbsoluteError": 7.995,
+        "rootMeanSquareError": 44.826,
+        "percentageChangedPixelsStrict": 3.18,
+        "percentageChangedPixelsTolerant": 3.18,
+        "structuralSimilarityIndex": 0.8534
+      },
+      "differingPixels": 2443,
+      "totalPixels": 76800,
+      "primaryCategory": "OBJECT_GEOMETRY",
+      "categoryExplanation": "Localized entity/sprite geometry offset in bounding box [56, 107, 127x87].",
+      "diffPpmFile": "diff_tick_0060.ppm",
+      "boundingBox": {
+        "x": 56,
+        "y": 107,
+        "w": 127,
+        "h": 87
+      }
+    },
+    {
+      "tick": 150,
+      "metrics": {
+        "exactPixelMatchPct": 96.82,
+        "meanAbsoluteError": 7.995,
+        "rootMeanSquareError": 44.826,
+        "percentageChangedPixelsStrict": 3.18,
+        "percentageChangedPixelsTolerant": 3.18,
+        "structuralSimilarityIndex": 0.8534
+      },
+      "differingPixels": 2443,
+      "totalPixels": 76800,
+      "primaryCategory": "OBJECT_GEOMETRY",
+      "categoryExplanation": "Localized entity/sprite geometry offset in bounding box [56, 107, 127x87].",
+      "diffPpmFile": "diff_tick_0150.ppm",
+      "boundingBox": {
+        "x": 56,
+        "y": 107,
+        "w": 127,
+        "h": 87
+      }
+    },
+    {
+      "tick": 240,
+      "metrics": {
+        "exactPixelMatchPct": 96.82,
+        "meanAbsoluteError": 7.995,
+        "rootMeanSquareError": 44.826,
+        "percentageChangedPixelsStrict": 3.18,
+        "percentageChangedPixelsTolerant": 3.18,
+        "structuralSimilarityIndex": 0.8534
+      },
+      "differingPixels": 2443,
+      "totalPixels": 76800,
+      "primaryCategory": "OBJECT_GEOMETRY",
+      "categoryExplanation": "Localized entity/sprite geometry offset in bounding box [56, 107, 127x87].",
+      "diffPpmFile": "diff_tick_0240.ppm",
+      "boundingBox": {
+        "x": 56,
+        "y": 107,
+        "w": 127,
+        "h": 87
+      }
+    }
+  ]
+}

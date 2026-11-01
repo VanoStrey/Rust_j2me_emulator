@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/j2me-core",
+    "crates/j2me-stdlib",
+    "crates/j2me-wasm",
+    "crates/j2me-cli",
+]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = false

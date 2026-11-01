@@ -1,0 +1,88 @@
+{
+  "game_id": "cyberpunk",
+  "scenario_type": "GAMEPLAY",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/cyberpunk_gameplay.json",
+  "jar_file": "cyberpunk.jar",
+  "jar_sha256": "ded969828b625b374d29f81b609a6a7cc81cab9f70afea488ad85425e3367f91",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "total_ticks_executed": 500,
+  "wall_time_ms": 41.780249999999995,
+  "ticks_per_sec": 11967.376930487491,
+  "instructions_executed": 195498,
+  "snapshots": [
+    {
+      "tick": 140,
+      "png_file": "rust_tick_0140.png",
+      "raw_file": "rust_tick_0140.raw",
+      "raw_sha256": "41cf4d318a3b7e08ffdbb430be2b49e2e8158f39d3ec5bbed51ecc35e51b929d",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 4865
+    },
+    {
+      "tick": 260,
+      "png_file": "rust_tick_0260.png",
+      "raw_file": "rust_tick_0260.raw",
+      "raw_sha256": "3949ca7fb120df2fa979cbc2e356a360f7e311835ed7b82cd3abea06154a0598",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 33254
+    },
+    {
+      "tick": 380,
+      "png_file": "rust_tick_0380.png",
+      "raw_file": "rust_tick_0380.raw",
+      "raw_sha256": "bdc22fde5b810e33e450a6edd59e8b4a7fccf78f32c463fa98b7a7d8d5d82f6d",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 36414
+    },
+    {
+      "tick": 500,
+      "png_file": "rust_tick_0500.png",
+      "raw_file": "rust_tick_0500.raw",
+      "raw_sha256": "bdc22fde5b810e33e450a6edd59e8b4a7fccf78f32c463fa98b7a7d8d5d82f6d",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 36414
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": true,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 195498,
+    "fb_publishes_count": 78,
+    "fb_changes_count": 27,
+    "input_events_count": 10,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 878,
+  "final_heap_objects": 878,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

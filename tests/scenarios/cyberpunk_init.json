@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "cyberpunk",
+  "jar_file": "cyberpunk.jar",
+  "jar_sha256": "ded969828b625b374d29f81b609a6a7cc81cab9f70afea488ad85425e3367f91",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot through Mayhem Studio intro to Cyberpunk title banner.",
+  "total_ticks": 240,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    60,
+    150,
+    240
+  ],
+  "expected_behavior": "Cold boot through Mayhem Studio intro to Cyberpunk title banner."
+}

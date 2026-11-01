@@ -1,0 +1,16 @@
+[package]
+name = "j2me-wasm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Antigravity Systems Architect"]
+description = "WebAssembly (WASM) Zero-Copy Bridge for Rust J2ME Emulator"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+j2me-core = { path = "../j2me-core" }
+j2me-stdlib = { path = "../j2me-stdlib" }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+
+[dev-dependencies]

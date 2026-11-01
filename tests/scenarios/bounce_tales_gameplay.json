@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "game_id": "bounce_tales",
+  "jar_file": "bounce_tales.jar",
+  "jar_sha256": "f768bbd2366f6d739d170b8cfa8383a98c4830d03555f5b44a0ab88c61a8028e",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "GAMEPLAY",
+  "description": "Start game, select Level 1, roll right (6), jump (5), and roll left (4).",
+  "total_ticks": 450,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 65,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 120,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 125,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 180,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 185,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 240,
+      "key": 54,
+      "action": "press",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 300,
+      "key": 53,
+      "action": "press",
+      "free_key": "Digit5"
+    },
+    {
+      "tick": 330,
+      "key": 53,
+      "action": "release",
+      "free_key": "Digit5"
+    },
+    {
+      "tick": 380,
+      "key": 54,
+      "action": "release",
+      "free_key": "Digit6"
+    },
+    {
+      "tick": 390,
+      "key": 52,
+      "action": "press",
+      "free_key": "Digit4"
+    },
+    {
+      "tick": 430,
+      "key": 52,
+      "action": "release",
+      "free_key": "Digit4"
+    }
+  ],
+  "snapshot_ticks": [
+    120,
+    240,
+    360,
+    450
+  ],
+  "expected_behavior": "Start game, select Level 1, roll right (6), jump (5), and roll left (4)."
+}

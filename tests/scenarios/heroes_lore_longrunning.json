@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "game_id": "heroes_lore",
+  "jar_file": "heroes_lore.jar",
+  "jar_sha256": "f7348e00fe222af207638880cc4baaa642dd1bb5a25ef9c55acc52b239611b90",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "LONGRUNNING",
+  "description": "1200 ticks of action RPG gameplay: TiledLayer world rendering, NPC pathing, dialogue scripts, RMS records.",
+  "total_ticks": 1200,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 70,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 120,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 130,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 220,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 230,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 400,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 600,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 700,
+      "key": -2,
+      "action": "press",
+      "free_key": "ArrowDown"
+    },
+    {
+      "tick": 900,
+      "key": -2,
+      "action": "release",
+      "free_key": "ArrowDown"
+    },
+    {
+      "tick": 1000,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 1030,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    }
+  ],
+  "snapshot_ticks": [
+    300,
+    600,
+    900,
+    1200
+  ],
+  "expected_behavior": "1200 ticks of action RPG gameplay: TiledLayer world rendering, NPC pathing, dialogue scripts, RMS records."
+}

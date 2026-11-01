@@ -1,0 +1,86 @@
+[
+  {
+    "id": "file_00416",
+    "jar": "DonaldTrumpsReal-EstateTycoon-SimCity4-mod-240.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": " { class_name: \"java/lang/Object\", method_name: \"notifyAll\", descriptor: \"()V\" })\n[VM ERROR] Thread 'ui_dispatcher' unhandled exception: java/lang/IllegalMonitorStateException (ObjectId ObjectId(52))\n"
+  },
+  {
+    "id": "file_01964",
+    "jar": "BaBum.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": ""
+  },
+  {
+    "id": "file_07207",
+    "jar": "Fireball.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": " \"ng/games/fireball/a/d\", method_name: \"do\", descriptor: \"(I)V\", count: 2 })\n[VM ERROR] Thread 'ng/games/fireball/n$a-run' unhandled exception: java/lang/NullPointerException (ObjectId ObjectId(291))\n"
+  },
+  {
+    "id": "file_07281",
+    "jar": "DonaldTrumpsReal-EstateTycoon-176.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": " { class_name: \"java/lang/Object\", method_name: \"notifyAll\", descriptor: \"()V\" })\n[VM ERROR] Thread 'ui_dispatcher' unhandled exception: java/lang/IllegalMonitorStateException (ObjectId ObjectId(52))\n"
+  },
+  {
+    "id": "file_02232",
+    "jar": "AikiaTheEscape-128.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "ffer\n[NATIVE ERROR] java/io/DataInputStream.readChar()C : Null buffer\n[NATIVE ERROR] java/io/DataInputStream.readChar()C : Null buffer\n[NATIVE ERROR] java/io/DataInputStream.readChar()C : Null buffer\n"
+  },
+  {
+    "id": "file_06248",
+    "jar": "PenguinRun.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "irtual/Special MenuScreen.showMenu()V target receiver is None! Thread: main, args: []\n[NATIVE ERROR] java/lang/String.<init>([CII)V : EXC:java/lang/StringIndexOutOfBoundsException: length is negative\n"
+  },
+  {
+    "id": "file_07537",
+    "jar": "DruidsAdventure.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "ATIVE ERROR] java/io/DataInputStream.readInt()I : Null buffer\n[NPE DEBUG] InvokeVirtual/Special javax/microedition/rms/RecordStore.closeRecordStore()V target receiver is None! Thread: b-run, args: []\n"
+  },
+  {
+    "id": "file_04571",
+    "jar": "Tetron.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "e()V at pc 6 (prev instr: \"IfNonNull(7)\")\n[VM ERROR] Thread 'ui_dispatcher' execution error: Expected Object reference, got Int(1) in TetronMidlet.readHighFile()V at pc 6 (prev instr: \"IfNonNull(7)\")\n"
+  },
+  {
+    "id": "file_05420",
+    "jar": "MiBWithoutATrace-220.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "buf_id=ObjectId(1654) copy_id=ObjectId(1656) len=318\n[VM ERROR] Thread 'e-run' execution error: Expected Object reference, got Int(1) in e.d(Ljava/lang/String;)V at pc 6 (prev instr: \"IfNonNull(10)\")\n"
+  },
+  {
+    "id": "file_06182",
+    "jar": "DewysAdveture.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": ""
+  },
+  {
+    "id": "file_06316",
+    "jar": "Fireball-original.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": " \"ng/games/fireball/a/d\", method_name: \"do\", descriptor: \"(I)V\", count: 2 })\n[VM ERROR] Thread 'ng/games/fireball/n$a-run' unhandled exception: java/lang/NullPointerException (ObjectId ObjectId(139))\n"
+  },
+  {
+    "id": "file_02766",
+    "jar": "Shadowalker.jar",
+    "exit_code": 0,
+    "has_panic": false,
+    "stderr": "VE ERROR] java/io/DataInputStream.readShort()S : Null buffer\n[TOBYTEARRAY] buf_id=ObjectId(17450) copy_id=ObjectId(17440) len=6103\n[TOBYTEARRAY] buf_id=ObjectId(17418) copy_id=ObjectId(17408) len=115\n"
+  }
+]

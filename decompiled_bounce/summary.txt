@@ -1,0 +1,25 @@
+Summary for /Users/foolvan/Desktop/j2me_market/roms/raw/bounce_tales.jar
+Decompiled with CFR 0.152
+
+
+g
+----------------------------
+
+a(g[] )
+  Unable to fully structure code
+
+
+h
+----------------------------
+
+c(int )
+  Unable to fully structure code
+
+
+p
+----------------------------
+
+a(java.lang.String )
+  Loose catch block
+run()
+  Exception : org.benf.cfr.reader.util.ConfusedCFRException: Started 2 blocks at once

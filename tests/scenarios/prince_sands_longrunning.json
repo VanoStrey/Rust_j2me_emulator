@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "game_id": "prince_sands",
+  "jar_file": "prince_sands.jar",
+  "jar_sha256": "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "LONGRUNNING",
+  "description": "1200 ticks of platformer mechanics, collision detection, and sprite layer rendering.",
+  "total_ticks": 1200,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 275,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 280,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 320,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 325,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 360,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 365,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 400,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 405,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 450,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 700,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 750,
+      "key": -1,
+      "action": "press",
+      "free_key": "ArrowUp"
+    },
+    {
+      "tick": 780,
+      "key": -1,
+      "action": "release",
+      "free_key": "ArrowUp"
+    },
+    {
+      "tick": 850,
+      "key": -3,
+      "action": "press",
+      "free_key": "ArrowLeft"
+    },
+    {
+      "tick": 1100,
+      "key": -3,
+      "action": "release",
+      "free_key": "ArrowLeft"
+    }
+  ],
+  "snapshot_ticks": [
+    300,
+    600,
+    900,
+    1200
+  ],
+  "expected_behavior": "1200 ticks of platformer mechanics, collision detection, and sprite layer rendering."
+}

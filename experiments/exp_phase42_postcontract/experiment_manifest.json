@@ -1,0 +1,31 @@
+{
+  "experiment_id": "exp_phase42_postcontract",
+  "phase": "4.2_postcontract",
+  "created_at": "2026-10-25T02:13:00Z",
+  "git_commit": "8bb38478087819c30f34f62cca5bbec99d75362b_dirty",
+  "cargo_lock_sha256": "a0eaf7f03bda1a3030a3d6095a7adfb92db50ed82612ef12afeeca288290cb95",
+  "exe_path": "target_postcontract/release/j2me-cli",
+  "exe_sha256": "7b4a5e8bed6172f24630cd0810acea97de2d8ee0ab1caaa8fadf8b9587d05257",
+  "wasm_path": "web/j2me_wasm.wasm",
+  "wasm_sha256": "55180d0a4babd87440f3dc2f8944a9f172d8a5303ac68c56b369488f523d2502",
+  "inventory_path": "catalog/j2me_market_inventory.json",
+  "inventory_sha256": "9d6a0f6cf1c9f57677b4dc234fa2b0f20c617ac2f28f1adbd05dead32b743e9d",
+  "toolchain": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)",
+  "target": "aarch64-apple-darwin",
+  "build_profile": "release [opt-level = 3]",
+  "sample_limit": 100,
+  "ticks_per_game": 300,
+  "clock_model": "RationalAccumulator (50/3 ms/tick integer-rational)",
+  "seed": 42,
+  "rms_strategy": "NextRecordId Counter (In-Memory Clean RMS)",
+  "monitor_model": "JVM Spec MonitorEnter/Exit + WaitSet/EntrySet + IllegalMonitorStateException",
+  "wall_timeout_ms": 6000,
+  "results_summary": {
+    "total_tested": 100,
+    "completed_window": 83,
+    "wall_timeout": 11,
+    "guest_exception": 6,
+    "load_error": 0,
+    "host_panic": 0
+  }
+}

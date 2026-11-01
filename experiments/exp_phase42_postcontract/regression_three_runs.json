@@ -1,0 +1,188 @@
+{
+  "Rev2.jar": [
+    {
+      "run": 1,
+      "measured_wall_sec": 5.8497,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 34163318,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 101,
+      "timing": {
+        "elapsed_load_ms": 2.887375,
+        "elapsed_vm_ms": 5821.857167,
+        "elapsed_graphics_ms": 0.143,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 2.891,
+        "elapsed_io_ms": 0.295333,
+        "elapsed_other_ms": 0.21745800000007875,
+        "total_wall_ms": 5828.291333
+      }
+    },
+    {
+      "run": 2,
+      "measured_wall_sec": 5.7374,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 34163318,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 101,
+      "timing": {
+        "elapsed_load_ms": 1.662875,
+        "elapsed_vm_ms": 5724.369333000001,
+        "elapsed_graphics_ms": 0.155,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 1.613,
+        "elapsed_io_ms": 0.035833000000000004,
+        "elapsed_other_ms": 0.19704299999921204,
+        "total_wall_ms": 5728.033084
+      }
+    },
+    {
+      "run": 3,
+      "measured_wall_sec": 5.73,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 34163318,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 101,
+      "timing": {
+        "elapsed_load_ms": 1.681334,
+        "elapsed_vm_ms": 5716.913041999999,
+        "elapsed_graphics_ms": 0.068,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 2.1,
+        "elapsed_io_ms": 0.040709,
+        "elapsed_other_ms": 0.19612300000062532,
+        "total_wall_ms": 5720.999208
+      }
+    }
+  ],
+  "Cops128.jar": [
+    {
+      "run": 1,
+      "measured_wall_sec": 6.1395,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 43502259,
+      "active_threads": 1,
+      "paint_calls": 60,
+      "publications": 62,
+      "timing": {
+        "elapsed_load_ms": 3.6694169999999997,
+        "elapsed_vm_ms": 6124.275333,
+        "elapsed_graphics_ms": 0.037,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 1.016,
+        "elapsed_io_ms": 0.420917,
+        "elapsed_other_ms": 0.5659990000003745,
+        "total_wall_ms": 6129.984666
+      }
+    },
+    {
+      "run": 2,
+      "measured_wall_sec": 6.1201,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 43502259,
+      "active_threads": 1,
+      "paint_calls": 60,
+      "publications": 62,
+      "timing": {
+        "elapsed_load_ms": 3.609708,
+        "elapsed_vm_ms": 6105.174915999999,
+        "elapsed_graphics_ms": 0.091,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 1.684,
+        "elapsed_io_ms": 0.043708000000000004,
+        "elapsed_other_ms": 0.5531680000003689,
+        "total_wall_ms": 6111.1565
+      }
+    },
+    {
+      "run": 3,
+      "measured_wall_sec": 6.3175,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 43502259,
+      "active_threads": 1,
+      "paint_calls": 60,
+      "publications": 62,
+      "timing": {
+        "elapsed_load_ms": 3.750584,
+        "elapsed_vm_ms": 6293.9632090000005,
+        "elapsed_graphics_ms": 0.087,
+        "elapsed_audio_ms": 0.005,
+        "elapsed_scheduler_ms": 7.713,
+        "elapsed_io_ms": 0.050875000000000004,
+        "elapsed_other_ms": 0.5911649999989095,
+        "total_wall_ms": 6306.160833
+      }
+    }
+  ],
+  "TheClub.jar": [
+    {
+      "run": 1,
+      "measured_wall_sec": 6.5682,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 28571223,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 46,
+      "timing": {
+        "elapsed_load_ms": 5.224917,
+        "elapsed_vm_ms": 6543.419584,
+        "elapsed_graphics_ms": 0.353,
+        "elapsed_audio_ms": 0.039,
+        "elapsed_scheduler_ms": 6.36,
+        "elapsed_io_ms": 0.625042,
+        "elapsed_other_ms": 1.7637070000009771,
+        "total_wall_ms": 6557.78525
+      }
+    },
+    {
+      "run": 2,
+      "measured_wall_sec": 6.5932,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 28571223,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 46,
+      "timing": {
+        "elapsed_load_ms": 5.689541999999999,
+        "elapsed_vm_ms": 6568.8162919999995,
+        "elapsed_graphics_ms": 0.236,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 6.103,
+        "elapsed_io_ms": 0.08016699999999999,
+        "elapsed_other_ms": 1.8825400000005175,
+        "total_wall_ms": 6582.807541
+      }
+    },
+    {
+      "run": 3,
+      "measured_wall_sec": 6.2372,
+      "status": "COMPLETED_WINDOW",
+      "exit_reason": "TICKS_EXHAUSTED",
+      "instructions": 28571223,
+      "active_threads": 1,
+      "paint_calls": 0,
+      "publications": 46,
+      "timing": {
+        "elapsed_load_ms": 5.215916999999999,
+        "elapsed_vm_ms": 6218.128250000001,
+        "elapsed_graphics_ms": 0.075,
+        "elapsed_audio_ms": 0.0,
+        "elapsed_scheduler_ms": 1.316,
+        "elapsed_io_ms": 0.078291,
+        "elapsed_other_ms": 1.6762079999998605,
+        "total_wall_ms": 6226.489666
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Rust build artifacts
+target/
+target_active_rendering/
+target_phase44/
+target_postcontract/
+target_*/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*~

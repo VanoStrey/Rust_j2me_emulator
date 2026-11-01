@@ -1,0 +1,140 @@
+[
+  {
+    "id": "bounce_tales",
+    "name": "Bounce Tales",
+    "file": "bounce_tales.jar",
+    "expectedW": 240,
+    "expectedH": 320,
+    "loaded": true,
+    "profileDetected": {
+      "title": "Bounce Tales",
+      "vendor": "Nokia",
+      "version": "2.0.12",
+      "mainClass": "RMIDlet"
+    },
+    "screenW": 240,
+    "screenH": 320,
+    "instructions": 3017643,
+    "publishes": 600,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 73111,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  },
+  {
+    "id": "gravity_defied",
+    "name": "Gravity Defied",
+    "file": "gravity_defied.jar",
+    "expectedW": 176,
+    "expectedH": 220,
+    "loaded": true,
+    "profileDetected": {
+      "title": "GDTEX_2X_Mod_(X-ZeY)_1364663100",
+      "vendor": "Codebrew Software",
+      "version": "1.0",
+      "mainClass": "Micro"
+    },
+    "screenW": 176,
+    "screenH": 220,
+    "instructions": 170676,
+    "publishes": 92,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 76149,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  },
+  {
+    "id": "doom_rpg",
+    "name": "Doom RPG",
+    "file": "doom_rpg.jar",
+    "expectedW": 240,
+    "expectedH": 320,
+    "loaded": true,
+    "profileDetected": {
+      "title": "Doom RPG",
+      "vendor": "JAMDAT Mobile Inc.",
+      "version": "1.0.92",
+      "mainClass": "DoomRPG"
+    },
+    "screenW": 240,
+    "screenH": 320,
+    "instructions": 5280,
+    "publishes": 4,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 2070,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  },
+  {
+    "id": "prince_sands",
+    "name": "Prince of Persia",
+    "file": "prince_sands.jar",
+    "expectedW": 176,
+    "expectedH": 208,
+    "loaded": true,
+    "profileDetected": {
+      "title": "PrinceSOT",
+      "vendor": "Gameloft SA",
+      "version": "1.1.0",
+      "mainClass": "pop2.PrinceSOT"
+    },
+    "screenW": 176,
+    "screenH": 208,
+    "instructions": 54204190,
+    "publishes": 233,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 29740,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  },
+  {
+    "id": "castlevania",
+    "name": "Castlevania",
+    "file": "castlevania.jar",
+    "expectedW": 240,
+    "expectedH": 320,
+    "loaded": true,
+    "profileDetected": {
+      "title": "Castlevania Aria Of Sorrow",
+      "vendor": "Konami",
+      "version": "1.0.0",
+      "mainClass": "SorrowMIDlet"
+    },
+    "screenW": 240,
+    "screenH": 320,
+    "instructions": 807580,
+    "publishes": 76,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 10156,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  },
+  {
+    "id": "heroes_lore",
+    "name": "Heroes Lore",
+    "file": "heroes_lore.jar",
+    "expectedW": 240,
+    "expectedH": 320,
+    "loaded": true,
+    "profileDetected": {
+      "title": "Heroes Lore by SunYu_911",
+      "vendor": "[ANDREW-LVIV] / Hands-On Mobile",
+      "version": "2.0.7",
+      "mainClass": "rpg.GameMIDlet"
+    },
+    "screenW": 240,
+    "screenH": 320,
+    "instructions": 5579,
+    "publishes": 119,
+    "uncaughtExceptions": 0,
+    "nonBlackPixels": 76664,
+    "rmsSaved": true,
+    "rmsRestored": true,
+    "keyInputDelivered": true
+  }
+]

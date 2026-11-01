@@ -1,0 +1,79 @@
+{
+  "game_id": "prince_sands",
+  "scenario_type": "INIT",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/prince_sands_init.json",
+  "jar_file": "prince_sands.jar",
+  "jar_sha256": "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "total_ticks_executed": 280,
+  "wall_time_ms": 828.2737079999999,
+  "ticks_per_sec": 338.05250280864885,
+  "instructions_executed": 6192712,
+  "snapshots": [
+    {
+      "tick": 60,
+      "png_file": "rust_tick_0060.png",
+      "raw_file": "rust_tick_0060.raw",
+      "raw_sha256": "d15313fdba23853890f99c8baee82b5afcaa5463eb5a192e24d374f96d5c724a",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 36608
+    },
+    {
+      "tick": 180,
+      "png_file": "rust_tick_0180.png",
+      "raw_file": "rust_tick_0180.raw",
+      "raw_sha256": "3684d7139de78e484a91ae586d9ab3ab4881f5213d62da2f16085bf78f491334",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 4748
+    },
+    {
+      "tick": 280,
+      "png_file": "rust_tick_0280.png",
+      "raw_file": "rust_tick_0280.raw",
+      "raw_sha256": "ada5e304391bb77d967d1e5100e59737061b132978c7493cf94fc3b734d047ab",
+      "width": 176,
+      "height": 208,
+      "non_black_pixels": 29740
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": false,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 6192712,
+    "fb_publishes_count": 115,
+    "fb_changes_count": 30,
+    "input_events_count": 0,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 5874,
+  "final_heap_objects": 5874,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

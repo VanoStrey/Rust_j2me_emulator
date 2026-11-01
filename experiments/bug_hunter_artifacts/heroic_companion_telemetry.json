@@ -1,0 +1,19 @@
+{
+  "gameId": "heroic_companion",
+  "gameName": "Heroic Companion: Trail of Immortals",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/heroic_companion_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9600,
+    "instructions": 0,
+    "publishes": 14,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

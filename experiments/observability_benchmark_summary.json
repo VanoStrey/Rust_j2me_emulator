@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-10-31T15:40:41.256Z",
+  "jsFnv1aOverheadUs": 1737.715832,
+  "rustFnv1aOverheadUs": 18.4,
+  "midlets": [
+    {
+      "name": "Bounce Tales",
+      "ticksPerSec": 233.61372496208398,
+      "latency": {
+        "mean": 4.280294656666674,
+        "median": 4.711749999999938,
+        "p95": 4.92574999999988,
+        "p99": 5.089832999999999,
+        "max": 5.482375000000275
+      },
+      "fbPublishes": 1434,
+      "fbChanges": 209,
+      "liveObjects": 453,
+      "gcCount": 0,
+      "uncaughtExc": 0,
+      "autoHealing": 0,
+      "verdict": "Pass",
+      "criteria": {
+        "jar_parsed": true,
+        "midlet_initialized": true,
+        "thread_running": true,
+        "thread_sleeping": true,
+        "thread_terminated": false,
+        "framebuffer_published": true,
+        "framebuffer_changed": true,
+        "input_delivered": false,
+        "input_affected_game_state": false,
+        "audio_generated": true,
+        "rms_write_read_ok": false,
+        "guest_exception": false,
+        "host_crash": false,
+        "auto_heal_occurred": false,
+        "wall_timeout": false,
+        "deadlock_suspected": false
+      }
+    },
+    {
+      "name": "Doom RPG",
+      "ticksPerSec": 201460.58927221576,
+      "latency": {
+        "mean": 0.004853254999990592,
+        "median": 0.0036660000000665605,
+        "p95": 0.00466599999981554,
+        "p99": 0.008457999999791355,
+        "max": 0.27145900000004985
+      },
+      "fbPublishes": 6,
+      "fbChanges": 3,
+      "liveObjects": 60,
+      "gcCount": 0,
+      "uncaughtExc": 0,
+      "autoHealing": 0,
+      "verdict": "Pass",
+      "criteria": {
+        "jar_parsed": true,
+        "midlet_initialized": true,
+        "thread_running": true,
+        "thread_sleeping": true,
+        "thread_terminated": false,
+        "framebuffer_published": true,
+        "framebuffer_changed": true,
+        "input_delivered": false,
+        "input_affected_game_state": false,
+        "audio_generated": false,
+        "rms_write_read_ok": false,
+        "guest_exception": false,
+        "host_crash": false,
+        "auto_heal_occurred": false,
+        "wall_timeout": false,
+        "deadlock_suspected": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "status": "GAMEPLAY_INPUT_VERIFIED",
+  "verified_games": [
+    {
+      "game": "Gravity Defied: Trial Racing",
+      "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/raw/gravity_defied.jar",
+      "gameplay_scene_description": "Track 1 Starting Line with Wireframe Terrain, Green Flags, and Countdown/Timer",
+      "control_sha256": "5620a730c7920d31aad484364fde51067dd1f56be473e09482e326bb9d8985ad",
+      "control_frame_png": "experiments/exp_phase46_stability_blockers/gd_gameplay_control/frame_700.png",
+      "action_performed": "Throttle UP (Key UP / KEY_NUM2) held for 60 ticks (600-660)",
+      "action_sha256": "cdac3960a83a317ac6b6b07d2007cd873aa987848f9682acf343a1a713f8451e",
+      "action_frame_png": "experiments/exp_phase46_stability_blockers/gd_gameplay_action/frame_700.png",
+      "gameplay_mutation_verified": true,
+      "visual_changes": "Motorcycle advanced along track past starting gate, front/rear wheels rotated, timer advanced from 0:00.00 to 0:00.62, camera scrolled"
+    },
+    {
+      "game": "Bounce Tales",
+      "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/raw/bounce_tales.jar",
+      "gameplay_scene_description": "Level 1 Platform with Red Flower, Wooden Sign, and 0/30 Egg HUD",
+      "control_sha256": "342a93abf5182d38c169957caf1b6052b51e0cec8d1c99fac79742fdef63cfaf",
+      "control_frame_png": "experiments/exp_phase46_stability_blockers/bt_gameplay_control/frame_460.png",
+      "action_performed": "Roll LEFT (Key LEFT / KEY_NUM4) held for 60 ticks (360-420)",
+      "action_sha256": "fd0cc41c7d8b717cf4be5daab29c57ed03f7602e90bf50aa8136b0f363d2243f",
+      "action_frame_png": "experiments/exp_phase46_stability_blockers/bt_gameplay_action/frame_460.png",
+      "gameplay_mutation_verified": true,
+      "visual_changes": "Red ball rolled off ledge onto lower platform, collided with wooden sign, collected egg (HUD updated 0/30 -> 1/30), star particle burst rendered"
+    },
+    {
+      "game": "Doom RPG",
+      "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/raw/doom_rpg.jar",
+      "gameplay_scene_description": "3D Dungeon Entrance Room facing North with Civilian, Scientist, Crates, and Doomguy HUD",
+      "control_sha256": "b849ee98c08a6dd6b8d27103ffc6be25b92be5683a53fae5838da0a7d687b510",
+      "control_frame_png": "experiments/exp_phase46_stability_blockers/doom_gameplay_control/frame_780.png",
+      "action_performed": "Turn RIGHT (Key RIGHT / KEY_NUM6) at tick 720",
+      "action_sha256": "303dd77860d885e06394e1e3aa71f078588e96877d9e7691fb14bc0046ac6860",
+      "action_frame_png": "experiments/exp_phase46_stability_blockers/doom_gameplay_action/frame_780.png",
+      "gameplay_mutation_verified": true,
+      "visual_changes": "3D perspective camera rotated 90 degrees clockwise, compass flipped from North (N) to East (E), server mainframe brought to screen center"
+    },
+    {
+      "game": "Prince of Persia: The Sands of Time",
+      "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/PrinceOfPersia-TheSandsOfTime-176.jar",
+      "gameplay_scene_description": "Level 1 Palace Balcony with Pillars, Tapestries, and Life Gauge",
+      "control_sha256": "3e9b110b65fba2f2ff8bc305e54d39f4a56aef4200c0134aeeb3ae793f7c469b",
+      "control_frame_png": "experiments/pop_level1_control.png",
+      "action_performed": "Run RIGHT (Key RIGHT / KEY_NUM6) held for 20 ticks",
+      "action_sha256": "df7a69b7f5256e7929d2f2dca58739fa42ccf6797a2245b7858cff2f0d912443",
+      "action_frame_png": "experiments/pop_level1_action.png",
+      "gameplay_mutation_verified": true,
+      "visual_changes": "Prince character sprite transitioned into running animation across balcony floor towards right, cape billowing"
+    },
+    {
+      "game": "Castlevania: Aria of Sorrow",
+      "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/CastlevaniaAoS.jar",
+      "gameplay_scene_description": "Level 1 Castle Courtyard with Stone Stairs, Torch Sconces, and HP/MP HUD",
+      "control_sha256": "5bc5a4f3b7f6fa6e5b38eb16aa06ee29f451f28b43831b15df33240212f7c006",
+      "control_frame_png": "experiments/castlevania_level1_control.png",
+      "action_performed": "Move RIGHT (Key RIGHT / KEY_NUM6) held for 70 ticks",
+      "action_sha256": "13e0ba2c7c668f30a195a062abf0b365280423e1acc0f64600f62026aac988ab",
+      "action_frame_png": "experiments/castlevania_level1_action.png",
+      "gameplay_mutation_verified": true,
+      "visual_changes": "Soma Cruz moved from initial courtyard landing up stone steps to the right, player coordinates and animation frame updated on screen"
+    }
+  ]
+}

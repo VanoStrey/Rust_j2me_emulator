@@ -1,0 +1,23 @@
+{
+  "gameId": "chicken_run",
+  "gameName": "Chicken Run",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/chicken_run_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG",
+  "finalTelemetry": {
+    "elapsedMs": 9642,
+    "instructions": 0,
+    "publishes": 190,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG"
+    ]
+  }
+}

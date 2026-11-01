@@ -1,0 +1,692 @@
+[
+  {
+    "jar": "TheFourthSeal.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "BrainCoachWithDrKawashima-FR-240.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "Raftandy.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 51,
+    "unique_fb": 2
+  },
+  {
+    "jar": "GhostHunter.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 2,
+    "fb_pubs": 5,
+    "unique_fb": 3
+  },
+  {
+    "jar": "FreeCell.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "game/freecell/GameCanvas.<init>(Lgame/freecell/FreeCell;)V:97",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "Stack-v1.0.6.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "DigitsME.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 3,
+    "unique_fb": 2
+  },
+  {
+    "jar": "WokWM.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "KlitschkoBoxChallenge.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "z.startApp()V:86",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "StrangeMaze3D-Trial-v1.1.2.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 256,
+    "fb_pubs": 300,
+    "unique_fb": 72
+  },
+  {
+    "jar": "Puzzled.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "ChipNDaleRescueRangers-Rus.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "i.paint(Ljavax/microedition/lcdui/Graphics;)V:76",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "BrainCoachWithDrKawashima-128.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "snakeex2_m1osxrt4.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 2,
+    "fb_pubs": 3,
+    "unique_fb": 2
+  },
+  {
+    "jar": "JinglePop.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 150,
+    "unique_fb": 150
+  },
+  {
+    "jar": "VirtualCop.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 102,
+    "fb_pubs": 193,
+    "unique_fb": 38
+  },
+  {
+    "jar": "AquariumProject.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "aquarium/AquariumMidlet.startApp()V:2",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "Checkersland.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "j.<init>(Ljavax/microedition/lcdui/Display;)V:75",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "Space2942.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "WoolyWorld.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 100,
+    "unique_fb": 9
+  },
+  {
+    "jar": "3DRiverStorm2.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "c.a(Ljavax/microedition/lcdui/Displayable;)V:4",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "TributeToArkanoid.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "sprites/ConcreteMIDlet.startApp()V:23",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "SWATSniper-176.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "z.if(Ljavax/microedition/lcdui/Canvas;)Z:7",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "BrainCoachWithDrKawashima-240.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "MoorhuhnPlaysuit.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 3,
+    "fb_pubs": 6,
+    "unique_fb": 3
+  },
+  {
+    "jar": "LunarCalendar.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "GemJamXMas.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "z.if(Ljavax/microedition/lcdui/Canvas;)Z:7",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "StrangeMaze3D-Trial-v1.04.02.jar",
+    "status": "WALL_TIMEOUT",
+    "fatal": false
+  },
+  {
+    "jar": "SpeedChaser.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "z.if(Ljavax/microedition/lcdui/Canvas;)Z:7",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "MasterBlasterSachin.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "MasterBlasterSachin.HighScoreDisplayDB()B:19",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "Dice.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 26,
+    "unique_fb": 2
+  },
+  {
+    "jar": "Emperor.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 7,
+    "fb_pubs": 14,
+    "unique_fb": 2
+  },
+  {
+    "jar": "StrangeMaze3D-RUmod.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 150,
+    "fb_pubs": 299,
+    "unique_fb": 59
+  },
+  {
+    "jar": "Jam.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 101,
+    "unique_fb": 8
+  },
+  {
+    "jar": "MarbleMiracle.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "z.if(Ljavax/microedition/lcdui/Canvas;)Z:7",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "WinterWoolyWorld.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 100,
+    "unique_fb": 9
+  },
+  {
+    "jar": "HelloKittyFunUtility.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 45,
+    "unique_fb": 45
+  },
+  {
+    "jar": "the_elder_scrolls_oblivion_240x320-17026.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "b.paint(Ljavax/microedition/lcdui/Graphics;)V:2626",
+    "paint_calls": 0,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "PlanetJam.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 11,
+    "unique_fb": 2
+  },
+  {
+    "jar": "RedBullMotocross2D-240.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 200,
+    "unique_fb": 19
+  },
+  {
+    "jar": "RedBullMotoCross3D-240.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "render3d/m3g/RendererM3GDirect.a(IZ)Ljavax/microedition/m3g/Image2D;:15",
+    "paint_calls": 1,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "StrangeMaze3D-UnDemo-v1.1.2.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 256,
+    "fb_pubs": 300,
+    "unique_fb": 72
+  },
+  {
+    "jar": "Wax.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 151,
+    "unique_fb": 13
+  },
+  {
+    "jar": "WuKangMonk-176.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "WuKangMonk_N60.startApp()V:318",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "Footrix.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 150,
+    "unique_fb": 1
+  },
+  {
+    "jar": "BubbleTots.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 150,
+    "unique_fb": 150
+  },
+  {
+    "jar": "Chuzzle-N5800-240x432.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "a.a(Ljavax/microedition/lcdui/Graphics;IIII)V:45",
+    "paint_calls": 74,
+    "fb_pubs": 149,
+    "unique_fb": 2
+  },
+  {
+    "jar": "LuminesInthehouseIbiza10-240.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "k.<init>()V:56",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "DND.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "a/f.a(ILjava/lang/Object;)V:66",
+    "paint_calls": 0,
+    "fb_pubs": 150,
+    "unique_fb": 127
+  },
+  {
+    "jar": "UltraPhoenix-Resurgence.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "JSol.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "de/tsr/jsol/game/TestGame.<init>(II)V:201",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "CaptainPogo.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 84,
+    "unique_fb": 1
+  },
+  {
+    "jar": "NeredesinFiruze.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "firuze/d.a(I)Ljava/lang/String;:8",
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "OutRoad2.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "d.a(IIILjava/lang/String;Ljava/lang/String;ZZZ[BLjavax/microedition/m3g/Fog;)I:107",
+    "paint_calls": 1,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "AquaDriller.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "com/southend/AquaDriller/MusicPlayer.b()V:8",
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "Dakar2010.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "ao.a(II)I:5",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "BoardersBall.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "ag.paint(Ljavax/microedition/lcdui/Graphics;)V:28",
+    "paint_calls": 2,
+    "fb_pubs": 3,
+    "unique_fb": 2
+  },
+  {
+    "jar": "SoccerRun2012.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "Jeweleon-Rus.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "aj.a(I)V:15",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "PangReturns.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "a.a(Ljava/lang/String;)I:25",
+    "paint_calls": 1,
+    "fb_pubs": 8,
+    "unique_fb": 8
+  },
+  {
+    "jar": "BigBig2.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 3,
+    "fb_pubs": 7,
+    "unique_fb": 4
+  },
+  {
+    "jar": "BigfootRacing.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "Bigfoot/a.a(Ljavax/microedition/rms/RecordStore;I[I)V:56",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "NeedForSpeed-ProStreet3D-176.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "af.b(I)[Ljavax/microedition/m3g/Object3D;:5",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "YetiSports9FinalSpit.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "M.c(Ljava/lang/String;)I:3",
+    "paint_calls": 22,
+    "fb_pubs": 43,
+    "unique_fb": 2
+  },
+  {
+    "jar": "AgentCodenStationX.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "a/a/g.a(Ljavax/microedition/lcdui/Graphics;I)V:31",
+    "paint_calls": 1,
+    "fb_pubs": 77,
+    "unique_fb": 4
+  },
+  {
+    "jar": "CryptOhMummy.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 0,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "BTetris.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "tetris/tetris/TetrisCanvas.paint(Ljavax/microedition/lcdui/Graphics;)V:346",
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "SnakeClassic.jar",
+    "status": "COMPLETED_WINDOW",
+    "fatal": false,
+    "last_exc": null,
+    "last_loc": null,
+    "paint_calls": 1,
+    "fb_pubs": 3,
+    "unique_fb": 2
+  },
+  {
+    "jar": "Falldown-LaurentHerbin.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "Texts.get(I)Ljava/lang/String;:2",
+    "paint_calls": 0,
+    "fb_pubs": 1,
+    "unique_fb": 1
+  },
+  {
+    "jar": "SuperTaxiDriver.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "d.a(IIILjava/lang/String;Ljava/lang/String;ZZZ[BLjavax/microedition/m3g/Fog;)I:130",
+    "paint_calls": 1,
+    "fb_pubs": 2,
+    "unique_fb": 2
+  },
+  {
+    "jar": "TrackAndFieldDeluxe.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "CCanvas.paint(Ljavax/microedition/lcdui/Graphics;)V:14",
+    "paint_calls": 1,
+    "fb_pubs": 45,
+    "unique_fb": 4
+  },
+  {
+    "jar": "NeedforSpeedUndercoverVelocity3D.jar",
+    "status": "GUEST_EXCEPTION",
+    "fatal": true,
+    "last_exc": "java/lang/NullPointerException",
+    "last_loc": "au.a(II)Ljava/lang/Object;:134",
+    "paint_calls": 19,
+    "fb_pubs": 40,
+    "unique_fb": 5
+  }
+]

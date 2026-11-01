@@ -1,0 +1,19 @@
+{
+  "gameId": "box_panic",
+  "gameName": "Box Panic",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/box_panic_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9788,
+    "instructions": 0,
+    "publishes": 277,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

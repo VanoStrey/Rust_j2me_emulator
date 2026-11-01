@@ -1,0 +1,112 @@
+{
+  "browser_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "timestamp": "2026-10-24T23:55:33.678Z",
+  "tests": {
+    "wasm_load": {
+      "passed": true,
+      "load_time_ms": 41.09999996423721,
+      "initial_memory_pages": 30,
+      "initial_bytes": 1966080
+    }
+  },
+  "memory_audit": {
+    "alloc_security": {
+      "zero_length_rejected": true,
+      "oversize_rejected": true,
+      "double_free_protected": true,
+      "framebuffer_view_valid": true
+    },
+    "cycles": {
+      "cycle_pages": [
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133
+      ],
+      "initial_pages": 133,
+      "final_pages": 133,
+      "growth_pages": 0,
+      "stabilized_high_water_mark": true
+    }
+  },
+  "test_a_throughput": {
+    "frames": 3600,
+    "wall_time_ms": 8175.699999988079,
+    "ticks_per_second": 440.3,
+    "vm_step_median_ms": 2.399999976158142,
+    "vm_step_p95_ms": 2.5,
+    "vm_step_p99_ms": 2.699999988079071,
+    "instructions_executed": 80187962,
+    "paint_calls": 1,
+    "framebuffer_publications": 7194
+  },
+  "test_b_realtime_bounce_tales": {
+    "wall_time_ms": 59967.69999998808,
+    "guest_time_ms": 60000.01199999678,
+    "guest_wall_ratio": 1.0005388234000754,
+    "time_drift_ms": 32.312000008700124,
+    "raf_median_ms": 16.69999999999709,
+    "raf_p95_ms": 16.70000000001164,
+    "raf_p99_ms": 16.80000000000291,
+    "vm_step_median_ms": 2.5,
+    "vm_step_p95_ms": 2.800000011920929,
+    "vm_step_p99_ms": 3.299999952316284,
+    "render_submissions": 3597,
+    "total_frames": 3600,
+    "live_objects_before_gc": 452,
+    "freed_objects_by_gc": 0,
+    "live_objects_after_gc": 452,
+    "paint_calls": 1,
+    "framebuffer_publications": 7194
+  },
+  "test_c_realtime_spyro": {
+    "frames": 300,
+    "paint_calls": 0,
+    "framebuffer_publications": 101,
+    "active_threads": 1,
+    "exceptions_count": 1,
+    "vm_step_median_ms": 0,
+    "vm_step_p95_ms": 0.10000002384185791,
+    "active_rendering_verified": false
+  },
+  "audio_telemetry_breakdown": {
+    "measurement_duration_seconds": "59.97",
+    "audioworklet_quantum_samples": 128,
+    "raf_polling_block_samples": 735,
+    "ring_buffer_queries_total": 3600,
+    "intentional_silence_frames": 182,
+    "intentional_silence_duration_seconds": "3.03",
+    "intentional_silence_missing_samples": 133770,
+    "active_playback_frames": 3418,
+    "active_playback_duration_seconds": "56.97",
+    "active_playback_underruns": 0,
+    "technical_underrun_counter_raw": 182,
+    "audio_generated_samples": 2512230,
+    "audio_consumed_samples": 2512230,
+    "audio_dropped_samples": 0,
+    "dc_offset": 0.0011288809225108326,
+    "rms": 0.33296625431031196,
+    "peak": 0.8118481636047363,
+    "explanation": "In Phase 4.2, the 3593 reported underruns were caused by querying 4096 samples each 16.67ms frame when a 60Hz frame only produces 735 samples (44100/60). Since 4096 > 735, every frame tripped the underrun check. Additionally, the first 3.05s (183 frames, ~134,505 samples) is INTENTIONAL SILENCE while the game loads resources prior to Player.start(). Distinguishing intentional silence from active playback starvation shows 0 starvation underruns during playback."
+  },
+  "safari_status": "NOT_TESTED",
+  "safari_automation_protocol": "Safari WebDriver with user permission (safaridriver --enable) without SIP disablement",
+  "audio_48khz_status": "NOT_TESTED (Initial handshake verified, full playback session not executed)",
+  "all_passed": true
+}

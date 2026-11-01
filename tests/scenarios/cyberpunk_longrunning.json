@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "game_id": "cyberpunk",
+  "jar_file": "cyberpunk.jar",
+  "jar_sha256": "ded969828b625b374d29f81b609a6a7cc81cab9f70afea488ad85425e3367f91",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "LONGRUNNING",
+  "description": "1200 ticks of Arasaka street traversal, MIDI background music playback, and enemy patrol updates.",
+  "total_ticks": 1200,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 70,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 140,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 150,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 240,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 250,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 400,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 650,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 700,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 750,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 800,
+      "key": -3,
+      "action": "press",
+      "free_key": "ArrowLeft"
+    },
+    {
+      "tick": 1050,
+      "key": -3,
+      "action": "release",
+      "free_key": "ArrowLeft"
+    }
+  ],
+  "snapshot_ticks": [
+    300,
+    600,
+    900,
+    1200
+  ],
+  "expected_behavior": "1200 ticks of Arasaka street traversal, MIDI background music playback, and enemy patrol updates."
+}

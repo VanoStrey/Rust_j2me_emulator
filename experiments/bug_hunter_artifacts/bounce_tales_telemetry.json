@@ -1,0 +1,19 @@
+{
+  "gameId": "bounce_tales",
+  "gameName": "Bounce Tales",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/bounce_tales_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9903,
+    "instructions": 8299750,
+    "publishes": 281,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

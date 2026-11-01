@@ -1,0 +1,89 @@
+{
+  "browser_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "timestamp": "2026-10-24T21:35:28.843Z",
+  "tests": {
+    "wasm_load": {
+      "passed": true,
+      "load_time_ms": 39.099999994039536,
+      "initial_memory_pages": 29,
+      "initial_bytes": 1900544
+    },
+    "diagnostic_pattern": {
+      "passed": true,
+      "byte_order": "RGBA8888_LITTLE_ENDIAN",
+      "red_pixel": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "green_pixel": [
+        0,
+        255,
+        0,
+        255
+      ],
+      "blue_pixel": [
+        0,
+        0,
+        255,
+        255
+      ]
+    },
+    "key_events": {
+      "passed": true,
+      "press_latency_ms": 0.20000001788139343,
+      "release_latency_ms": 0
+    }
+  },
+  "metrics": {
+    "total_frames": 3600,
+    "total_duration_ms": 8493.09999999404,
+    "throughput_frames_per_sec": 423.9,
+    "median_tick_ms": 2.5,
+    "p95_tick_ms": 2.699999988079071,
+    "p99_tick_ms": 3,
+    "mean_tick_ms": 2.350944444421265,
+    "framebuffer_publishes": 3597,
+    "final_memory_pages": 123,
+    "final_memory_bytes": 8060928
+  },
+  "audio_metrics": {
+    "total_samples_captured": 2507085,
+    "non_zero_samples": 2504584,
+    "peak_amplitude": 0.8780485391616821,
+    "dc_offset": -0.05807680078928067,
+    "sample_rate": 44100,
+    "channels": 1
+  },
+  "memory_leak_audit": {
+    "cycles_tested": 20,
+    "cycle_pages": [
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123,
+      123
+    ],
+    "initial_pages": 123,
+    "final_pages": 123,
+    "growth_pages": 0,
+    "stabilized": true
+  },
+  "all_passed": true
+}

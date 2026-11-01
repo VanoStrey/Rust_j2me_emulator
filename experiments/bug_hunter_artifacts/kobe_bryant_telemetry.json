@@ -1,0 +1,19 @@
+{
+  "gameId": "kobe_bryant",
+  "gameName": "Kobe Bryant Pro Basketball 08",
+  "durationSec": 10,
+  "anomalies": [],
+  "hasBugs": false,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/kobe_bryant_artifact.png",
+  "summary": "CLEAN_PASS",
+  "finalTelemetry": {
+    "elapsedMs": 9651,
+    "instructions": 9088,
+    "publishes": 222,
+    "autoHealing": 0,
+    "anomalies": []
+  }
+}

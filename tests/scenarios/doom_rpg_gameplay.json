@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "game_id": "doom_rpg",
+  "jar_file": "doom_rpg.jar",
+  "jar_sha256": "a07ff089ec4b124220a52008ab3adaa205c51f40476c64258d91006604bbc6b3",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "GAMEPLAY",
+  "description": "Dismiss copyright, select New Game, start Sector 1, step forward (-1), turn right (-4), interact (-5).",
+  "total_ticks": 500,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 65,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 120,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 125,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 180,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 185,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 260,
+      "key": -1,
+      "action": "press",
+      "free_key": "ArrowUp"
+    },
+    {
+      "tick": 300,
+      "key": -1,
+      "action": "release",
+      "free_key": "ArrowUp"
+    },
+    {
+      "tick": 330,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 360,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 400,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 420,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    }
+  ],
+  "snapshot_ticks": [
+    120,
+    220,
+    350,
+    500
+  ],
+  "expected_behavior": "Dismiss copyright, select New Game, start Sector 1, step forward (-1), turn right (-4), interact (-5)."
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "game_id": "cyberpunk",
+  "jar_file": "cyberpunk.jar",
+  "jar_sha256": "ded969828b625b374d29f81b609a6a7cc81cab9f70afea488ad85425e3367f91",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "GAMEPLAY",
+  "description": "Accept Audio prompt, select New Game, skip mission briefing, move protagonist right, draw weapon.",
+  "total_ticks": 500,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 60,
+      "key": -6,
+      "action": "press",
+      "free_key": "F1"
+    },
+    {
+      "tick": 70,
+      "key": -6,
+      "action": "release",
+      "free_key": "F1"
+    },
+    {
+      "tick": 140,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 150,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 240,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 250,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 320,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 380,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 440,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 450,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    }
+  ],
+  "snapshot_ticks": [
+    140,
+    260,
+    380,
+    500
+  ],
+  "expected_behavior": "Accept Audio prompt, select New Game, skip mission briefing, move protagonist right, draw weapon."
+}

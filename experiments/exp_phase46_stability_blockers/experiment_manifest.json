@@ -1,0 +1,58 @@
+{
+  "experiment_id": "exp_phase46_stability_blockers",
+  "created_at": "2026-10-25T20:40:00+03:00",
+  "platform": "Darwin 27.0.0 arm64 (Apple M2, 8 cores, 8 GB RAM)",
+  "toolchain": {
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "profile": "release",
+    "wasm_target": "wasm32-unknown-unknown"
+  },
+  "binaries": {
+    "j2me_cli": {
+      "path": "experiments/exp_phase46_stability_blockers/j2me-cli",
+      "sha256": "713ef4806170aae8ec578ac2270777a8ba9ff26f03c406e254ac7c2301901139"
+    },
+    "j2me_wasm": {
+      "path": "experiments/exp_phase46_stability_blockers/j2me_wasm.wasm",
+      "sha256": "cc1641169f635e152b0641a7a24008ed6703d1ede00366d9707c425c8d596643"
+    }
+  },
+  "runtime_configuration": {
+    "profile": "CLDC 1.1 / MIDP 2.0 / Nokia UI / MMAPI",
+    "virtual_clock": {
+      "mode": "rational_discrete",
+      "step_ms": 16.666666666666668,
+      "frequency_hz": 60.0
+    },
+    "watchdog_timeout_ms": 6000,
+    "max_instructions_per_frame": 300000,
+    "display": {
+      "width": 240,
+      "height": 320,
+      "bpp": 32
+    },
+    "audio": {
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  },
+  "p0_historical_crashes_status": {
+    "total_confirmed_historical_crashes": 12,
+    "reproduced_and_eliminated": 12,
+    "host_panics": 0
+  },
+  "p1_top3_clusters": {
+    "cluster_1": "RecordEnumeration contract mismatch (NoSuchElementException -> InvalidRecordIDException, bidirectional traversal, rebuild)",
+    "cluster_2": "Reflection and stream contracts (Class.forName java/lang/Class virtual dispatch, newInstance frame management, Vector subclassing, stream exception catchable formatting)",
+    "cluster_3": "javax/microedition/lcdui/game/Sprite and Layer missing implementation"
+  },
+  "sample100_summary": {
+    "total_tested": 100,
+    "completed_window": 86,
+    "guest_exception": 6,
+    "wall_timeout": 8,
+    "host_panics": 0,
+    "improved_over_phase45": 3,
+    "regressed_over_phase45": 2
+  }
+}

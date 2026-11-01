@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "bounce_tales",
+  "jar_file": "bounce_tales.jar",
+  "jar_sha256": "f768bbd2366f6d739d170b8cfa8383a98c4830d03555f5b44a0ab88c61a8028e",
+  "resolution": {
+    "width": 240,
+    "height": 320
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot through Rovio / Nokia splash screens to Title Screen.",
+  "total_ticks": 240,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    60,
+    180,
+    240
+  ],
+  "expected_behavior": "Cold boot through Rovio / Nokia splash screens to Title Screen."
+}

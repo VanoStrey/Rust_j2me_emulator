@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "game_id": "gravity_defied",
+  "jar_file": "gravity_defied.jar",
+  "jar_sha256": "8c120d5eee9875061078d47016d9a850f0ceb1ec9d4b923e585d48d8d8b83f88",
+  "resolution": {
+    "width": 176,
+    "height": 220
+  },
+  "scenario_type": "INIT",
+  "description": "Cold boot to Codebrew Software title screen and track menu.",
+  "total_ticks": 200,
+  "tick_step_ms": 16.66667,
+  "inputs": [],
+  "snapshot_ticks": [
+    50,
+    120,
+    200
+  ],
+  "expected_behavior": "Cold boot to Codebrew Software title screen and track menu."
+}

@@ -1,0 +1,72 @@
+{
+  "file_id": "single",
+  "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/FreeCell.jar",
+  "jar_sha256": "4131538a0c147d48884bdc30cee596f321f3bc76f88fb34d5bf8a1179c1a5075",
+  "launch_configuration_id": "default",
+  "entry_point": "default",
+  "title": "",
+  "vendor": "",
+  "runtime_status": "GUEST_EXCEPTION",
+  "observed_ui": "UNKNOWN",
+  "load_ok": true,
+  "midlet_started": true,
+  "main_canvas_created": false,
+  "paint_calls": 0,
+  "framebuffer_publications": 1,
+  "unique_framebuffer_hashes": 1,
+  "active_threads": 0,
+  "executed_instructions": 8662,
+  "exceptions": 2,
+  "unhandled_native": 0,
+  "native_call_counts": 0,
+  "guest_exceptions_thrown": 2,
+  "guest_exceptions_caught": 1,
+  "guest_exceptions_uncaught": 1,
+  "fatal_guest_exception": true,
+  "uncaught_exception_threads": [
+    "main"
+  ],
+  "last_exception_class": "java/lang/NullPointerException",
+  "last_exception_message": null,
+  "last_exception_location": "game/freecell/GameCanvas.<init>(Lgame/freecell/FreeCell;)V:97",
+  "audio_generated_samples": 0,
+  "audio_consumed_samples": 0,
+  "audio_dropped_samples": 0,
+  "audio_underrun_count": 0,
+  "audio_overflow_count": 0,
+  "timing": {
+    "elapsed_load_ms": 0.564541,
+    "elapsed_vm_ms": 2.20725,
+    "elapsed_graphics_ms": 0.0,
+    "elapsed_audio_ms": 0.0,
+    "elapsed_scheduler_ms": 0.0,
+    "elapsed_io_ms": 0.39045799999999997,
+    "elapsed_other_ms": 0.058084000000000024,
+    "total_wall_ms": 3.220333
+  },
+  "exit_reason": "TICKS_EXHAUSTED",
+  "last_error": "java/lang/NullPointerException: no message at game/freecell/GameCanvas.<init>(Lgame/freecell/FreeCell;)V:97",
+  "final_frame_sha256": "9cab56ab25c331302e1a1e34d00835fdfbcb7cbd189155a2acbab052c7f678ae",
+  "apis_invoked": [
+    "com/nokia/mid/ui/FullCanvas.<init>",
+    "game/freecell/GameCanvas.getHeight",
+    "java/lang/Object.<init>",
+    "java/util/Random.<init>",
+    "java/util/Random.nextInt",
+    "java/util/Random.setSeed",
+    "javax/microedition/lcdui/Command.<init>",
+    "javax/microedition/lcdui/Display.getDisplay",
+    "javax/microedition/lcdui/Font.getFont",
+    "javax/microedition/midlet/MIDlet.<init>",
+    "javax/microedition/rms/RecordStore.getRecord",
+    "javax/microedition/rms/RecordStore.openRecordStore"
+  ],
+  "blockers": [
+    {
+      "blocker_type": "CONFIRMED",
+      "category": "GUEST_EXCEPTION",
+      "description": "Uncaught guest Java exception: java/lang/NullPointerException (\"no message\") in game/freecell/GameCanvas.<init>(Lgame/freecell/FreeCell;)V:97 (thread: main)",
+      "minimal_repro": null
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "game_id": "gravity_defied",
+  "scenario_type": "LONGRUNNING",
+  "scenario_file": "/Users/foolvan/Desktop/Rust_j2me_emulator/tests/scenarios/gravity_defied_longrunning.json",
+  "jar_file": "gravity_defied.jar",
+  "jar_sha256": "8c120d5eee9875061078d47016d9a850f0ceb1ec9d4b923e585d48d8d8b83f88",
+  "resolution": {
+    "width": 176,
+    "height": 220
+  },
+  "total_ticks_executed": 1200,
+  "wall_time_ms": 32292.514208,
+  "ticks_per_sec": 37.16031499655476,
+  "instructions_executed": 235300718,
+  "snapshots": [
+    {
+      "tick": 300,
+      "png_file": "rust_tick_0300.png",
+      "raw_file": "rust_tick_0300.raw",
+      "raw_sha256": "56c42f8266272abe4b4ba50ad70af027223d51a0a7a2105eea30a6d14d2a792a",
+      "width": 176,
+      "height": 220,
+      "non_black_pixels": 38197
+    },
+    {
+      "tick": 600,
+      "png_file": "rust_tick_0600.png",
+      "raw_file": "rust_tick_0600.raw",
+      "raw_sha256": "0d7ea56edddcb875354683e4e4ece274059462cdabc8b390fda12dce0f05a35f",
+      "width": 176,
+      "height": 220,
+      "non_black_pixels": 35527
+    },
+    {
+      "tick": 900,
+      "png_file": "rust_tick_0900.png",
+      "raw_file": "rust_tick_0900.raw",
+      "raw_sha256": "15822b321e9d689acc0a9d860046e9dd4f098bfed52356e081edddae0256bc87",
+      "width": 176,
+      "height": 220,
+      "non_black_pixels": 38720
+    },
+    {
+      "tick": 1200,
+      "png_file": "rust_tick_1200.png",
+      "raw_file": "rust_tick_1200.raw",
+      "raw_sha256": "8e1088eed277af65374f5c04214d4e0fad532ee208291f6e14d5b92989a5849b",
+      "width": 176,
+      "height": 220,
+      "non_black_pixels": 38720
+    }
+  ],
+  "criteria_report": {
+    "verdict": "Pass",
+    "strict_mode": true,
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": false,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": true,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    },
+    "instructions_executed": 235300718,
+    "fb_publishes_count": 900,
+    "fb_changes_count": 842,
+    "input_events_count": 10,
+    "auto_healing_events": [],
+    "last_uncaught_exception": null,
+    "host_crash_error": null,
+    "blocker_summary": []
+  },
+  "peak_heap_objects": 24943,
+  "final_heap_objects": 967,
+  "gc_count": 0,
+  "verdict": "Pass",
+  "passed": true
+}

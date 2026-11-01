@@ -1,0 +1,60 @@
+{
+  "total_investigated": 1014,
+  "denominator": 1014,
+  "breakdown": {
+    "with_framebuffer_publications": {
+      "count": 1014,
+      "pct": 100.0
+    },
+    "unique_framebuffer_hashes_gt_1": {
+      "count": 796,
+      "pct": 78.5
+    },
+    "unique_framebuffer_hashes_eq_1": {
+      "count": 218,
+      "pct": 21.5
+    },
+    "apis": {
+      "invoked_gamecanvas_or_flush": {
+        "count": 500,
+        "pct": 49.31
+      },
+      "invoked_directgraphics": {
+        "count": 112,
+        "pct": 11.05
+      },
+      "explicit_flushGraphics_call": {
+        "count": 163,
+        "pct": 16.07
+      },
+      "invoked_both_gc_and_dg": {
+        "count": 52,
+        "pct": 5.13
+      }
+    },
+    "thread_states": {
+      "active_threads_gt_0": {
+        "count": 883,
+        "pct": 87.08
+      },
+      "exceptions_logged": {
+        "count": 345,
+        "pct": 34.02
+      }
+    },
+    "runtime_status": {
+      "COMPLETED_WINDOW": {
+        "count": 1014,
+        "pct": 100.0
+      },
+      "WALL_TIMEOUT": {
+        "count": 0,
+        "pct": 0.0
+      },
+      "GUEST_EXCEPTION": {
+        "count": 0,
+        "pct": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "exp_phase43_active_rendering",
+  "phase": "4.3",
+  "timestamp": "2026-10-25T02:52:00Z",
+  "binary_hashes": {
+    "cli_path": "experiments/exp_phase43_active_rendering/j2me-cli",
+    "cli_sha256": "8fd5a36b3ddb67966837858a7d573393ddddb79fb92cf113433092b2133a92d7",
+    "wasm_path": "experiments/exp_phase43_active_rendering/j2me_wasm.wasm",
+    "wasm_sha256": "51c3c186a7b6b87d6c96024b96820f6d465d9e9ffe885c70c8ee610ef329bf2f",
+    "cargo_lock_sha256": "a0eaf7f9cf0165eefccf5f70bb058bcbeba1376d54238e2170312674fe80f555"
+  },
+  "provenance": {
+    "git_commit": "HEAD",
+    "parent_experiment_id": "exp_phase42_postcontract",
+    "full_corpus_reference": "experiments/exp_phase42_full_corpus"
+  },
+  "hypotheses_and_goals": {
+    "hypothesis_1014_classification": "Proved that 1,014 games marked NO_PAINT were not broken; they were working GameCanvas games misclassified by the smoke test counting paint_calls instead of active rendering flushGraphics()",
+    "active_rendering_contract": "Implemented dedicated GameCanvas double-buffering, regional flushGraphics, buffer isolation, DirectGraphics exact pixel decoding, transformations, negative scanlength support, and Java exceptions",
+    "test_fixtures": "10 end-to-end MIDP Java fixtures passing through VM interpreter and native bridge"
+  }
+}

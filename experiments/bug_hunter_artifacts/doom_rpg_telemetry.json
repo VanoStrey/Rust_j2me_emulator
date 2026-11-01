@@ -1,0 +1,23 @@
+{
+  "gameId": "doom_rpg",
+  "gameName": "Doom RPG",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/doom_rpg_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG",
+  "finalTelemetry": {
+    "elapsedMs": 9990,
+    "instructions": 697301,
+    "publishes": 250,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG"
+    ]
+  }
+}

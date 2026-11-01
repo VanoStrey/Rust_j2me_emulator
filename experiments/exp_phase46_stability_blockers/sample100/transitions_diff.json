@@ -1,0 +1,48 @@
+{
+  "total_configurations": 100,
+  "transitions_summary": {
+    "COMPLETED_WINDOW -> COMPLETED_WINDOW": 83,
+    "COMPLETED_WINDOW -> GUEST_EXCEPTION": 1,
+    "WALL_TIMEOUT -> WALL_TIMEOUT": 7,
+    "COMPLETED_WINDOW -> WALL_TIMEOUT": 1,
+    "GUEST_EXCEPTION -> GUEST_EXCEPTION": 4,
+    "WALL_TIMEOUT -> GUEST_EXCEPTION": 1,
+    "GUEST_EXCEPTION -> COMPLETED_WINDOW": 3
+  },
+  "improved_count": 3,
+  "regressed_count": 2,
+  "improved": [
+    [
+      "file_01524",
+      "GhoulsnGhosts.jar",
+      "GUEST_EXCEPTION",
+      "COMPLETED_WINDOW"
+    ],
+    [
+      "file_04137",
+      "Clone3D.jar",
+      "GUEST_EXCEPTION",
+      "COMPLETED_WINDOW"
+    ],
+    [
+      "file_01825",
+      "Sonic-Time-3D.jar",
+      "GUEST_EXCEPTION",
+      "COMPLETED_WINDOW"
+    ]
+  ],
+  "regressed": [
+    [
+      "file_02278",
+      "SleighRide.jar",
+      "COMPLETED_WINDOW",
+      "GUEST_EXCEPTION"
+    ],
+    [
+      "file_06717",
+      "Cops128.jar",
+      "COMPLETED_WINDOW",
+      "WALL_TIMEOUT"
+    ]
+  ]
+}

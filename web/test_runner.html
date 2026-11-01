@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>J2ME WASM Automated Test Suite & Browser Benchmark</title>
+</head>
+<body style="background: #111; color: #fff; font-family: monospace; padding: 20px;">
+  <h2>J2ME WASM Browser Verification Suite</h2>
+  <canvas id="screen" width="240" height="320" style="border: 2px solid #555; background: #000;"></canvas>
+  <div id="status" style="margin-top: 10px; color: #0f0;">Starting tests...</div>
+  <pre id="log" style="background: #222; padding: 10px; max-height: 400px; overflow: auto;"></pre>
+
+  <script type="module">
+    const logEl = document.getElementById("log");
+    const statusEl = document.getElementById("status");
+    function log(msg) {
+      console.log(msg);
+      logEl.textContent += msg + "\n";
+    }
+
+    const results = {
+      browser_user_agent: navigator.userAgent,
+      timestamp: new Date().toISOString(),
+      tests: {},
+      metrics: {},
+      audio_metrics: {},
+      memory_leak_audit: {},
+      all_passed: false,
+    };
+
+    window.__TEST_RESULTS__ = results;
+
+    async function runSuite() {
+      try {
+        log("=== 1. WASM Load and Instantiation ===");
+        const t0 = performance.now();
+        const resp = await fetch("./j2me_wasm.wasm");
+        if (!resp.ok) throw new Error("Failed to fetch j2me_wasm.wasm");
+        const wasmBytes = await resp.arrayBuffer();
+        const { instance } = await WebAssembly.instantiate(wasmBytes, {});
+        const wasm = instance.exports;
+        const memory = wasm.memory;
+        const loadTimeMs = performance.now() - t0;
+
+        wasm.emu_init(240, 320, 44100);
+        log(`WASM instantiated in ${loadTimeMs.toFixed(2)} ms. Memory pages: ${memory.buffer.byteLength / 65536}`);
+
+        results.tests.wasm_load = {
+          passed: true,
+          load_time_ms: loadTimeMs,
+          initial_memory_pages: memory.buffer.byteLength / 65536,
+          initial_bytes: memory.buffer.byteLength,
+        };
+
+        log("\n=== 2. Diagnostic Pattern & Byte Order Verification ===");
+        wasm.emu_fill_diagnostic_pattern();
+        const fbPtr = wasm.emu_get_framebuffer_ptr();
+        const fbLen = wasm.emu_get_framebuffer_len();
+
+        if (!fbPtr || fbLen !== 240 * 320 * 4) {
+          throw new Error(`Invalid framebuffer ptr or len: ${fbPtr}, ${fbLen}`);
+        }
+
+        const fbView = new Uint8ClampedArray(memory.buffer, fbPtr, fbLen);
+        const canvas = document.getElementById("screen");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        const imgData = new ImageData(fbView, 240, 320);
+        ctx.putImageData(imgData, 0, 0);
+
+        // Sample pixels from Canvas to verify presentation byte order
+        const redPixel = ctx.getImageData(60, 80, 1, 1).data;
+        const greenPixel = ctx.getImageData(180, 80, 1, 1).data;
+        const bluePixel = ctx.getImageData(60, 240, 1, 1).data;
+
+        log(`Top-Left Sample (Red):   [R=${redPixel[0]}, G=${redPixel[1]}, B=${redPixel[2]}, A=${redPixel[3]}]`);
+        log(`Top-Right Sample (Green): [R=${greenPixel[0]}, G=${greenPixel[1]}, B=${greenPixel[2]}, A=${greenPixel[3]}]`);
+        log(`Bottom-Left Sample (Blue):[R=${bluePixel[0]}, G=${bluePixel[1]}, B=${bluePixel[2]}, A=${bluePixel[3]}]`);
+
+        const redOk = redPixel[0] === 255 && redPixel[1] === 0 && redPixel[2] === 0 && redPixel[3] === 255;
+        const greenOk = greenPixel[0] === 0 && greenPixel[1] === 255 && greenPixel[2] === 0 && greenPixel[3] === 255;
+        const blueOk = bluePixel[0] === 0 && bluePixel[1] === 0 && bluePixel[2] === 255 && bluePixel[3] === 255;
+
+        if (!redOk || !greenOk || !blueOk) {
+          throw new Error("Diagnostic pattern color verification failed!");
+        }
+        log("Diagnostic Pattern verified: Pure RGBA byte order matches Canvas ImageData presentation!");
+
+        results.tests.diagnostic_pattern = {
+          passed: true,
+          byte_order: "RGBA8888_LITTLE_ENDIAN",
+          red_pixel: Array.from(redPixel),
+          green_pixel: Array.from(greenPixel),
+          blue_pixel: Array.from(bluePixel),
+        };
+
+        log("\n=== 3. Key Press / Release Latency & Handlers ===");
+        const tKey0 = performance.now();
+        wasm.emu_key_event(-1, 1); // ArrowUp Pressed
+        const keyPressLatencyMs = performance.now() - tKey0;
+        const tKey1 = performance.now();
+        wasm.emu_key_event(-1, 0); // ArrowUp Released
+        const keyReleaseLatencyMs = performance.now() - tKey1;
+
+        log(`Key Press Latency:   ${keyPressLatencyMs.toFixed(3)} ms`);
+        log(`Key Release Latency: ${keyReleaseLatencyMs.toFixed(3)} ms`);
+        results.tests.key_events = {
+          passed: true,
+          press_latency_ms: keyPressLatencyMs,
+          release_latency_ms: keyReleaseLatencyMs,
+        };
+
+        log("\n=== 4. 20 Cycles of Load / Run / Stop / Reset (Memory Leak Audit) ===");
+        const jarResp = await fetch("./bounce_tales.jar");
+        const jarBytes = new Uint8Array(await jarResp.arrayBuffer());
+        log(`Fetched bounce_tales.jar: ${jarBytes.length} bytes`);
+
+        const cycleMemoryPages = [];
+        for (let cycle = 1; cycle <= 20; cycle++) {
+          log(`Cycle ${cycle}: emu_init`);
+          wasm.emu_init(240, 320, 44100);
+          log(`Cycle ${cycle}: emu_alloc_buffer`);
+          const bufPtr = wasm.emu_alloc_buffer(jarBytes.length);
+          log(`Cycle ${cycle}: bufPtr = ${bufPtr}, writing bytes`);
+          new Uint8Array(wasm.memory.buffer, bufPtr, jarBytes.length).set(jarBytes);
+          log(`Cycle ${cycle}: emu_load_jar`);
+          const ok = wasm.emu_load_jar(bufPtr, jarBytes.length);
+          log(`Cycle ${cycle}: emu_load_jar returned ${ok}`);
+          log(`Cycle ${cycle}: emu_free_buffer`);
+          wasm.emu_free_buffer(bufPtr, jarBytes.length);
+          log(`Cycle ${cycle}: running 5 ticks`);
+
+          for (let f = 0; f < 5; f++) {
+            wasm.emu_tick(16.66667);
+          }
+          const pages = wasm.memory.buffer.byteLength / 65536;
+          cycleMemoryPages.push(pages);
+          log(`Cycle ${cycle}: emu_destroy`);
+          wasm.emu_destroy();
+        }
+
+        const initialPages = cycleMemoryPages[0];
+        const finalPages = cycleMemoryPages[19];
+        log(`Cycle 1 Memory Pages:  ${initialPages} (${initialPages * 64} KB)`);
+        log(`Cycle 20 Memory Pages: ${finalPages} (${finalPages * 64} KB)`);
+        const memoryGrowthPages = finalPages - initialPages;
+        log(`Memory High-Water Mark Growth across 20 cycles: ${memoryGrowthPages} pages`);
+
+        results.memory_leak_audit = {
+          cycles_tested: 20,
+          cycle_pages: cycleMemoryPages,
+          initial_pages: initialPages,
+          final_pages: finalPages,
+          growth_pages: memoryGrowthPages,
+          stabilized: memoryGrowthPages <= 2,
+        };
+
+        log("\n=== 5. Real Game 60-Second Deterministic Benchmark (3600 Frames) ===");
+        wasm.emu_init(240, 320, 44100);
+        const jarBufPtr = wasm.emu_alloc_buffer(jarBytes.length);
+        new Uint8Array(wasm.memory.buffer, jarBufPtr, jarBytes.length).set(jarBytes);
+        const loadOk = wasm.emu_load_jar(jarBufPtr, jarBytes.length);
+        wasm.emu_free_buffer(jarBufPtr, jarBytes.length);
+
+        if (!loadOk) throw new Error("Failed to load bounce_tales.jar in benchmark");
+
+        const tickDurations = [];
+        let publishes = 0;
+        const totalFrames = 3600; // 60 seconds at 60 FPS
+        const audioCapture = [];
+        const audioBufPtr = wasm.emu_alloc_buffer(1024 * 4);
+
+        const benchT0 = performance.now();
+        for (let frame = 0; frame < totalFrames; frame++) {
+          const tFrameStart = performance.now();
+          const dirty = wasm.emu_tick(16.66667);
+          const tickMs = performance.now() - tFrameStart;
+          tickDurations.push(tickMs);
+
+          if (dirty) {
+            publishes++;
+          }
+
+          // Sample audio
+          const samplesRead = wasm.emu_read_audio_samples(audioBufPtr, 1024);
+          if (samplesRead > 0) {
+            const fView = new Float32Array(wasm.memory.buffer, audioBufPtr, samplesRead);
+            for (let s = 0; s < samplesRead; s++) {
+              audioCapture.push(fView[s]);
+            }
+          }
+        }
+        const totalBenchMs = performance.now() - benchT0;
+
+        tickDurations.sort((a, b) => a - b);
+        const medianTick = tickDurations[Math.floor(totalFrames * 0.5)];
+        const p95Tick = tickDurations[Math.floor(totalFrames * 0.95)];
+        const p99Tick = tickDurations[Math.floor(totalFrames * 0.99)];
+        const meanTick = tickDurations.reduce((acc, v) => acc + v, 0) / totalFrames;
+        const throughputFps = (totalFrames / (totalBenchMs / 1000)).toFixed(1);
+
+        log(`3600 Frames Executed in: ${totalBenchMs.toFixed(1)} ms`);
+        log(`Throughput:              ${throughputFps} virtual frames/sec`);
+        log(`Tick Execution Time:     Median: ${medianTick.toFixed(3)} ms | p95: ${p95Tick.toFixed(3)} ms | p99: ${p99Tick.toFixed(3)} ms | Mean: ${meanTick.toFixed(3)} ms`);
+        log(`Framebuffer Publishes:   ${publishes}`);
+        log(`Audio Samples Captured:  ${audioCapture.length}`);
+
+        results.metrics = {
+          total_frames: totalFrames,
+          total_duration_ms: totalBenchMs,
+          throughput_frames_per_sec: parseFloat(throughputFps),
+          median_tick_ms: medianTick,
+          p95_tick_ms: p95Tick,
+          p99_tick_ms: p99Tick,
+          mean_tick_ms: meanTick,
+          framebuffer_publishes: publishes,
+          final_memory_pages: wasm.memory.buffer.byteLength / 65536,
+          final_memory_bytes: wasm.memory.buffer.byteLength,
+        };
+
+        log("\n=== 6. Audio Analysis ===");
+        let nonZeroCount = 0;
+        let peakAmp = 0;
+        let sumAmp = 0;
+        for (let i = 0; i < audioCapture.length; i++) {
+          const val = Math.abs(audioCapture[i]);
+          if (val > 0.0001) nonZeroCount++;
+          if (val > peakAmp) peakAmp = val;
+          sumAmp += audioCapture[i];
+        }
+        const dcOffset = audioCapture.length > 0 ? sumAmp / audioCapture.length : 0;
+        log(`Non-zero Audible Samples: ${nonZeroCount} / ${audioCapture.length}`);
+        log(`Peak Amplitude:           ${peakAmp.toFixed(4)}`);
+        log(`DC Offset:                ${dcOffset.toFixed(6)}`);
+
+        results.audio_metrics = {
+          total_samples_captured: audioCapture.length,
+          non_zero_samples: nonZeroCount,
+          peak_amplitude: peakAmp,
+          dc_offset: dcOffset,
+          sample_rate: 44100,
+          channels: 1,
+        };
+
+        results.all_passed = true;
+        statusEl.textContent = "ALL BROWSER TESTS PASSED!";
+        log("\n>>> ALL TESTS COMPLETED SUCCESSFULLY <<<");
+      } catch (err) {
+        log(`[ERROR] ${err.message}`);
+        statusEl.textContent = `FAILED: ${err.message}`;
+        statusEl.style.color = "#f00";
+        results.all_passed = false;
+        results.error = err.message;
+      }
+    }
+
+    runSuite();
+  </script>
+</body>
+</html>

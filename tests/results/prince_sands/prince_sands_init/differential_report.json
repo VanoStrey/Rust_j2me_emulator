@@ -1,0 +1,105 @@
+{
+  "game_id": "prince_sands",
+  "scenario_type": "INIT",
+  "scenario_file": "prince_sands_init.json",
+  "timestamp": "2026-10-31T18:21:52.812Z",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "rust_execution": {
+    "wall_time_ms": 828.2737079999999,
+    "ticks_per_sec": 338.05250280864885,
+    "instructions_executed": 6192712,
+    "peak_heap_objects": 5874,
+    "final_heap_objects": 5874,
+    "gc_count": 0,
+    "verdict": "Pass",
+    "criteria": {
+      "jar_parsed": true,
+      "midlet_initialized": true,
+      "thread_running": true,
+      "thread_sleeping": false,
+      "thread_terminated": false,
+      "framebuffer_published": true,
+      "framebuffer_changed": true,
+      "input_delivered": false,
+      "input_affected_game_state": false,
+      "audio_generated": false,
+      "rms_write_read_ok": false,
+      "guest_exception": false,
+      "host_crash": false,
+      "auto_heal_occurred": false,
+      "wall_timeout": false,
+      "deadlock_suspected": false
+    }
+  },
+  "snapshot_comparisons": [
+    {
+      "tick": 60,
+      "metrics": {
+        "exactPixelMatchPct": 0,
+        "meanAbsoluteError": 252.136,
+        "rootMeanSquareError": 252.958,
+        "percentageChangedPixelsStrict": 100,
+        "percentageChangedPixelsTolerant": 100,
+        "structuralSimilarityIndex": 0.0001
+      },
+      "differingPixels": 36608,
+      "totalPixels": 36608,
+      "primaryCategory": "GAME_STATE",
+      "categoryExplanation": "Macro divergence (100.0% of frame differs): midlets are displaying entirely different game screens, menus, or major cutscenes.",
+      "diffPpmFile": "diff_tick_0060.ppm",
+      "boundingBox": {
+        "x": 0,
+        "y": 0,
+        "w": 176,
+        "h": 208
+      }
+    },
+    {
+      "tick": 180,
+      "metrics": {
+        "exactPixelMatchPct": 87.03,
+        "meanAbsoluteError": 18.808,
+        "rootMeanSquareError": 59.028,
+        "percentageChangedPixelsStrict": 12.97,
+        "percentageChangedPixelsTolerant": 12.97,
+        "structuralSimilarityIndex": 0.7166
+      },
+      "differingPixels": 4748,
+      "totalPixels": 36608,
+      "primaryCategory": "ANIMATION_TIMING",
+      "categoryExplanation": "Animation timing / cadence drift: active rendering sequence at divergent cycle frames.",
+      "diffPpmFile": "diff_tick_0180.ppm",
+      "boundingBox": {
+        "x": 29,
+        "y": 30,
+        "w": 120,
+        "h": 157
+      }
+    },
+    {
+      "tick": 280,
+      "metrics": {
+        "exactPixelMatchPct": 18.76,
+        "meanAbsoluteError": 80.343,
+        "rootMeanSquareError": 108.996,
+        "percentageChangedPixelsStrict": 81.24,
+        "percentageChangedPixelsTolerant": 81.24,
+        "structuralSimilarityIndex": 0.0783
+      },
+      "differingPixels": 29740,
+      "totalPixels": 36608,
+      "primaryCategory": "GAME_STATE",
+      "categoryExplanation": "Macro divergence (81.2% of frame differs): midlets are displaying entirely different game screens, menus, or major cutscenes.",
+      "diffPpmFile": "diff_tick_0280.ppm",
+      "boundingBox": {
+        "x": 0,
+        "y": 0,
+        "w": 176,
+        "h": 208
+      }
+    }
+  ]
+}

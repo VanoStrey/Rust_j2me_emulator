@@ -1,0 +1,45 @@
+{
+  "audit_date": "2026-10-31T21:18:00Z",
+  "component": "javax.microedition.lcdui.game.Sprite",
+  "fix_verified": true,
+  "mathematical_soundness": "PROVEN",
+  "unit_tests_passing": 4,
+  "unit_test_suite": "crates/j2me-stdlib/tests/sprite_transform_table_test.rs",
+  "table_driven_coverage": {
+    "all_8_transforms_tested": true,
+    "non_square_frames_tested": true,
+    "non_central_reference_pixel_tested": true,
+    "display_coordinate_invariance": true,
+    "round_trip_preservation": true,
+    "sequential_walk_preservation": true,
+    "pixel_alpha_collision_inverse_mapping": true
+  },
+  "game_exercise_audit": {
+    "prince_sands": {
+      "uses_midp2_sprite": false,
+      "uses_set_transform": false,
+      "verdict": "REFUTED (Game uses MIDP 1.0 custom blitter)"
+    },
+    "castlevania": {
+      "uses_midp2_sprite": false,
+      "uses_set_transform": false,
+      "verdict": "REFUTED (Game uses Nokia DirectGraphics)"
+    },
+    "heroes_lore": {
+      "uses_midp2_sprite": false,
+      "uses_set_transform": false,
+      "verdict": "REFUTED (Game uses custom software tile/sprite engine)"
+    },
+    "cyberpunk": {
+      "uses_midp2_sprite": false,
+      "uses_set_transform": false,
+      "verdict": "REFUTED (Game uses Nokia DirectGraphics)"
+    },
+    "bounce_tales": {
+      "uses_midp2_sprite": false,
+      "uses_set_transform": false,
+      "verdict": "REFUTED (Game uses Nokia DirectGraphics and custom render pipeline)"
+    }
+  },
+  "overall_audit_finding": "The Sprite.setTransform fix is mathematically and behaviorally verified for the MIDP 2.0 API. However, the Milestone 2 report's claim that this bug caused in-game character teleportation in Prince of Persia, Castlevania, Heroes Lore, and Cyberpunk was REFUTED by bytecode inspection: none of these games invoke javax.microedition.lcdui.game.Sprite."
+}

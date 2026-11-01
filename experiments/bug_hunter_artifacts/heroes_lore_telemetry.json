@@ -1,0 +1,23 @@
+{
+  "gameId": "heroes_lore",
+  "gameName": "Heroes Lore: Wind of Soltia",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/heroes_lore_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG",
+  "finalTelemetry": {
+    "elapsedMs": 9689,
+    "instructions": 21043,
+    "publishes": 181,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG"
+    ]
+  }
+}

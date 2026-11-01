@@ -1,0 +1,23 @@
+{
+  "gameId": "duke_nukem_2",
+  "gameName": "Duke Nukem Mobile 2",
+  "durationSec": 10,
+  "anomalies": [
+    "TEXT_SCANLINE_GAP_BUG"
+  ],
+  "hasBugs": true,
+  "autoHealingCount": 0,
+  "lastAutoHealingSig": "",
+  "softlockDetected": false,
+  "screenshotPath": "/Users/foolvan/Desktop/Rust_j2me_emulator/experiments/bug_hunter_artifacts/duke_nukem_2_artifact.png",
+  "summary": "TEXT_SCANLINE_GAP_BUG",
+  "finalTelemetry": {
+    "elapsedMs": 9935,
+    "instructions": 0,
+    "publishes": 159,
+    "autoHealing": 0,
+    "anomalies": [
+      "TEXT_SCANLINE_GAP_BUG"
+    ]
+  }
+}

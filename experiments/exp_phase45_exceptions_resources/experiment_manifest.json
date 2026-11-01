@@ -1,0 +1,50 @@
+{
+  "experiment_id": "exp_phase45_exceptions_resources",
+  "created_at": "2026-10-25T04:20:00+03:00",
+  "platform": "Darwin 27.0.0 arm64 (Apple M2, 8 cores, 8 GB RAM)",
+  "toolchain": {
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "profile": "release",
+    "wasm_target": "wasm32-unknown-unknown"
+  },
+  "binaries": {
+    "j2me_cli": {
+      "path": "experiments/exp_phase45_exceptions_resources/j2me-cli",
+      "sha256": "f1195ac7f2d62760f524514566624516efcb1706f3b860b2847dd59bff28ea50"
+    },
+    "j2me_wasm": {
+      "path": "experiments/exp_phase45_exceptions_resources/j2me_wasm.wasm",
+      "sha256": "7c36196c26bcc4b12e2e8ec2ecd83f2645fef61d2562d2fcdd5630ca0ef7f735"
+    }
+  },
+  "runtime_configuration": {
+    "profile": "CLDC 1.1 / MIDP 2.0 / Nokia UI / MMAPI",
+    "virtual_clock": {
+      "mode": "rational_discrete",
+      "step_ms": 16.666666666666668,
+      "frequency_hz": 60.0
+    },
+    "watchdog_timeout_ms": 6000,
+    "max_instructions_per_frame": 300000,
+    "display": {
+      "width": 240,
+      "height": 320,
+      "bpp": 32
+    },
+    "audio": {
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  },
+  "microcombat_verification": {
+    "jar_path": "/Users/foolvan/Desktop/j2me_market/roms/Games/MicroCombat.jar",
+    "jar_sha256": "4310a52bffcfd7416a9d453ed8628c8048bc0575da47d553c6bcebdb77928033",
+    "jad_status": "N/A",
+    "resource_entry": "fontin0.prop",
+    "resource_size_bytes": 479,
+    "resource_sha256": "c6f49f4953fab42c38f935658814ad3b6c68a70b7405a435076624b389588555",
+    "observed_ui": "SPLASH",
+    "runtime_status": "COMPLETED_WINDOW",
+    "final_frame_sha256": "950a404dae51e985e306c6ffd3ef7b54e3971c97d3cb7b4acf1d14dad5d67166"
+  }
+}

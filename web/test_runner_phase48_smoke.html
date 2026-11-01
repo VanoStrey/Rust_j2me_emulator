@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phase 4.8 Browser WASM Smoke Verification (Bounce Tales & Prince of Persia)</title>
+  <style>
+    body { background: #0b0f19; color: #f0f4fc; font-family: monospace; padding: 20px; }
+    canvas { border: 2px solid #2e344d; background: #000; }
+    #log { background: #161b28; border: 1px solid #2e344d; padding: 12px; max-height: 300px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <h1>Phase 4.8 Browser WASM Smoke Verification</h1>
+  <canvas id="screen" width="240" height="320"></canvas>
+  <pre id="log"></pre>
+
+  <script type="module">
+    const logEl = document.getElementById("log");
+    const canvas = document.getElementById("screen");
+    const ctx = canvas.getContext("2d");
+
+    function log(msg) {
+      console.log(msg);
+      logEl.textContent += msg + "\n";
+    }
+
+    async function run() {
+      try {
+        log("[1/3] Loading WASM module (j2me_wasm.wasm)...");
+        const wasmResp = await fetch("./j2me_wasm.wasm");
+        if (!wasmResp.ok) throw new Error("Failed to fetch j2me_wasm.wasm: " + wasmResp.status);
+        const wasmBytes = await wasmResp.arrayBuffer();
+        const wasmModule = await WebAssembly.instantiate(wasmBytes, {});
+        const wasm = wasmModule.instance.exports;
+
+        const results = {
+          user_agent: navigator.userAgent,
+          bounce_tales: null,
+          prince_of_persia: null,
+          all_passed: false
+        };
+
+        // Test 1: Bounce Tales
+        {
+          log("[2/3] Running Bounce Tales (300 frames)...");
+          const jarResp = await fetch("./bounce_tales.jar");
+          const jarBytes = new Uint8Array(await jarResp.arrayBuffer());
+
+          wasm.emu_init(240, 320, 44100);
+          const jarPtr = wasm.emu_alloc_buffer(jarBytes.length);
+          new Uint8Array(wasm.memory.buffer, jarPtr, jarBytes.length).set(jarBytes);
+          const loadOk = wasm.emu_load_jar(jarPtr, jarBytes.length);
+          wasm.emu_free_buffer(jarPtr, jarBytes.length);
+          if (loadOk === 0) throw new Error("Bounce Tales JAR load failed");
+
+          let fbPublishes = 0;
+          for (let f = 0; f < 300; f++) {
+            wasm.emu_tick(16.66667);
+            const ptr = wasm.emu_get_framebuffer_ptr();
+            const len = wasm.emu_get_framebuffer_len();
+            if (ptr && len > 0) {
+              const fb = new Uint8ClampedArray(wasm.memory.buffer, ptr, len);
+              const imgData = new ImageData(fb, 240, 320);
+              ctx.putImageData(imgData, 0, 0);
+              fbPublishes++;
+            }
+          }
+
+          const uncaught = wasm.emu_get_uncaught_exceptions_count();
+          const paintCalls = wasm.emu_get_paint_calls();
+          wasm.emu_destroy();
+
+          results.bounce_tales = {
+            frames: 300,
+            fb_publishes: fbPublishes,
+            paint_calls: paintCalls,
+            uncaught_exceptions: uncaught,
+            passed: uncaught === 0 && fbPublishes > 0
+          };
+          log(`  Bounce Tales -> Publishes: ${fbPublishes}, Paint: ${paintCalls}, Uncaught: ${uncaught}`);
+        }
+
+        // Test 2: Prince of Persia
+        {
+          log("[3/4] Running Prince of Persia (300 frames)...");
+          const jarResp = await fetch("./prince_sands.jar");
+          const jarBytes = new Uint8Array(await jarResp.arrayBuffer());
+
+          wasm.emu_init(176, 208, 44100);
+          const jarPtr = wasm.emu_alloc_buffer(jarBytes.length);
+          new Uint8Array(wasm.memory.buffer, jarPtr, jarBytes.length).set(jarBytes);
+          const loadOk = wasm.emu_load_jar(jarPtr, jarBytes.length);
+          wasm.emu_free_buffer(jarPtr, jarBytes.length);
+          if (loadOk === 0) throw new Error("Prince of Persia JAR load failed");
+
+          let fbPublishes = 0;
+          for (let f = 0; f < 300; f++) {
+            wasm.emu_tick(16.66667);
+            const ptr = wasm.emu_get_framebuffer_ptr();
+            const len = wasm.emu_get_framebuffer_len();
+            if (ptr && len > 0) {
+              const fb = new Uint8ClampedArray(wasm.memory.buffer, ptr, len);
+              const imgData = new ImageData(fb, 176, 208);
+              ctx.putImageData(imgData, 0, 0);
+              fbPublishes++;
+            }
+          }
+
+          const uncaught = wasm.emu_get_uncaught_exceptions_count();
+          const paintCalls = wasm.emu_get_paint_calls();
+          wasm.emu_destroy();
+
+          results.prince_of_persia = {
+            frames: 300,
+            fb_publishes: fbPublishes,
+            paint_calls: paintCalls,
+            uncaught_exceptions: uncaught,
+            passed: uncaught === 0 && fbPublishes > 0
+          };
+          log(`  Prince of Persia -> Publishes: ${fbPublishes}, Paint: ${paintCalls}, Uncaught: ${uncaught}`);
+        }
+
+        // Test 3: Castlevania AoS
+        {
+          log("[4/4] Running Castlevania AoS (300 frames)...");
+          const jarResp = await fetch("./castlevania.jar");
+          const jarBytes = new Uint8Array(await jarResp.arrayBuffer());
+
+          wasm.emu_init(176, 220, 44100);
+          const jarPtr = wasm.emu_alloc_buffer(jarBytes.length);
+          new Uint8Array(wasm.memory.buffer, jarPtr, jarBytes.length).set(jarBytes);
+          const loadOk = wasm.emu_load_jar(jarPtr, jarBytes.length);
+          wasm.emu_free_buffer(jarPtr, jarBytes.length);
+          if (loadOk === 0) throw new Error("Castlevania JAR load failed");
+
+          let fbPublishes = 0;
+          for (let f = 0; f < 300; f++) {
+            wasm.emu_tick(16.66667);
+            const ptr = wasm.emu_get_framebuffer_ptr();
+            const len = wasm.emu_get_framebuffer_len();
+            if (ptr && len > 0) {
+              const fb = new Uint8ClampedArray(wasm.memory.buffer, ptr, len);
+              const imgData = new ImageData(fb, 176, 220);
+              ctx.putImageData(imgData, 0, 0);
+              fbPublishes++;
+            }
+          }
+
+          const uncaught = wasm.emu_get_uncaught_exceptions_count();
+          const paintCalls = wasm.emu_get_paint_calls();
+          wasm.emu_destroy();
+
+          results.castlevania = {
+            frames: 300,
+            fb_publishes: fbPublishes,
+            paint_calls: paintCalls,
+            uncaught_exceptions: uncaught,
+            passed: uncaught === 0 && fbPublishes > 0
+          };
+          log(`  Castlevania AoS -> Publishes: ${fbPublishes}, Paint: ${paintCalls}, Uncaught: ${uncaught}`);
+        }
+
+        results.all_passed = results.bounce_tales.passed && results.prince_of_persia.passed && results.castlevania.passed;
+        log(`\nALL TESTS PASSED: ${results.all_passed}`);
+        console.log("__RESULTS_JSON__" + JSON.stringify(results));
+      } catch (err) {
+        log("ERROR: " + err.message);
+        console.log("__RESULTS_JSON__" + JSON.stringify({ error: err.message, all_passed: false }));
+      }
+    }
+
+    run();
+  </script>
+</body>
+</html>

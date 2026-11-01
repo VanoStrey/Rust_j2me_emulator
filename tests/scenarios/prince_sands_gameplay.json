@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "game_id": "prince_sands",
+  "jar_file": "prince_sands.jar",
+  "jar_sha256": "40e7115a32e9e584106bc6565ed78cd6af189b41a426f5d61f53bbf8d0ac3e9f",
+  "resolution": {
+    "width": 176,
+    "height": 208
+  },
+  "scenario_type": "GAMEPLAY",
+  "description": "Start New Game, skip story dialogues, load Level 1, run right (-4) and attack (-5).",
+  "total_ticks": 500,
+  "tick_step_ms": 16.66667,
+  "inputs": [
+    {
+      "tick": 275,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 280,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 320,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 325,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 360,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 365,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 400,
+      "key": -7,
+      "action": "press",
+      "free_key": "F2"
+    },
+    {
+      "tick": 405,
+      "key": -7,
+      "action": "release",
+      "free_key": "F2"
+    },
+    {
+      "tick": 440,
+      "key": -4,
+      "action": "press",
+      "free_key": "ArrowRight"
+    },
+    {
+      "tick": 480,
+      "key": -5,
+      "action": "press",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 490,
+      "key": -5,
+      "action": "release",
+      "free_key": "Enter"
+    },
+    {
+      "tick": 495,
+      "key": -4,
+      "action": "release",
+      "free_key": "ArrowRight"
+    }
+  ],
+  "snapshot_ticks": [
+    280,
+    410,
+    460,
+    500
+  ],
+  "expected_behavior": "Start New Game, skip story dialogues, load Level 1, run right (-4) and attack (-5)."
+}
