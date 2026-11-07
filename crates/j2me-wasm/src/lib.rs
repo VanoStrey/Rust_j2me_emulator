@@ -73,13 +73,31 @@ pub extern "C" fn emu_free_buffer(ptr: *mut u8, size: usize) {
 /// Load JAR from memory buffer
 #[no_mangle]
 pub extern "C" fn emu_load_jar(jar_ptr: *const u8, jar_len: usize) -> i32 {
+    emu_load_jar_with_filename(jar_ptr, jar_len, std::ptr::null(), 0)
+}
+
+/// Load JAR from memory buffer with original filename for resolution auto-detection
+#[no_mangle]
+pub extern "C" fn emu_load_jar_with_filename(
+    jar_ptr: *const u8,
+    jar_len: usize,
+    name_ptr: *const u8,
+    name_len: usize,
+) -> i32 {
     if jar_ptr.is_null() || jar_len == 0 {
         return 0;
     }
     let bytes = unsafe { std::slice::from_raw_parts(jar_ptr, jar_len) };
+    let filename_opt = if !name_ptr.is_null() && name_len > 0 {
+        let name_bytes = unsafe { std::slice::from_raw_parts(name_ptr, name_len) };
+        std::str::from_utf8(name_bytes).ok()
+    } else {
+        None
+    };
+
     unsafe {
         if let Some(ref mut emu) = EMULATOR {
-            match emu.load_jar(bytes) {
+            match emu.load_jar_with_filename(bytes, filename_opt) {
                 Ok(_) => 1,
                 Err(_) => 0,
             }
@@ -604,6 +622,30 @@ pub extern "C" fn emu_set_screen_size(width: u32, height: u32) {
     }
 }
 
+/// Retrieve the active native screen width
+#[no_mangle]
+pub extern "C" fn emu_get_screen_width() -> u32 {
+    unsafe {
+        if let Some(ref emu) = EMULATOR {
+            emu.context.screen_width
+        } else {
+            240
+        }
+    }
+}
+
+/// Retrieve the active native screen height
+#[no_mangle]
+pub extern "C" fn emu_get_screen_height() -> u32 {
+    unsafe {
+        if let Some(ref emu) = EMULATOR {
+            emu.context.screen_height
+        } else {
+            320
+        }
+    }
+}
+
 /// Retrieve comprehensive parity state telemetry as a JSON string
 #[no_mangle]
 pub extern "C" fn emu_get_parity_state_ptr() -> *const u8 {
@@ -802,127 +844,6 @@ pub extern "C" fn emu_get_observability_report_len() -> usize {
     unsafe { (*std::ptr::addr_of!(OBSERVABILITY_BUFFER)).len() }
 }
 
-fn parse_resolution_str(s: &str) -> Option<(u32, u32)> {
-    let clean = s.trim();
-    let parts: Vec<&str> = if clean.contains('x') || clean.contains('X') {
-        clean.split(|c| c == 'x' || c == 'X').collect()
-    } else if clean.contains(',') {
-        clean.split(',').collect()
-    } else if clean.contains('*') {
-        clean.split('*').collect()
-    } else {
-        return None;
-    };
-    if parts.len() >= 2 {
-        let w = parts[0].trim().parse::<u32>().ok()?;
-        let h = parts[1].trim().parse::<u32>().ok()?;
-        if (64..=1920).contains(&w) && (64..=1920).contains(&h) {
-            return Some((w, h));
-        }
-    }
-    None
-}
-
-fn detect_screen_resolution_from_assets(
-    jar: &j2me_core::jar::JarArchive,
-) -> Option<(u32, u32, &'static str)> {
-    let standard_resolutions: &[(u32, u32)] = &[
-        (128, 128),
-        (128, 160),
-        (176, 208),
-        (176, 220),
-        (208, 208),
-        (240, 320),
-        (320, 240),
-        (240, 400),
-        (352, 416),
-        (480, 800),
-    ];
-
-    let mut found_dimensions: Vec<(u32, u32)> = Vec::new();
-
-    for (_name, data) in &jar.entries {
-        // Find all PNG headers in data
-        let mut idx = 0;
-        while idx + 24 <= data.len() {
-            if &data[idx..idx + 8] == b"\x89PNG\r\n\x1a\n" && &data[idx + 12..idx + 16] == b"IHDR" {
-                let w = u32::from_be_bytes([
-                    data[idx + 16],
-                    data[idx + 17],
-                    data[idx + 18],
-                    data[idx + 19],
-                ]);
-                let h = u32::from_be_bytes([
-                    data[idx + 20],
-                    data[idx + 21],
-                    data[idx + 22],
-                    data[idx + 23],
-                ]);
-                if (16..=1920).contains(&w) && (16..=1920).contains(&h) {
-                    found_dimensions.push((w, h));
-                }
-                idx += 24;
-            } else {
-                idx += 1;
-            }
-        }
-
-        // Check LMB format (Mayhem Studio games, e.g. Cyberpunk)
-        if data.len() >= 4 && (1..=3).contains(&data[0]) {
-            let fmt = data[0];
-            let count = u16::from_be_bytes([data[1], data[2]]) as usize;
-            let pal_len = if fmt == 2 {
-                16
-            } else if fmt == 3 {
-                4
-            } else {
-                0
-            };
-            let mut off = 3 + pal_len;
-            for _ in 0..count {
-                if off + 4 <= data.len() {
-                    let w = u16::from_be_bytes([data[off], data[off + 1]]) as u32;
-                    let h = u16::from_be_bytes([data[off + 2], data[off + 3]]) as u32;
-                    if (16..=1920).contains(&w) && (16..=1920).contains(&h) {
-                        found_dimensions.push((w, h));
-                    }
-                    off += 4;
-                } else {
-                    break;
-                }
-            }
-        }
-    }
-
-    // 1. Direct match with standard full-screen resolutions (e.g. splash/background)
-    for &(sw, sh) in standard_resolutions {
-        if found_dimensions.iter().any(|&(w, h)| w == sw && h == sh) {
-            return Some((sw, sh, "image_exact_match"));
-        }
-    }
-
-    // 2. Max width heuristics
-    let max_w = found_dimensions.iter().map(|&(w, _)| w).max().unwrap_or(0);
-    if max_w == 176 {
-        return Some((176, 208, "image_width_heuristic"));
-    } else if max_w == 128 {
-        let max_h = found_dimensions.iter().map(|&(_, h)| h).max().unwrap_or(0);
-        if max_h <= 128 {
-            return Some((128, 128, "image_width_heuristic"));
-        } else {
-            return Some((128, 160, "image_width_heuristic"));
-        }
-    } else if max_w == 208 {
-        return Some((208, 208, "image_width_heuristic"));
-    } else if max_w == 240 {
-        return Some((240, 320, "image_width_heuristic"));
-    } else if max_w == 320 {
-        return Some((320, 240, "image_width_heuristic"));
-    }
-
-    None
-}
-
 fn detect_jar_profile_impl(bytes: &[u8]) -> String {
     let jar = match j2me_core::jar::JarArchive::parse(bytes) {
         Ok(j) => j,
@@ -933,9 +854,6 @@ fn detect_jar_profile_impl(bytes: &[u8]) -> String {
     let mut vendor = "Unknown Vendor".to_string();
     let mut version = "1.0.0".to_string();
     let mut midlets_json = Vec::new();
-    let mut suggested_w = 240u32;
-    let mut suggested_h = 320u32;
-    let mut res_source = "default";
 
     if let Some(ref m) = jar.manifest {
         if let Some(n) = m.midlet_name() {
@@ -956,73 +874,17 @@ fn detect_jar_profile_impl(bytes: &[u8]) -> String {
                 ));
             }
         }
-
-        // Check manifest resolution keys
-        let res_keys = [
-            "Nokia-MIDlet-Original-Display-Size",
-            "Nokia-MIDlet-Target-Display-Size",
-            "MIDlet-ScreenSize",
-            "SE-MIDlet-Original-Display-Size",
-            "Resolution",
-            "Screen-Size",
-            "ScreenSize",
-        ];
-        for k in &res_keys {
-            if let Some(val) = m.get(k) {
-                if let Some((w, h)) = parse_resolution_str(val) {
-                    suggested_w = w;
-                    suggested_h = h;
-                    res_source = "manifest";
-                    break;
-                }
-            }
-        }
     }
 
-    if res_source == "default" {
-        // Heuristics based on entry paths and class names
-        let known_resolutions = [
-            ("128x128", 128, 128),
-            ("128x160", 128, 160),
-            ("176x208", 176, 208),
-            ("176x220", 176, 220),
-            ("208x208", 208, 208),
-            ("240x320", 240, 320),
-            ("320x240", 320, 240),
-            ("352x416", 352, 416),
-            ("480x800", 480, 800),
-        ];
-
-        for (res_str, w, h) in &known_resolutions {
-            let found = jar
-                .entries
-                .keys()
-                .any(|k| k.to_lowercase().contains(res_str));
-            if found {
-                suggested_w = *w;
-                suggested_h = *h;
-                res_source = "entry_heuristic";
-                break;
-            }
-        }
-
-        if res_source == "default" {
-            // Check for FullCanvas
-            if jar.entries.keys().any(|k| k.contains("FullCanvas")) {
-                suggested_w = 176;
-                suggested_h = 208;
-                res_source = "nokia_heuristic";
-            }
-        }
-
-        if res_source == "default" {
-            if let Some((w, h, src)) = detect_screen_resolution_from_assets(&jar) {
-                suggested_w = w;
-                suggested_h = h;
-                res_source = src;
-            }
-        }
-    }
+    let detected = j2me_core::jar::ResolutionDetector::detect(
+        jar.manifest.as_ref(),
+        None,
+        None,
+        Some(&jar),
+    );
+    let suggested_w = detected.width;
+    let suggested_h = detected.height;
+    let res_source = format!("{}", detected.source);
 
     format!(
         "{{\"name\":{:?},\"vendor\":{:?},\"version\":{:?},\"midlets\":[{}],\"suggested_width\":{},\"suggested_height\":{},\"resolution_source\":{:?}}}",
