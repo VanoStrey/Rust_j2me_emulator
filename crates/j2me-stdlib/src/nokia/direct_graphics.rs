@@ -658,11 +658,11 @@ pub fn transform_coords(
     h: i32,
     manipulation: i32,
 ) -> (i32, i32, i32, i32) {
-    let rot = manipulation & 0x1FFF & !(FLIP_HORIZONTAL | FLIP_VERTICAL); // Rotation angle: 0, 90, 180, 270 counterclockwise
+    let rot = manipulation & 0x1FFF & !(FLIP_HORIZONTAL | FLIP_VERTICAL); // Rotation angle: 0, 90, 180, 270 clockwise
     let (mut rc, mut rr, target_w, target_h) = match rot {
-        90 => (row, w - 1 - col, h, w),
+        90 => (h - 1 - row, col, h, w),
         180 => (w - 1 - col, h - 1 - row, w, h),
-        270 => (h - 1 - row, col, h, w),
+        270 => (row, w - 1 - col, h, w),
         _ => (col, row, w, h),
     };
     if manipulation & FLIP_HORIZONTAL != 0 {

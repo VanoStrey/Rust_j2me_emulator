@@ -19,3 +19,13 @@ Thumbs.db
 *.tmp
 *.swp
 *~
+
+# Fuzzing, local test dumps and reports
+/crashes/
+/dumps/audio_eval/
+/dumps/katamari/
+/dumps/pro_snowboard/
+dumps/frame_*.png
+dumps/frame_*.raw
+/reports/
+

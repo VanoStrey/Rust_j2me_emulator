@@ -263,6 +263,48 @@ impl Heap {
         }
     }
 
+    pub fn get_string_length(&self, id: ObjectId) -> Option<usize> {
+        match self.get(id)? {
+            ObjectData::String(s) => {
+                if s.is_ascii() {
+                    Some(s.len())
+                } else {
+                    Some(s.encode_utf16().count())
+                }
+            }
+            ObjectData::Instance(inst) if inst.class_name == "java/lang/String" => {
+                if let Some(JavaValue::Object(Some(char_arr_id))) = inst.fields.get("value") {
+                    if let Some(ObjectData::Array(ArrayData::Char(chars))) = self.get(*char_arr_id) {
+                        return Some(chars.len());
+                    }
+                }
+                None
+            }
+            _ => None,
+        }
+    }
+
+    pub fn get_string_char_at(&self, id: ObjectId, idx: usize) -> Option<u16> {
+        match self.get(id)? {
+            ObjectData::String(s) => {
+                if s.is_ascii() {
+                    s.as_bytes().get(idx).map(|&b| b as u16)
+                } else {
+                    s.encode_utf16().nth(idx)
+                }
+            }
+            ObjectData::Instance(inst) if inst.class_name == "java/lang/String" => {
+                if let Some(JavaValue::Object(Some(char_arr_id))) = inst.fields.get("value") {
+                    if let Some(ObjectData::Array(ArrayData::Char(chars))) = self.get(*char_arr_id) {
+                        return chars.get(idx).copied();
+                    }
+                }
+                None
+            }
+            _ => None,
+        }
+    }
+
     pub fn set_string(&mut self, id: ObjectId, s: &str) {
         if let Some(slot) = self.slots.get_mut(id.0 as usize) {
             *slot = Some(ObjectData::String(s.to_string()));

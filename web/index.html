@@ -215,6 +215,8 @@
       margin-bottom: 16px;
       position: relative;
       overflow: hidden;
+      width: 256px;
+      height: 336px;
     }
 
     #game-canvas {
@@ -223,10 +225,10 @@
       image-rendering: pixelated;
       image-rendering: crisp-edges;
       border-radius: 4px;
-      width: 240px;
-      height: 320px;
-      max-width: 280px;
-      max-height: 360px;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
     }
 
@@ -995,9 +997,25 @@
           if (telemetryUI) telemetryUI.render();
         }, 200);
 
-        // Support ?game=<url_or_filename> for automated fuzzing and testing
+        // Support ?game=<url_or_filename> and ?jad=<url_or_filename> for automated loading and testing
         const urlParams = new URLSearchParams(window.location.search);
         const gameParam = urlParams.get("game");
+        const jadParam = urlParams.get("jad") || (gameParam && gameParam.includes(".jar") ? gameParam.replace(/\.jar$/i, ".jad") : null);
+
+        if (jadParam) {
+          try {
+            console.log(`[AutoLoad] Checking for companion JAD: ${jadParam}`);
+            const resp = await fetch(jadParam);
+            if (resp.ok) {
+              const text = await resp.text();
+              if (text && text.trim().length > 0) {
+                console.log(`[AutoLoad] Companion JAD properties applied (${text.length} bytes).`);
+                jadPropInput.value = text;
+              }
+            }
+          } catch (_) {}
+        }
+
         if (gameParam) {
           try {
             console.log(`[AutoLoad] Loading game from query param: ${gameParam}`);
@@ -1315,6 +1333,16 @@
       if (ok) {
         gameStatusBadge.textContent = "Running";
         gameStatusBadge.style.color = "var(--success)";
+
+        // Auto-detect and sync native resolution from WASM core
+        if (wasm.emu_get_screen_width && wasm.emu_get_screen_height) {
+          const autoW = wasm.emu_get_screen_width();
+          const autoH = wasm.emu_get_screen_height();
+          if (autoW && autoH) {
+            setScreenResolution(autoW, autoH);
+            if (resSelect) resSelect.value = `${autoW}x${autoH}`;
+          }
+        }
 
         // Apply custom JAD properties if any are configured
         if (jadPropInput.value.trim()) {

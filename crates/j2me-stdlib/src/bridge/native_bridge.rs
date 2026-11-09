@@ -490,10 +490,10 @@ impl NativeBridge {
                 let wake_ms = if ms > 0 {
                     Some(scheduler.current_time_ms + ms as u64)
                 } else {
-                    // Safe spurious wakeup timeout for wait(0) to prevent eternal deadlock (JLS §17.8.1)
-                    Some(scheduler.current_time_ms + 1000)
+                    None
                 };
                 if let Err(_) = scheduler.wait_monitor(tid, m, wake_ms) {
+                    eprintln!("[EXC] IllegalMonitorStateException on wait! tid={:?} m={:?} owner={:?}", tid, m, scheduler.get_monitor_owner(m));
                     let exc = heap.alloc_instance("java/lang/IllegalMonitorStateException");
                     return Err(format!(
                         "EXC:java/lang/IllegalMonitorStateException:{}",
@@ -512,6 +512,7 @@ impl NativeBridge {
                 };
                 let tid = scheduler.threads[thread_idx].id;
                 if let Err(_) = scheduler.notify_monitor(tid, m) {
+                    eprintln!("[EXC] IllegalMonitorStateException on notify! tid={:?} m={:?} owner={:?}", tid, m, scheduler.get_monitor_owner(m));
                     let exc = heap.alloc_instance("java/lang/IllegalMonitorStateException");
                     return Err(format!(
                         "EXC:java/lang/IllegalMonitorStateException:{}",
@@ -730,6 +731,14 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Object(msg)));
                 }
                 "printStackTrace" => {
+                    let exc_info = receiver.and_then(|r| {
+                        if let Some(ObjectData::Instance(inst)) = heap.get(r) {
+                            Some(format!("{}: {:?}", inst.class_name, inst.fields))
+                        } else {
+                            None
+                        }
+                    });
+                    eprintln!("[GUEST printStackTrace] {:?}", exc_info);
                     return Ok(None);
                 }
                 _ => {}
@@ -844,6 +853,9 @@ impl NativeBridge {
                     if thread_idx < scheduler.threads.len() {
                         scheduler.threads[thread_idx].on_yield();
                         scheduler.threads[thread_idx].state = ThreadState::Ready;
+                        if scheduler.threads[thread_idx].yield_count_in_frame >= 25 {
+                            context.tick_budget_exhausted = true;
+                        }
                     }
                     if context.repaints_this_tick >= context.max_repaints_per_tick {
                         context.tick_budget_exhausted = true;
@@ -893,7 +905,16 @@ impl NativeBridge {
                 }
                 "setPriority" | "getPriority" => return Ok(Some(JavaValue::Int(5))),
                 "currentThread" => {
-                    let t_id = receiver.unwrap_or(ObjectId(1));
+                    let cur_th_obj = scheduler.threads.get_mut(thread_idx).map(|t| {
+                        if let Some(obj) = t.java_thread_obj {
+                            obj
+                        } else {
+                            let new_th = heap.alloc_instance("java/lang/Thread");
+                            t.java_thread_obj = Some(new_th);
+                            new_th
+                        }
+                    });
+                    let t_id = cur_th_obj.or(receiver).unwrap_or(ObjectId(1));
                     return Ok(Some(JavaValue::Object(Some(t_id))));
                 }
                 _ => {}
@@ -1721,59 +1742,88 @@ impl NativeBridge {
                     return Ok(None);
                 }
                 "length" => {
-                    let s = receiver
-                        .and_then(|r| heap.get_string_utf8(r))
-                        .unwrap_or_default();
-                    let u16_len = s.encode_utf16().count();
-                    return Ok(Some(JavaValue::Int(u16_len as i32)));
+                    let r_id = match receiver {
+                        Some(id) => id,
+                        None => {
+                            let exc = heap.alloc_instance("java/lang/NullPointerException");
+                            return Err(format!("EXC:java/lang/NullPointerException:{}", exc.0));
+                        }
+                    };
+                    let len = heap.get_string_length(r_id).unwrap_or(0);
+                    return Ok(Some(JavaValue::Int(len as i32)));
                 }
                 "charAt" => {
-                    let s = receiver
-                        .and_then(|r| heap.get_string_utf8(r))
-                        .unwrap_or_default();
+                    let r_id = match receiver {
+                        Some(id) => id,
+                        None => {
+                            let exc = heap.alloc_instance("java/lang/NullPointerException");
+                            return Err(format!("EXC:java/lang/NullPointerException:{}", exc.0));
+                        }
+                    };
                     let idx_i = args.first().and_then(|v| v.as_int().ok()).unwrap_or(0);
-                    let utf16: Vec<u16> = s.encode_utf16().collect();
-                    if idx_i < 0 || (idx_i as usize) >= utf16.len() {
+                    if idx_i < 0 {
+                        let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
                         return Err(format!(
-                            "EXC:java/lang/StringIndexOutOfBoundsException: index {} out of bounds for length {}",
-                            idx_i,
-                            utf16.len()
+                            "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                            exc.0
                         ));
                     }
-                    let c = utf16[idx_i as usize] as i32;
-                    return Ok(Some(JavaValue::Int(c)));
+                    if let Some(ch) = heap.get_string_char_at(r_id, idx_i as usize) {
+                        return Ok(Some(JavaValue::Int(ch as i32)));
+                    } else {
+                        let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                        return Err(format!(
+                            "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                            exc.0
+                        ));
+                    }
                 }
                 "substring" => {
                     let s = receiver
                         .and_then(|r| heap.get_string_utf8(r))
                         .unwrap_or_default();
-                    let utf16: Vec<u16> = s.encode_utf16().collect();
                     let start_i = args.first().and_then(|v| v.as_int().ok()).unwrap_or(0);
-                    let end_i = args
-                        .get(1)
-                        .and_then(|v| v.as_int().ok())
-                        .unwrap_or(utf16.len() as i32);
-                    if start_i < 0
-                        || end_i < 0
-                        || (start_i as usize) > (end_i as usize)
-                        || (end_i as usize) > utf16.len()
-                    {
-                        return Err(format!(
-                            "EXC:java/lang/StringIndexOutOfBoundsException: start {}, end {}, length {}",
-                            start_i,
-                            end_i,
-                            utf16.len()
-                        ));
+                    let end_opt = args.get(1).and_then(|v| v.as_int().ok());
+                    if s.is_ascii() {
+                        let b = s.as_bytes();
+                        let end_i = end_opt.unwrap_or(b.len() as i32);
+                        if start_i < 0
+                            || end_i < 0
+                            || (start_i as usize) > (end_i as usize)
+                            || (end_i as usize) > b.len()
+                        {
+                            let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                            return Err(format!(
+                                "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                exc.0
+                            ));
+                        }
+                        let sub = &s[start_i as usize..end_i as usize];
+                        let sid = heap.alloc_string(sub);
+                        return Ok(Some(JavaValue::Object(Some(sid))));
+                    } else {
+                        let utf16: Vec<u16> = s.encode_utf16().collect();
+                        let end_i = end_opt.unwrap_or(utf16.len() as i32);
+                        if start_i < 0
+                            || end_i < 0
+                            || (start_i as usize) > (end_i as usize)
+                            || (end_i as usize) > utf16.len()
+                        {
+                            let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                            return Err(format!(
+                                "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                exc.0
+                            ));
+                        }
+                        let sub = String::from_utf16_lossy(&utf16[start_i as usize..end_i as usize]);
+                        let sid = heap.alloc_string(&sub);
+                        return Ok(Some(JavaValue::Object(Some(sid))));
                     }
-                    let sub = String::from_utf16_lossy(&utf16[start_i as usize..end_i as usize]);
-                    let sid = heap.alloc_string(&sub);
-                    return Ok(Some(JavaValue::Object(Some(sid))));
                 }
                 "getChars" => {
                     let s = receiver
                         .and_then(|r| heap.get_string_utf8(r))
                         .unwrap_or_default();
-                    let utf16: Vec<u16> = s.encode_utf16().collect();
                     let src_begin = args.get(0).and_then(|v| v.as_int().ok()).unwrap_or(0);
                     let src_end = args.get(1).and_then(|v| v.as_int().ok()).unwrap_or(0);
                     let dst_obj = args.get(2).and_then(|v| v.as_object().ok()).flatten();
@@ -1782,39 +1832,84 @@ impl NativeBridge {
                     let dst_id = match dst_obj {
                         Some(id) => id,
                         None => {
-                            return Err(
-                                "EXC:java/lang/NullPointerException: dst is null".to_string()
-                            );
+                            let exc = heap.alloc_instance("java/lang/NullPointerException");
+                            return Err(format!(
+                                "EXC:java/lang/NullPointerException:{}",
+                                exc.0
+                            ));
                         }
                     };
 
-                    if src_begin < 0
-                        || src_begin > src_end
-                        || (src_end as usize) > utf16.len()
-                        || dst_begin < 0
-                    {
-                        return Err(
-                            "EXC:java/lang/StringIndexOutOfBoundsException: index out of bounds"
-                                .to_string(),
-                        );
-                    }
-                    let count = (src_end - src_begin) as usize;
-                    match heap.get_mut(dst_id) {
-                        Some(ObjectData::Array(ArrayData::Char(dst_chars))) => {
-                            let dst_idx = dst_begin as usize;
-                            if dst_idx + count > dst_chars.len() {
-                                return Err(
-                                    "EXC:java/lang/StringIndexOutOfBoundsException: dst array overflow"
-                                        .to_string(),
-                                );
-                            }
-                            dst_chars[dst_idx..dst_idx + count]
-                                .copy_from_slice(&utf16[src_begin as usize..src_end as usize]);
+                    if s.is_ascii() {
+                        let b = s.as_bytes();
+                        if src_begin < 0
+                            || src_begin > src_end
+                            || (src_end as usize) > b.len()
+                            || dst_begin < 0
+                        {
+                            let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                            return Err(format!(
+                                "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                exc.0
+                            ));
                         }
-                        _ => {
-                            return Err(
-                                "EXC:java/lang/ArrayStoreException: dst is not char[]".to_string()
-                            );
+                        let count = (src_end - src_begin) as usize;
+                        match heap.get_mut(dst_id) {
+                            Some(ObjectData::Array(ArrayData::Char(dst_chars))) => {
+                                let dst_idx = dst_begin as usize;
+                                if dst_idx + count > dst_chars.len() {
+                                    let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                                    return Err(format!(
+                                        "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                        exc.0
+                                    ));
+                                }
+                                for (i, &byte) in b[src_begin as usize..src_end as usize].iter().enumerate() {
+                                    dst_chars[dst_idx + i] = byte as u16;
+                                }
+                            }
+                            _ => {
+                                let exc = heap.alloc_instance("java/lang/ArrayStoreException");
+                                return Err(format!(
+                                    "EXC:java/lang/ArrayStoreException:{}",
+                                    exc.0
+                                ));
+                            }
+                        }
+                    } else {
+                        let utf16: Vec<u16> = s.encode_utf16().collect();
+                        if src_begin < 0
+                            || src_begin > src_end
+                            || (src_end as usize) > utf16.len()
+                            || dst_begin < 0
+                        {
+                            let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                            return Err(format!(
+                                "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                exc.0
+                            ));
+                        }
+                        let count = (src_end - src_begin) as usize;
+                        match heap.get_mut(dst_id) {
+                            Some(ObjectData::Array(ArrayData::Char(dst_chars))) => {
+                                let dst_idx = dst_begin as usize;
+                                if dst_idx + count > dst_chars.len() {
+                                    let exc = heap.alloc_instance("java/lang/StringIndexOutOfBoundsException");
+                                    return Err(format!(
+                                        "EXC:java/lang/StringIndexOutOfBoundsException:{}",
+                                        exc.0
+                                    ));
+                                }
+                                dst_chars[dst_idx..dst_idx + count]
+                                    .copy_from_slice(&utf16[src_begin as usize..src_end as usize]);
+                            }
+                            _ => {
+                                let exc = heap.alloc_instance("java/lang/ArrayStoreException");
+                                return Err(format!(
+                                    "EXC:java/lang/ArrayStoreException:{}",
+                                    exc.0
+                                ));
+                            }
                         }
                     }
                     return Ok(None);
@@ -2468,6 +2563,12 @@ impl NativeBridge {
                                     char::from_u32(*i as u32)
                                         .map(|c| c.to_string())
                                         .unwrap_or_default()
+                                } else if descriptor.contains("Z)") {
+                                    if *i != 0 {
+                                        "true".to_string()
+                                    } else {
+                                        "false".to_string()
+                                    }
                                 } else {
                                     i.to_string()
                                 }
@@ -2475,9 +2576,36 @@ impl NativeBridge {
                             JavaValue::Long(l) => l.to_string(),
                             JavaValue::Float(f) => f.to_string(),
                             JavaValue::Double(d) => d.to_string(),
-                            JavaValue::Object(Some(oid)) => heap
-                                .get_string_utf8(*oid)
-                                .unwrap_or_else(|| "Object".to_string()),
+                            JavaValue::Object(Some(oid)) => {
+                                if let Some(ObjectData::Array(ArrayData::Char(chars))) =
+                                    heap.get(*oid)
+                                {
+                                    if args.len() >= 4 {
+                                        let c_off = args
+                                            .get(2)
+                                            .and_then(|v| v.as_int().ok())
+                                            .unwrap_or(0)
+                                            .max(0) as usize;
+                                        let c_len = args
+                                            .get(3)
+                                            .and_then(|v| v.as_int().ok())
+                                            .unwrap_or(0)
+                                            .max(0) as usize;
+                                        let end = (c_off + c_len).min(chars.len());
+                                        if c_off < chars.len() {
+                                            String::from_utf16_lossy(&chars[c_off..end])
+                                        } else {
+                                            String::new()
+                                        }
+                                    } else {
+                                        String::from_utf16_lossy(chars)
+                                    }
+                                } else if let Some(s) = heap.get_string_utf8(*oid) {
+                                    s
+                                } else {
+                                    Self::object_to_java_string(heap, *oid)
+                                }
+                            }
                             JavaValue::Object(None) => "null".to_string(),
                         }
                     } else {
@@ -2559,9 +2687,20 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Int(v)));
                 }
                 "valueOf" => {
-                    let v = args.first().copied().unwrap_or(JavaValue::Int(0));
+                    let v = match args.first() {
+                        Some(JavaValue::Int(i)) => *i,
+                        Some(JavaValue::Object(Some(str_id))) => {
+                            if let Some(s) = heap.get_string_utf8(*str_id) {
+                                let radix = args.get(1).and_then(|v| v.as_int().ok()).unwrap_or(10) as u32;
+                                i32::from_str_radix(s.trim(), radix).unwrap_or(0)
+                            } else {
+                                0
+                            }
+                        }
+                        _ => 0,
+                    };
                     let obj = heap.alloc_instance("java/lang/Integer");
-                    heap.set_field(obj, "value", v);
+                    heap.set_field(obj, "value", JavaValue::Int(v));
                     return Ok(Some(JavaValue::Object(Some(obj))));
                 }
                 "parseInt" => {
@@ -2637,9 +2776,20 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Long(v)));
                 }
                 "valueOf" => {
-                    let v = args.first().copied().unwrap_or(JavaValue::Long(0));
+                    let v = match args.first() {
+                        Some(JavaValue::Long(l)) => *l,
+                        Some(JavaValue::Object(Some(str_id))) => {
+                            if let Some(s) = heap.get_string_utf8(*str_id) {
+                                let radix = args.get(1).and_then(|v| v.as_int().ok()).unwrap_or(10) as u32;
+                                i64::from_str_radix(s.trim(), radix).unwrap_or(0)
+                            } else {
+                                0
+                            }
+                        }
+                        _ => 0,
+                    };
                     let obj = heap.alloc_instance("java/lang/Long");
-                    heap.set_field(obj, "value", v);
+                    heap.set_field(obj, "value", JavaValue::Long(v));
                     return Ok(Some(JavaValue::Object(Some(obj))));
                 }
                 "parseLong" => {
@@ -2699,9 +2849,19 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Int(v)));
                 }
                 "valueOf" => {
-                    let v = args.first().copied().unwrap_or(JavaValue::Int(0));
+                    let v = match args.first() {
+                        Some(JavaValue::Int(b)) => *b,
+                        Some(JavaValue::Object(Some(str_id))) => {
+                            if let Some(s) = heap.get_string_utf8(*str_id) {
+                                if s.eq_ignore_ascii_case("true") { 1 } else { 0 }
+                            } else {
+                                0
+                            }
+                        }
+                        _ => 0,
+                    };
                     let obj = heap.alloc_instance("java/lang/Boolean");
-                    heap.set_field(obj, "value", v);
+                    heap.set_field(obj, "value", JavaValue::Int(v));
                     return Ok(Some(JavaValue::Object(Some(obj))));
                 }
                 _ => {}
@@ -3783,6 +3943,17 @@ impl NativeBridge {
                         };
                         let is_fixed_rate = method_name == "scheduleAtFixedRate";
                         let timer_id = receiver.unwrap_or(ObjectId(1));
+                        if let Some(ObjectData::Instance(inst)) = heap.get(task_id) {
+                            if let Some(JavaValue::Int(state)) = inst.fields.get("__task_state") {
+                                if *state != 0 {
+                                    let exc_id = heap.alloc_instance("java/lang/IllegalStateException");
+                                    return Err(format!(
+                                        "EXC:java/lang/IllegalStateException:{}",
+                                        exc_id.0
+                                    ));
+                                }
+                            }
+                        }
                         if let Err(_e) = context.timers.schedule(
                             timer_id,
                             task_id,
@@ -3796,6 +3967,9 @@ impl NativeBridge {
                                 "EXC:java/lang/IllegalStateException:{}",
                                 exc_id.0
                             ));
+                        }
+                        if let Some(ObjectData::Instance(inst)) = heap.get_mut(task_id) {
+                            inst.fields.insert("__task_state".to_string(), JavaValue::Int(1));
                         }
                     }
                     return Ok(None);
@@ -3817,9 +3991,18 @@ impl NativeBridge {
             match method_name {
                 "<init>" => return Ok(None),
                 "cancel" => {
-                    let res = receiver
+                    let mut res = receiver
                         .map(|id| context.timers.cancel_task(id))
                         .unwrap_or(false);
+                    if let Some(task_id) = receiver {
+                        if let Some(ObjectData::Instance(inst)) = heap.get_mut(task_id) {
+                            let old_state = inst.fields.get("__task_state").and_then(|v| v.as_int().ok()).unwrap_or(0);
+                            if old_state == 1 {
+                                res = true;
+                            }
+                            inst.fields.insert("__task_state".to_string(), JavaValue::Int(3));
+                        }
+                    }
                     return Ok(Some(JavaValue::Int(if res { 1 } else { 0 })));
                 }
                 "scheduledExecutionTime" => {
@@ -3877,14 +4060,22 @@ impl NativeBridge {
                 "setCurrent" => {
                     let dispable = args.first().and_then(|v| v.as_object().ok()).flatten();
                     let prev_dispable = context.current_displayable;
+                    let was_paused = context.is_app_paused;
+                    context.is_app_paused = false;
                     context.current_displayable = dispable;
                     context.screen_dirty = true;
                     context.repaint_requested = true;
 
-                    if prev_dispable != dispable {
-                        context.ui_queue.canvas_changed(prev_dispable, dispable);
-                        context.key_states = 0;
-                        context.latched_key_states = 0;
+                    if prev_dispable != dispable || was_paused {
+                        if prev_dispable != dispable {
+                            context.ui_queue.canvas_changed(prev_dispable, dispable);
+                            context.key_states = 0;
+                            context.latched_key_states = 0;
+                        } else if was_paused {
+                            if let Some(new_id) = dispable {
+                                context.ui_queue.post_show_notify(new_id);
+                            }
+                        }
 
                         if thread_idx < scheduler.threads.len() {
                             // 1. Prepare showNotify on new displayable (pushed first, executes last)
@@ -3916,31 +4107,33 @@ impl NativeBridge {
                                 }
                             }
 
-                            // 3. Prepare hideNotify on old displayable (pushed third, executes first)
-                            if let Some(old_id) = prev_dispable {
-                                context.ui_queue.cancel_hide_notify_for(old_id);
-                                if let Some(ObjectData::Instance(inst)) = heap.get(old_id) {
-                                    let cls = inst.class_name.clone();
-                                    if let Some(hide_m) = class_loader.find_method(&cls, "hideNotify", "()V") {
-                                        let mut hide_frame = Frame::new(
-                                            cls,
-                                            "hideNotify".to_string(),
-                                            "()V".to_string(),
-                                            Arc::clone(&hide_m.instructions),
-                                            hide_m.max_locals,
-                                            hide_m.max_stack,
-                                            hide_m.exception_table.clone(),
-                                            Arc::clone(&hide_m.pc_map),
-                                        );
-                                        hide_frame.set_local(0, JavaValue::Object(Some(old_id)));
-                                        if hide_m.is_synchronized() {
-                                            hide_frame.sync_monitor = Some(old_id);
-                                            let tid = scheduler.threads[thread_idx].id;
-                                            if !scheduler.try_acquire_monitor(tid, old_id) {
-                                                scheduler.block_on_monitor(tid, old_id, 1);
+                            // 2. Prepare hideNotify on old displayable (only if displayable actually changed)
+                            if prev_dispable != dispable {
+                                if let Some(old_id) = prev_dispable {
+                                    context.ui_queue.cancel_hide_notify_for(old_id);
+                                    if let Some(ObjectData::Instance(inst)) = heap.get(old_id) {
+                                        let cls = inst.class_name.clone();
+                                        if let Some(hide_m) = class_loader.find_method(&cls, "hideNotify", "()V") {
+                                            let mut hide_frame = Frame::new(
+                                                cls,
+                                                "hideNotify".to_string(),
+                                                "()V".to_string(),
+                                                Arc::clone(&hide_m.instructions),
+                                                hide_m.max_locals,
+                                                hide_m.max_stack,
+                                                hide_m.exception_table.clone(),
+                                                Arc::clone(&hide_m.pc_map),
+                                            );
+                                            hide_frame.set_local(0, JavaValue::Object(Some(old_id)));
+                                            if hide_m.is_synchronized() {
+                                                hide_frame.sync_monitor = Some(old_id);
+                                                let tid = scheduler.threads[thread_idx].id;
+                                                if !scheduler.try_acquire_monitor(tid, old_id) {
+                                                    scheduler.block_on_monitor(tid, old_id, 1);
+                                                }
                                             }
+                                            scheduler.threads[thread_idx].call_stack.push(hide_frame);
                                         }
-                                        scheduler.threads[thread_idx].call_stack.push(hide_frame);
                                     }
                                 }
                             }
@@ -3974,6 +4167,34 @@ impl NativeBridge {
                 }
                 _ => {}
             }
+        }
+
+        if method_name == "addCommand" {
+            if let (Some(disp_id), Some(cmd_id)) = (
+                receiver,
+                args.first().and_then(|v| v.as_object().ok().flatten()),
+            ) {
+                context.add_command(disp_id, cmd_id, heap);
+            }
+            return Ok(None);
+        }
+
+        if method_name == "removeCommand" {
+            if let (Some(disp_id), Some(cmd_id)) = (
+                receiver,
+                args.first().and_then(|v| v.as_object().ok().flatten()),
+            ) {
+                context.remove_command(disp_id, cmd_id);
+            }
+            return Ok(None);
+        }
+
+        if method_name == "setCommandListener" {
+            if let Some(disp_id) = receiver {
+                let listener = args.first().and_then(|v| v.as_object().ok().flatten());
+                context.set_command_listener(disp_id, listener);
+            }
+            return Ok(None);
         }
 
         let is_displayable = cls.ends_with("Canvas")
@@ -4012,7 +4233,7 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Int(h)));
                 }
                 "isShown" => {
-                    let is_current = receiver.is_none() || receiver == context.current_displayable;
+                    let is_current = (receiver.is_none() || receiver == context.current_displayable) && !context.is_app_paused;
                     return Ok(Some(JavaValue::Int(if is_current { 1 } else { 0 })));
                 }
                 "repaint" => {
@@ -4220,15 +4441,15 @@ impl NativeBridge {
                 "getGameAction" => {
                     let key = args.first().and_then(|v| v.as_int().ok()).unwrap_or(0);
                     let action = match key {
-                        -1 | 50 => 1,           // UP (or KEY_NUM2)
-                        -3 | 52 => 2,           // LEFT (or KEY_NUM4)
-                        -4 | 54 => 5,           // RIGHT (or KEY_NUM6)
-                        -2 | 56 => 6,           // DOWN (or KEY_NUM8)
-                        -5 | 53 | 10 | 32 => 8, // FIRE (or KEY_NUM5, Enter, Space)
-                        49 | -6 => 9,           // GAME_A / SOFT1
-                        51 | -7 => 10,          // GAME_B / SOFT2
-                        55 => 11,               // GAME_C (KEY_NUM7)
-                        57 => 12,               // GAME_D (KEY_NUM9)
+                        -1 | 50 | 1 => 1,                 // UP (or KEY_NUM2 or Canvas.UP)
+                        -3 | 52 | 2 => 2,                 // LEFT (or KEY_NUM4 or Canvas.LEFT)
+                        -4 | 54 | 5 => 5,                 // RIGHT (or KEY_NUM6 or Canvas.RIGHT)
+                        -2 | 56 | 6 => 6,                 // DOWN (or KEY_NUM8 or Canvas.DOWN)
+                        -5 | 53 | 13 | 32 | 8 => 8,       // FIRE (or KEY_NUM5, Enter, Space or Canvas.FIRE)
+                        49 | -6 | -21 | 9 => 9,           // GAME_A / SOFT1 / Motorola -21
+                        51 | -7 | -22 | 10 => 10,         // GAME_B / SOFT2 / Motorola -22
+                        55 | 11 => 11,                    // GAME_C (KEY_NUM7)
+                        57 | 12 => 12,                    // GAME_D (KEY_NUM9)
                         _ => 0,
                     };
                     return Ok(Some(JavaValue::Int(action)));
@@ -4241,8 +4462,8 @@ impl NativeBridge {
                         5 => -4,  // RIGHT
                         6 => -2,  // DOWN
                         8 => -5,  // FIRE
-                        9 => 49,  // GAME_A
-                        10 => 51, // GAME_B
+                        9 => -6,  // GAME_A (SOFT1)
+                        10 => -7, // GAME_B (SOFT2)
                         11 => 55, // GAME_C
                         12 => 57, // GAME_D
                         _ => 0,
@@ -4257,8 +4478,8 @@ impl NativeBridge {
                         -3 => "LEFT",
                         -4 => "RIGHT",
                         -5 => "FIRE",
-                        -6 => "SOFT1",
-                        -7 => "SOFT2",
+                        -6 | -21 => "SOFT1",
+                        -7 | -22 => "SOFT2",
                         -8 => "CLEAR",
                         48..=57 => {
                             let ch = (b'0' + (key - 48) as u8) as char;
@@ -4277,8 +4498,7 @@ impl NativeBridge {
                 "hasPointerMotionEvents" => return Ok(Some(JavaValue::Int(0))),
                 "keyPressed" | "keyReleased" | "keyRepeated" | "pointerPressed"
                 | "pointerReleased" | "pointerDragged" | "showNotify" | "hideNotify"
-                | "sizeChanged" | "addCommand" | "removeCommand" | "setCommandListener"
-                | "setTitle" => return Ok(None),
+                | "sizeChanged" | "setTitle" => return Ok(None),
                 _ => {}
             }
         }
@@ -4293,8 +4513,7 @@ impl NativeBridge {
                     }
                     return Ok(None);
                 }
-                "setType" | "setTimeout" | "setString" | "setImage" | "setIndicator"
-                | "addCommand" | "setCommandListener" => return Ok(None),
+                "setType" | "setTimeout" | "setString" | "setImage" | "setIndicator" => return Ok(None),
                 "getString" => {
                     let r_id = receiver.unwrap_or(ObjectId(0));
                     return Ok(Some(heap.get_field(r_id, "title")));
@@ -5031,34 +5250,6 @@ impl NativeBridge {
                 }
                 _ => return Ok(None),
             }
-        }
-
-        if method_name == "addCommand" {
-            if let (Some(disp_id), Some(cmd_id)) = (
-                receiver,
-                args.first().and_then(|v| v.as_object().ok().flatten()),
-            ) {
-                context.add_command(disp_id, cmd_id, heap);
-            }
-            return Ok(None);
-        }
-
-        if method_name == "removeCommand" {
-            if let (Some(disp_id), Some(cmd_id)) = (
-                receiver,
-                args.first().and_then(|v| v.as_object().ok().flatten()),
-            ) {
-                context.remove_command(disp_id, cmd_id);
-            }
-            return Ok(None);
-        }
-
-        if method_name == "setCommandListener" {
-            if let Some(disp_id) = receiver {
-                let listener = args.first().and_then(|v| v.as_object().ok().flatten());
-                context.set_command_listener(disp_id, listener);
-            }
-            return Ok(None);
         }
 
         // 20. Image
@@ -7653,6 +7844,7 @@ impl NativeBridge {
         if cls == "com/nokia/mid/sound/Sound" {
             match method_name {
                 "<init>" => {
+                    context.audio_api_invoked = true;
                     if let Some(r) = receiver {
                         if !args.is_empty() {
                             if let Some(arr_id) = args[0].as_object().ok().flatten() {
@@ -7680,6 +7872,7 @@ impl NativeBridge {
                     return Ok(None);
                 }
                 "play" => {
+                    context.audio_api_invoked = true;
                     let loop_count = args.first().and_then(|v| v.as_int().ok()).unwrap_or(1);
                     if let Some(r) = receiver {
                         if let Some(player) = context.players.get_mut(&r) {
@@ -7764,6 +7957,7 @@ impl NativeBridge {
         if cls == "javax/microedition/media/Manager" {
             match method_name {
                 "createPlayer" => {
+                    context.audio_api_invoked = true;
                     let mut media_bytes = Vec::new();
                     let mut content_type = "audio/midi".to_string();
 
@@ -7843,6 +8037,7 @@ impl NativeBridge {
                     return Ok(Some(JavaValue::Object(Some(inst))));
                 }
                 "playTone" => {
+                    context.audio_api_invoked = true;
                     let note = args.first().and_then(|v| v.as_int().ok()).unwrap_or(69);
                     let dur = args.get(1).and_then(|v| v.as_int().ok()).unwrap_or(100);
                     let vol = args.get(2).and_then(|v| v.as_int().ok()).unwrap_or(80);
@@ -7875,6 +8070,7 @@ impl NativeBridge {
         if cls == "javax/microedition/media/Player" {
             match method_name {
                 "start" => {
+                    context.audio_api_invoked = true;
                     if let Some(r) = receiver {
                         if let Some(player) = context.players.get_mut(&r) {
                             player.start(&mut context.audio);
@@ -8588,6 +8784,73 @@ impl NativeBridge {
                     };
                     let conn_id = heap.alloc_instance(conn_cls);
                     return Ok(Some(JavaValue::Object(Some(conn_id))));
+                }
+                _ => {}
+            }
+        }
+
+        // 26b-2. javax/microedition/io Connection Stubs (HttpConnection, SocketConnection, StreamConnection)
+        if cls == "javax/microedition/io/HttpConnection"
+            || cls == "javax/microedition/io/SocketConnection"
+            || cls == "javax/microedition/io/StreamConnection"
+            || cls == "javax/microedition/io/ContentConnection"
+            || cls == "javax/microedition/io/InputConnection"
+            || cls == "javax/microedition/io/OutputConnection"
+            || cls == "javax/microedition/io/Connection"
+        {
+            match method_name {
+                "setRequestMethod" | "setRequestProperty" | "setSocketOption" | "close" => {
+                    return Ok(None);
+                }
+                "getResponseCode" => return Ok(Some(JavaValue::Int(200))),
+                "getResponseMessage" => {
+                    let s = heap.alloc_string("OK");
+                    return Ok(Some(JavaValue::Object(Some(s))));
+                }
+                "getLength" => return Ok(Some(JavaValue::Long(0))),
+                "getType" | "getEncoding" | "getHeaderField" | "getHeaderFieldKey"
+                | "getRequestProperty" => return Ok(Some(JavaValue::Object(None))),
+                "getExpiration" | "getDate" | "getLastModified" | "getHeaderFieldDate" => {
+                    return Ok(Some(JavaValue::Long(0)));
+                }
+                "getHeaderFieldInt" | "getSocketOption" => return Ok(Some(JavaValue::Int(0))),
+                "getPort" | "getLocalPort" => return Ok(Some(JavaValue::Int(80))),
+                "getAddress" | "getLocalAddress" => {
+                    let s = heap.alloc_string("127.0.0.1");
+                    return Ok(Some(JavaValue::Object(Some(s))));
+                }
+                "getURL" => {
+                    let s = heap.alloc_string("http://127.0.0.1/");
+                    return Ok(Some(JavaValue::Object(Some(s))));
+                }
+                "getHost" | "getProtocol" => {
+                    let s = heap.alloc_string("localhost");
+                    return Ok(Some(JavaValue::Object(Some(s))));
+                }
+                "openInputStream" | "openDataInputStream" => {
+                    let stream_id = heap.alloc_instance("java/io/ByteArrayInputStream");
+                    let empty_buf = heap.alloc_array(ArrayData::Byte(Vec::new()));
+                    heap.set_field(stream_id, "buf", JavaValue::Object(Some(empty_buf)));
+                    heap.set_field(stream_id, "pos", JavaValue::Int(0));
+                    heap.set_field(stream_id, "count", JavaValue::Int(0));
+                    if method_name == "openDataInputStream" {
+                        let dis_id = heap.alloc_instance("java/io/DataInputStream");
+                        heap.set_field(dis_id, "in", JavaValue::Object(Some(stream_id)));
+                        return Ok(Some(JavaValue::Object(Some(dis_id))));
+                    }
+                    return Ok(Some(JavaValue::Object(Some(stream_id))));
+                }
+                "openOutputStream" | "openDataOutputStream" => {
+                    let stream_id = heap.alloc_instance("java/io/ByteArrayOutputStream");
+                    let empty_buf = heap.alloc_array(ArrayData::Byte(Vec::new()));
+                    heap.set_field(stream_id, "buf", JavaValue::Object(Some(empty_buf)));
+                    heap.set_field(stream_id, "count", JavaValue::Int(0));
+                    if method_name == "openDataOutputStream" {
+                        let dos_id = heap.alloc_instance("java/io/DataOutputStream");
+                        heap.set_field(dos_id, "out", JavaValue::Object(Some(stream_id)));
+                        return Ok(Some(JavaValue::Object(Some(dos_id))));
+                    }
+                    return Ok(Some(JavaValue::Object(Some(stream_id))));
                 }
                 _ => {}
             }

@@ -231,8 +231,34 @@ impl J2meEmulator {
     }
 
     pub fn load_jar(&mut self, jar_bytes: &[u8]) -> Result<String, String> {
+        self.load_jar_with_filename(jar_bytes, None)
+    }
+
+    pub fn load_jar_with_filename(
+        &mut self,
+        jar_bytes: &[u8],
+        filename: Option<&str>,
+    ) -> Result<String, String> {
         let jar = JarArchive::parse(jar_bytes)?;
         let manifest = jar.manifest.clone().unwrap_or_default();
+
+        if let Some(f) = filename {
+            self.context.jar_filename = Some(f.to_string());
+        }
+        let effective_filename = filename.or(self.context.jar_filename.as_deref());
+
+        // 0. Resolution-Agnostic Engine: Auto-detect native resolution from Manifest, JAD, Filename, and Assets
+        let detected = j2me_core::jar::ResolutionDetector::detect(
+            Some(&manifest),
+            self.context.jad.as_ref(),
+            effective_filename,
+            Some(&jar),
+        );
+        self.set_screen_size(detected.width, detected.height);
+        println!(
+            " [RESOLUTION] Auto-detected native display: {}x{} (source: {})",
+            detected.width, detected.height, detected.source
+        );
 
         // Load all .class files from JAR into ClassLoader
         let mut _loaded = 0;
@@ -366,6 +392,7 @@ impl J2meEmulator {
                     }
                 }
             }
+            thread.strict_mode = self.context.strict_mode;
             self.scheduler.threads.push(thread);
         }
 
@@ -403,6 +430,7 @@ impl J2meEmulator {
         self.context.screen_width = width;
         self.context.screen_height = height;
         self.context.framebuffer = vec![0xFF000000; (width * height) as usize];
+        self.context.game_canvas_buffers.clear();
         self.context.graphics.width = width as i32;
         self.context.graphics.height = height as i32;
         self.context.graphics.clip_x = 0;
@@ -410,6 +438,14 @@ impl J2meEmulator {
         self.context.graphics.clip_w = width as i32;
         self.context.graphics.clip_h = height as i32;
         self.context.screen_dirty = true;
+    }
+
+    pub fn get_screen_resolution(&self) -> (u32, u32) {
+        (self.context.screen_width, self.context.screen_height)
+    }
+
+    pub fn set_jar_filename(&mut self, filename: &str) {
+        self.context.jar_filename = Some(filename.to_string());
     }
 
     /// Retrieves an application property following MIDP precedence (JAD overrides Manifest).
@@ -479,12 +515,26 @@ impl J2meEmulator {
         self.context.repaints_this_tick = 0;
         self.context.tick_budget_exhausted = false;
 
+        // Drain pending input before executing VM instruction slice and render
+        if self.last_displayable != self.context.current_displayable {
+            if self.last_displayable.is_some() {
+                self.input.canvas_changed();
+            }
+            self.last_displayable = self.context.current_displayable;
+        }
+        self.input.advance(self.scheduler.current_time_ms);
+        self.dispatch_ui();
+
         // Reset per-frame yield count for all active threads
         for t in &mut self.scheduler.threads {
             t.yield_count_in_frame = 0;
         }
 
-        let max_frame_instructions = 300_000;
+        let max_frame_instructions = if self.context.repaints_this_tick > 0 {
+            300_000
+        } else {
+            500_000
+        };
         let mut total_executed = 0;
 
         while total_executed < max_frame_instructions {
@@ -496,18 +546,16 @@ impl J2meEmulator {
                         self.dispatch_ui();
                         if let Some(idx) = self.scheduler.next_ready_thread_index() {
                             idx
-                        } else if self.scheduler.break_deadlocks() {
+                        } else {
+                            break;
+                        }
+                    } else if self.scheduler.threads.iter().filter(|t| t.is_alive()).all(|t| matches!(t.state, ThreadState::Blocked { .. })) && self.scheduler.active_thread_count() > 0 {
+                        if self.scheduler.break_deadlocks() {
                             if let Some(idx) = self.scheduler.next_ready_thread_index() {
                                 idx
                             } else {
                                 break;
                             }
-                        } else {
-                            break;
-                        }
-                    } else if self.scheduler.break_deadlocks() {
-                        if let Some(idx) = self.scheduler.next_ready_thread_index() {
-                            idx
                         } else {
                             break;
                         }
@@ -578,6 +626,7 @@ impl J2meEmulator {
                             .map(|o| o != tid)
                             .unwrap_or(false);
                         if owned_by_other {
+                            eprintln!("[EXC] IllegalMonitorStateException on monitorexit! tid={:?} m={:?} owner={:?}", tid, monitor, self.scheduler.get_monitor_owner(monitor));
                             let exc = self
                                 .heap
                                 .alloc_instance("java/lang/IllegalMonitorStateException");
@@ -594,9 +643,16 @@ impl J2meEmulator {
                 }
                 StepResult::ThreadFinished => {
                     let java_th_obj = self.scheduler.threads[ready_idx].java_thread_obj;
+                    let is_ui_dispatcher = self.scheduler.threads[ready_idx].name == UI_DISPATCHER_THREAD;
                     self.scheduler.threads[ready_idx].state = ThreadState::Terminated;
                     if let Some(target_obj) = java_th_obj {
                         self.scheduler.wake_threads_waiting_for(target_obj);
+                    }
+                    if is_ui_dispatcher {
+                        self.scheduler.clean_terminated();
+                        if !self.context.ui_queue.is_empty() {
+                            self.dispatch_ui();
+                        }
                     }
                 }
                 StepResult::NativeCall {
@@ -636,36 +692,20 @@ impl J2meEmulator {
                         ready_idx,
                     );
                     self.context.native_calls_count += 1;
-                    let res_str = match &res {
-                        Ok(Some(j2me_core::heap::value::JavaValue::Object(None))) => {
-                            "Null".to_string()
-                        }
-                        Ok(Some(j2me_core::heap::value::JavaValue::Object(Some(id)))) => {
-                            format!("Obj({})", id.0)
-                        }
-                        Ok(Some(j2me_core::heap::value::JavaValue::Int(v))) => {
-                            format!("Int({})", v)
-                        }
-                        Ok(Some(j2me_core::heap::value::JavaValue::Long(v))) => {
-                            format!("Long({})", v)
-                        }
-                        Ok(Some(j2me_core::heap::value::JavaValue::Float(v))) => {
-                            format!("Float({})", v)
-                        }
-                        Ok(Some(j2me_core::heap::value::JavaValue::Double(v))) => {
-                            format!("Double({})", v)
-                        }
-                        Ok(None) => "Void".to_string(),
-                        Err(e) => format!("Err({})", e),
-                    };
-                    let call_entry = format!(
-                        "{}.{}{} -> {}",
-                        class_name, method_name, descriptor, res_str
-                    );
                     if self.context.recent_native_calls.len() >= 8 {
                         self.context.recent_native_calls.pop_front();
                     }
-                    self.context.recent_native_calls.push_back(call_entry);
+                    if res.is_err() {
+                        self.context.recent_native_calls.push_back(format!(
+                            "{}.{}{} -> Err",
+                            class_name, method_name, descriptor
+                        ));
+                    } else {
+                        self.context.recent_native_calls.push_back(format!(
+                            "{}.{}",
+                            class_name, method_name
+                        ));
+                    }
 
                     let is_void = descriptor.ends_with(")V");
                     match res {
@@ -682,21 +722,35 @@ impl J2meEmulator {
                         Err(e) => {
                             if e.starts_with("EXC:") {
                                 let parts: Vec<&str> = e.split(':').collect();
-                                if parts.len() >= 3 {
-                                    if let Ok(raw_id) = parts[2].parse::<u32>() {
-                                        let exc_id = j2me_core::heap::object::ObjectId(raw_id);
-                                        if let StepResult::UnhandledException(eid) =
-                                            Interpreter::handle_athrow(
-                                                &mut self.scheduler.threads[ready_idx],
-                                                &mut self.heap,
-                                                &self.class_loader,
-                                                exc_id,
-                                            )
-                                        {
-                                            self.record_uncaught_exception(ready_idx, eid);
+                                if parts.len() >= 2 {
+                                    let exc_cls = parts[1].trim();
+                                    let exc_id = if parts.len() >= 3 {
+                                        if let Ok(raw_id) = parts[2].trim().parse::<u32>() {
+                                            j2me_core::heap::object::ObjectId(raw_id)
+                                        } else {
+                                            let inst = self.heap.alloc_instance(exc_cls);
+                                            let msg_sid = self.heap.alloc_string(parts[2].trim());
+                                            self.heap.set_field(
+                                                inst,
+                                                "detailMessage",
+                                                JavaValue::Object(Some(msg_sid)),
+                                            );
+                                            inst
                                         }
-                                        continue;
+                                    } else {
+                                        self.heap.alloc_instance(exc_cls)
+                                    };
+                                    if let StepResult::UnhandledException(eid) =
+                                        Interpreter::handle_athrow(
+                                            &mut self.scheduler.threads[ready_idx],
+                                            &mut self.heap,
+                                            &self.class_loader,
+                                            exc_id,
+                                        )
+                                    {
+                                        self.record_uncaught_exception(ready_idx, eid);
                                     }
+                                    continue;
                                 }
                             }
                             self.context.exception_telemetry.native_errors += 1;
@@ -797,6 +851,10 @@ impl J2meEmulator {
             self.scheduler.total_exceptions_thrown();
         self.context.exception_telemetry.guest_exceptions_caught =
             self.scheduler.total_exceptions_caught();
+        self.context.exception_telemetry.critical_exceptions_caught =
+            self.scheduler.total_critical_exceptions_caught();
+        self.context.exception_telemetry.caught_exception_classes =
+            self.scheduler.unique_caught_exception_classes();
         self.context.exception_telemetry.guest_exceptions_uncaught =
             self.scheduler.total_exceptions_uncaught();
         self.context.exception_telemetry.auto_healing_count =
@@ -810,6 +868,12 @@ impl J2meEmulator {
         for task_id in ready_timer_tasks {
             if let Some(ObjectData::Instance(inst)) = self.heap.get(task_id) {
                 let task_cls = inst.class_name.clone();
+                let th_name = format!("{}-TimerTask", task_cls);
+                // In Java, Timer tasks run sequentially on the timer's background thread.
+                // Do not spawn duplicate concurrent threads for an already-running timer task.
+                if self.scheduler.threads.iter().any(|t| t.name == th_name && t.is_alive()) {
+                    continue;
+                }
                 if let Some(run_m) = self.class_loader.find_method(&task_cls, "run", "()V") {
                     let mut task_frame = Frame::new(
                         task_cls.clone(),
@@ -826,9 +890,9 @@ impl J2meEmulator {
                     }
                     task_frame.set_local(0, JavaValue::Object(Some(task_id)));
                     self.scheduler.spawn(
-                        &format!("{}-TimerTask", task_cls),
+                        &th_name,
                         task_frame,
-                        Some(task_id),
+                        None,
                     );
                 }
             }
@@ -851,9 +915,11 @@ impl J2meEmulator {
                 .iter()
                 .map(|t| {
                     format!(
-                        "{}={:?}@{}",
+                        "{}={:?}@{}.{}@{}",
                         t.name,
                         t.state,
+                        t.call_stack.last().map(|f| f.class_name.as_str()).unwrap_or(""),
+                        t.call_stack.last().map(|f| f.method_name.as_str()).unwrap_or(""),
                         t.call_stack.last().map(|f| f.pc).unwrap_or(0)
                     )
                 })
@@ -931,12 +997,32 @@ impl J2meEmulator {
             ((self.context.audio.sample_rate as f64) * (delta_ms / 1000.0)).round() as usize;
         let active_player_keys: Vec<j2me_core::heap::object::ObjectId> =
             self.context.players.keys().copied().collect();
+
+        // Honest synchronous component-wise mixing across all active players
+        let mut mixed_frame = vec![0.0f32; audio_samples_per_frame];
+        let mut any_player_rendered = false;
+        let mut player_buf = Vec::with_capacity(audio_samples_per_frame);
+
         for key in active_player_keys {
             if let Some(player) = self.context.players.get_mut(&key) {
                 if player.state == crate::media::manager::STATE_STARTED {
-                    player
-                        .render_audio_into_buffer(audio_samples_per_frame, &mut self.context.audio);
+                    player_buf.clear();
+                    player.render_audio_samples(audio_samples_per_frame, &mut player_buf);
+                    if !player_buf.is_empty() {
+                        any_player_rendered = true;
+                        for (i, &s) in player_buf.iter().enumerate() {
+                            if i < mixed_frame.len() {
+                                mixed_frame[i] += s;
+                            }
+                        }
+                    }
                 }
+            }
+        }
+
+        if any_player_rendered {
+            for s in mixed_frame {
+                self.context.audio.write_sample(s.clamp(-1.0, 1.0));
             }
         }
         self.context.audio_time_us += t_audio.elapsed_micros();
@@ -1089,6 +1175,7 @@ impl J2meEmulator {
         self.context
             .layer_managers
             .retain(|id, _| self.heap.get(*id).is_some());
+        self.context.timers.purge_dead_objects(&self.heap);
 
         let active_gc_targets: std::collections::HashSet<j2me_core::heap::object::ObjectId> = self
             .context
@@ -1231,7 +1318,8 @@ impl J2meEmulator {
                     ca_frame.set_local(1, JavaValue::Object(Some(cmd_id)));
                     ca_frame.set_local(2, JavaValue::Object(Some(displayable)));
                     self.scheduler
-                        .spawn(UI_DISPATCHER_THREAD, ca_frame, Some(listener_id));
+                        .spawn(UI_DISPATCHER_THREAD, ca_frame, None);
+                    self.context.input_affected_game_state = true;
                     return true;
                 }
             }
@@ -1520,8 +1608,10 @@ impl J2meEmulator {
     /// keyPressed(), keyReleased(), showNotify(), and hideNotify() handlers run
     /// sequentially on this dispatch loop.
     pub fn dispatch_ui(&mut self) {
-        // Enqueue newly arrived key events
+        // Enqueue newly arrived key events if a Displayable is active
         while let Some(event) = self.input.next_event() {
+            self.context
+                .set_key(event.key, event.action == crate::input::KeyAction::Pressed);
             if let Some(disp_id) = self.context.current_displayable {
                 self.context
                     .ui_queue
@@ -1561,7 +1651,7 @@ impl J2meEmulator {
                             }
                             run_frame.set_local(0, JavaValue::Object(Some(r_id)));
                             self.scheduler
-                                .spawn(UI_DISPATCHER_THREAD, run_frame, Some(r_id));
+                                .spawn(UI_DISPATCHER_THREAD, run_frame, None);
                             return;
                         }
                     }
@@ -1576,6 +1666,11 @@ impl J2meEmulator {
                     {
                         self.context.ui_queue.coalesced += 1;
                         self.context.ui_queue.coalesced_repaints += 1;
+                        return;
+                    }
+                    // Throttle asynchronous repaints to max_repaints_per_tick per display tick
+                    if self.context.repaints_this_tick >= self.max_repaints_per_tick {
+                        self.context.ui_queue.defer_paint(disp_id);
                         return;
                     }
                     if let Some(ObjectData::Instance(inst)) = self.heap.get(disp_id) {
@@ -1610,7 +1705,7 @@ impl J2meEmulator {
                             self.context.paint_calls_count += 1;
                             self.context.repaints_this_tick += 1;
                             self.scheduler
-                                .spawn(UI_DISPATCHER_THREAD, paint_frame, Some(disp_id));
+                                .spawn(UI_DISPATCHER_THREAD, paint_frame, None);
                             return;
                         }
                     }
@@ -1623,11 +1718,13 @@ impl J2meEmulator {
                     self.context
                         .set_key(key, action == crate::input::KeyAction::Pressed);
 
-                    // MIDP 2.0 Command action dispatch for Soft1 (-6) and Soft2 (-7)
-                    if (key == -6 || key == -7) && action == crate::input::KeyAction::Pressed {
+                    // MIDP 2.0 Command action dispatch for Soft1 (-6, -21) and Soft2 (-7, -22)
+                    if (key == -6 || key == -7 || key == -21 || key == -22)
+                        && action == crate::input::KeyAction::Pressed
+                    {
                         let (soft1, soft2) =
                             self.context.get_soft_commands(displayable, &self.heap);
-                        let target_cmd = if key == -6 { soft1 } else { soft2 };
+                        let target_cmd = if key == -6 || key == -21 { soft1 } else { soft2 };
                         if let Some(cmd_id) = target_cmd {
                             if self.dispatch_command(displayable, cmd_id) {
                                 return;
@@ -1642,15 +1739,18 @@ impl J2meEmulator {
                                 // UP
                                 list.selected_index = (list.selected_index - 1).max(0);
                                 self.context.screen_dirty = true;
+                                self.context.input_affected_game_state = true;
                                 return;
                             } else if key == -2 {
                                 // DOWN
                                 list.selected_index = (list.selected_index + 1)
                                     .min((list.elements.len() as i32 - 1).max(0));
                                 self.context.screen_dirty = true;
+                                self.context.input_affected_game_state = true;
                                 return;
                             } else if key == -5 || key == 53 {
                                 // FIRE or 5
+                                self.context.input_affected_game_state = true;
                                 let idx = list.selected_index as usize;
                                 if list.list_type == 3 {
                                     // IMPLICIT: dispatch select_command or List.SELECT_COMMAND
@@ -1710,7 +1810,7 @@ impl J2meEmulator {
                                 self.class_loader.find_method(&cls, method_name, "(I)V")
                             {
                                 let mut key_frame = Frame::new(
-                                    cls,
+                                    cls.clone(),
                                     method_name.to_string(),
                                     "(I)V".to_string(),
                                     Arc::clone(&key_m.instructions),
@@ -1727,8 +1827,9 @@ impl J2meEmulator {
                                 self.scheduler.spawn(
                                     UI_DISPATCHER_THREAD,
                                     key_frame,
-                                    Some(displayable),
+                                    None,
                                 );
+                                self.context.input_affected_game_state = true;
                                 return;
                             }
                         }
@@ -1755,7 +1856,7 @@ impl J2meEmulator {
                             }
                             show_frame.set_local(0, JavaValue::Object(Some(disp_id)));
                             self.scheduler
-                                .spawn(UI_DISPATCHER_THREAD, show_frame, Some(disp_id));
+                                .spawn(UI_DISPATCHER_THREAD, show_frame, None);
                             return;
                         }
                     }
@@ -1781,7 +1882,7 @@ impl J2meEmulator {
                             }
                             hide_frame.set_local(0, JavaValue::Object(Some(disp_id)));
                             self.scheduler
-                                .spawn(UI_DISPATCHER_THREAD, hide_frame, Some(disp_id));
+                                .spawn(UI_DISPATCHER_THREAD, hide_frame, None);
                             return;
                         }
                     }
@@ -1812,21 +1913,119 @@ impl J2meEmulator {
 
     pub fn key_to_game_action(key: i32) -> i32 {
         match key {
-            -1 | 50 => 1,           // UP (or KEY_NUM2)
-            -3 | 52 => 2,           // LEFT (or KEY_NUM4)
-            -4 | 54 => 5,           // RIGHT (or KEY_NUM6)
-            -2 | 56 => 6,           // DOWN (or KEY_NUM8)
-            -5 | 53 | 10 | 32 => 8, // FIRE (or KEY_NUM5, Enter, Space)
-            49 | -6 => 9,           // GAME_A / SOFT1
-            51 | -7 => 10,          // GAME_B / SOFT2
-            55 => 11,               // GAME_C (KEY_NUM7)
-            57 => 12,               // GAME_D (KEY_NUM9)
+            -1 | 50 | 1 => 1,                 // UP (or KEY_NUM2 or Canvas.UP)
+            -3 | 52 | 2 => 2,                 // LEFT (or KEY_NUM4 or Canvas.LEFT)
+            -4 | 54 | 5 => 5,                 // RIGHT (or KEY_NUM6 or Canvas.RIGHT)
+            -2 | 56 | 6 => 6,                 // DOWN (or KEY_NUM8 or Canvas.DOWN)
+            -5 | 53 | 13 | 32 | 8 => 8,       // FIRE (or KEY_NUM5, Enter, Space or Canvas.FIRE)
+            49 | -6 | -21 | 9 => 9,           // GAME_A / SOFT1 / Motorola -21
+            51 | -7 | -22 | 10 => 10,         // GAME_B / SOFT2 / Motorola -22
+            55 | 11 => 11,                    // GAME_C (KEY_NUM7)
+            57 | 12 => 12,                    // GAME_D (KEY_NUM9)
             _ => 0,
+        }
+    }
+
+    pub fn pause_app(&mut self) {
+        if self.context.is_app_paused {
+            return;
+        }
+        self.context.is_app_paused = true;
+        if let Some(disp_id) = self.context.current_displayable {
+            self.context.ui_queue.post_hide_notify(disp_id);
+        }
+        if let Some(midlet_id) = self.midlet_obj {
+            if let Some(ObjectData::Instance(inst)) = self.heap.get(midlet_id) {
+                let cls = inst.class_name.clone();
+                if let Some(m) = self.class_loader.find_method(&cls, "pauseApp", "()V") {
+                    let mut frame = Frame::new(
+                        cls,
+                        "pauseApp".to_string(),
+                        "()V".to_string(),
+                        Arc::clone(&m.instructions),
+                        m.max_locals,
+                        m.max_stack,
+                        m.exception_table.clone(),
+                        Arc::clone(&m.pc_map),
+                    );
+                    if m.is_synchronized() {
+                        frame.sync_monitor = Some(midlet_id);
+                    }
+                    frame.set_local(0, JavaValue::Object(Some(midlet_id)));
+                    self.scheduler.spawn("Lifecycle-pauseApp", frame, None);
+                }
+            }
+        }
+    }
+
+    pub fn resume_app(&mut self) {
+        if !self.context.is_app_paused {
+            return;
+        }
+        self.context.is_app_paused = false;
+        if let Some(disp_id) = self.context.current_displayable {
+            self.context.ui_queue.post_show_notify(disp_id);
+            self.context.request_repaint(disp_id);
+        }
+        if self.scheduler.threads.iter().any(|t| (t.name == "Lifecycle-startApp" || t.name == "main") && t.is_alive()) {
+            return;
+        }
+        if let Some(midlet_id) = self.midlet_obj {
+            if let Some(ObjectData::Instance(inst)) = self.heap.get(midlet_id) {
+                let cls = inst.class_name.clone();
+                if let Some(m) = self.class_loader.find_method(&cls, "startApp", "()V") {
+                    let mut frame = Frame::new(
+                        cls,
+                        "startApp".to_string(),
+                        "()V".to_string(),
+                        Arc::clone(&m.instructions),
+                        m.max_locals,
+                        m.max_stack,
+                        m.exception_table.clone(),
+                        Arc::clone(&m.pc_map),
+                    );
+                    if m.is_synchronized() {
+                        frame.sync_monitor = Some(midlet_id);
+                    }
+                    frame.set_local(0, JavaValue::Object(Some(midlet_id)));
+                    self.scheduler.spawn("Lifecycle-startApp", frame, None);
+                }
+            }
+        }
+    }
+
+    pub fn destroy_app(&mut self, unconditional: bool) {
+        if let Some(midlet_id) = self.midlet_obj {
+            if let Some(ObjectData::Instance(inst)) = self.heap.get(midlet_id) {
+                let cls = inst.class_name.clone();
+                if let Some(m) = self.class_loader.find_method(&cls, "destroyApp", "(Z)V") {
+                    let mut frame = Frame::new(
+                        cls,
+                        "destroyApp".to_string(),
+                        "(Z)V".to_string(),
+                        Arc::clone(&m.instructions),
+                        m.max_locals,
+                        m.max_stack,
+                        m.exception_table.clone(),
+                        Arc::clone(&m.pc_map),
+                    );
+                    if m.is_synchronized() {
+                        frame.sync_monitor = Some(midlet_id);
+                    }
+                    frame.set_local(0, JavaValue::Object(Some(midlet_id)));
+                    frame.set_local(1, JavaValue::Int(if unconditional { 1 } else { 0 }));
+                    self.scheduler.spawn("Lifecycle-destroyApp", frame, None);
+                }
+            }
         }
     }
 
     pub fn set_strict_mode(&mut self, strict: bool) {
         self.context.strict_mode = strict;
+        self.scheduler.strict_mode = strict;
+        for t in &mut self.scheduler.threads {
+            t.strict_mode = strict;
+        }
     }
 
     pub fn is_strict_mode(&self) -> bool {
@@ -1938,6 +2137,8 @@ impl J2meEmulator {
             fb_publishes_count: self.context.fb_publishes_count,
             fb_changes_count: self.context.framebuffer_changes_count,
             input_events_count: self.context.input_delivered_count,
+            swallowed_exceptions_count: self.context.exception_telemetry.critical_exceptions_caught as usize,
+            unique_swallowed_classes: self.context.exception_telemetry.caught_exception_classes.clone(),
             auto_healing_events: self.context.exception_telemetry.auto_healing_events.clone(),
             last_uncaught_exception: self.context.exception_telemetry.last_uncaught.clone(),
             host_crash_error: None,

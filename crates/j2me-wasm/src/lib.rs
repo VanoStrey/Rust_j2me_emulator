@@ -365,6 +365,23 @@ pub extern "C" fn emu_fill_diagnostic_pattern() {
     }
 }
 
+/// Query whether guest application requested vibration; resets the flag upon reading
+#[no_mangle]
+pub extern "C" fn emu_poll_vibration() -> i32 {
+    unsafe {
+        if let Some(ref mut emu) = EMULATOR {
+            if emu.context.vibration_active {
+                emu.context.vibration_active = false;
+                1
+            } else {
+                0
+            }
+        } else {
+            0
+        }
+    }
+}
+
 /// Teardown and reset current emulator instance, releasing all tracked buffers
 #[no_mangle]
 pub extern "C" fn emu_destroy() {

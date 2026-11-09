@@ -47,6 +47,8 @@ pub struct GreenThread {
     pub instructions_executed: u64,
     pub exceptions_thrown: u64,
     pub exceptions_caught: u64,
+    pub critical_exceptions_caught: u64,
+    pub caught_exception_classes: std::collections::HashSet<String>,
     pub exceptions_uncaught: u64,
     pub auto_healing_count: u32,
     pub last_auto_healing_signature: Option<String>,
@@ -56,6 +58,7 @@ pub struct GreenThread {
     pub wait_start_instructions: u64,
     pub yield_count_in_frame: usize,
     pub consecutive_yields: usize,
+    pub strict_mode: bool,
 }
 
 impl GreenThread {
@@ -75,6 +78,8 @@ impl GreenThread {
             instructions_executed: 0,
             exceptions_thrown: 0,
             exceptions_caught: 0,
+            critical_exceptions_caught: 0,
+            caught_exception_classes: std::collections::HashSet::new(),
             exceptions_uncaught: 0,
             auto_healing_count: 0,
             last_auto_healing_signature: None,
@@ -84,6 +89,7 @@ impl GreenThread {
             wait_start_instructions: 0,
             yield_count_in_frame: 0,
             consecutive_yields: 0,
+            strict_mode: false,
         }
     }
 

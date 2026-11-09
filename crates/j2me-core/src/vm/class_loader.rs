@@ -41,13 +41,39 @@ pub struct ClassLoader {
     pub initialized_classes: HashSet<String>,
     pub class_objects: HashMap<String, ObjectId>,
     pub method_cache:
-        std::cell::RefCell<HashMap<(String, String, String), Option<Arc<PredecodedMethod>>>>,
-    pub field_owner_cache: std::cell::RefCell<HashMap<(String, String, String), String>>,
+        std::cell::RefCell<HashMap<u64, (String, String, String, Option<Arc<PredecodedMethod>>)>>,
+    pub field_owner_cache: std::cell::RefCell<HashMap<u64, (String, String, String, String)>>,
+    pub instance_of_cache: std::cell::RefCell<HashMap<u64, (String, String, bool)>>,
     pub method_cache_hits: std::cell::Cell<u64>,
     pub method_cache_misses: std::cell::Cell<u64>,
     pub field_cache_hits: std::cell::Cell<u64>,
     pub field_cache_misses: std::cell::Cell<u64>,
     pub cache_invalidations: std::cell::Cell<u64>,
+}
+
+#[inline]
+fn fnv1a_hash_str(mut hash: u64, s: &str) -> u64 {
+    const FNV_PRIME: u64 = 0x100000001b3;
+    for &byte in s.as_bytes() {
+        hash ^= byte as u64;
+        hash = hash.wrapping_mul(FNV_PRIME);
+    }
+    hash
+}
+
+#[inline]
+fn fast_hash3(a: &str, b: &str, c: &str) -> u64 {
+    const FNV_OFFSET: u64 = 0xcbf29ce484222325;
+    let h1 = fnv1a_hash_str(FNV_OFFSET, a);
+    let h2 = fnv1a_hash_str(h1 ^ 0x1f, b);
+    fnv1a_hash_str(h2 ^ 0x2f, c)
+}
+
+#[inline]
+fn fast_hash2(a: &str, b: &str) -> u64 {
+    const FNV_OFFSET: u64 = 0xcbf29ce484222325;
+    let h1 = fnv1a_hash_str(FNV_OFFSET, a);
+    fnv1a_hash_str(h1 ^ 0x1f, b)
 }
 
 #[inline]
@@ -346,6 +372,7 @@ impl ClassLoader {
         self.classes.insert(name, Arc::clone(&arc));
         self.method_cache.borrow_mut().clear();
         self.field_owner_cache.borrow_mut().clear();
+        self.instance_of_cache.borrow_mut().clear();
         self.cache_invalidations
             .set(self.cache_invalidations.get() + 1);
         arc
@@ -392,23 +419,29 @@ impl ClassLoader {
         descriptor: &str,
     ) -> Option<Arc<PredecodedMethod>> {
         let normalized = normalize_class_name(class_name);
+        let h = fast_hash3(normalized.as_ref(), method_name, descriptor);
+
+        if let Some((c, m, d, cached)) = self.method_cache.borrow().get(&h) {
+            if c == normalized.as_ref() && m == method_name && d == descriptor {
+                self.method_cache_hits.set(self.method_cache_hits.get() + 1);
+                return cached.clone();
+            }
+        }
+        self.method_cache_misses
+            .set(self.method_cache_misses.get() + 1);
+
         let key = (
             normalized.to_string(),
             method_name.to_string(),
             descriptor.to_string(),
         );
 
-        if let Some(cached) = self.method_cache.borrow().get(&key) {
-            self.method_cache_hits.set(self.method_cache_hits.get() + 1);
-            return cached.clone();
-        }
-        self.method_cache_misses
-            .set(self.method_cache_misses.get() + 1);
-
         // 1. Direct match on class
         if let Some(m) = self.predecoded_methods.get(&key) {
             let res = Some(Arc::clone(m));
-            self.method_cache.borrow_mut().insert(key, res.clone());
+            self.method_cache
+                .borrow_mut()
+                .insert(h, (key.0, key.1, key.2, res.clone()));
             return res;
         }
 
@@ -423,7 +456,9 @@ impl ClassLoader {
                 );
                 if let Some(m) = self.predecoded_methods.get(&super_key) {
                     let res = Some(Arc::clone(m));
-                    self.method_cache.borrow_mut().insert(key, res.clone());
+                    self.method_cache
+                        .borrow_mut()
+                        .insert(h, (key.0, key.1, key.2, res.clone()));
                     return res;
                 }
                 curr_class = self.get_class(super_name);
@@ -432,7 +467,9 @@ impl ClassLoader {
             }
         }
 
-        self.method_cache.borrow_mut().insert(key, None);
+        self.method_cache
+            .borrow_mut()
+            .insert(h, (key.0, key.1, key.2, None));
         None
     }
 
@@ -443,15 +480,13 @@ impl ClassLoader {
         descriptor: &str,
     ) -> String {
         let normalized = normalize_class_name(class_name);
-        let key = (
-            normalized.to_string(),
-            field_name.to_string(),
-            descriptor.to_string(),
-        );
+        let h = fast_hash3(normalized.as_ref(), field_name, descriptor);
 
-        if let Some(cached) = self.field_owner_cache.borrow().get(&key) {
-            self.field_cache_hits.set(self.field_cache_hits.get() + 1);
-            return cached.clone();
+        if let Some((c, f, d, cached)) = self.field_owner_cache.borrow().get(&h) {
+            if c == normalized.as_ref() && f == field_name && d == descriptor {
+                self.field_cache_hits.set(self.field_cache_hits.get() + 1);
+                return cached.clone();
+            }
         }
         self.field_cache_misses
             .set(self.field_cache_misses.get() + 1);
@@ -461,9 +496,15 @@ impl ClassLoader {
         while let Some(cls_name) = curr_name {
             if let Some(cls) = self.get_class(&cls_name) {
                 if cls.find_field(field_name, descriptor).is_some() {
-                    self.field_owner_cache
-                        .borrow_mut()
-                        .insert(key, cls_name.clone());
+                    self.field_owner_cache.borrow_mut().insert(
+                        h,
+                        (
+                            normalized.to_string(),
+                            field_name.to_string(),
+                            descriptor.to_string(),
+                            cls_name.clone(),
+                        ),
+                    );
                     return cls_name;
                 }
                 curr_name = cls.super_class.clone();
@@ -472,9 +513,15 @@ impl ClassLoader {
                     if fields.contains_key(&typed_key)
                         || (descriptor.is_empty() && fields.contains_key(field_name))
                     {
-                        self.field_owner_cache
-                            .borrow_mut()
-                            .insert(key, cls_name.clone());
+                        self.field_owner_cache.borrow_mut().insert(
+                            h,
+                            (
+                                normalized.to_string(),
+                                field_name.to_string(),
+                                descriptor.to_string(),
+                                cls_name.clone(),
+                            ),
+                        );
                         return cls_name;
                     }
                 }
@@ -483,9 +530,15 @@ impl ClassLoader {
         }
 
         let fallback = normalized.to_string();
-        self.field_owner_cache
-            .borrow_mut()
-            .insert(key, fallback.clone());
+        self.field_owner_cache.borrow_mut().insert(
+            h,
+            (
+                normalized.to_string(),
+                field_name.to_string(),
+                descriptor.to_string(),
+                fallback.clone(),
+            ),
+        );
         fallback
     }
 
@@ -521,22 +574,31 @@ impl ClassLoader {
     }
 
     pub fn is_instance_of(&self, actual_class: &str, target_class: &str) -> bool {
-        let act = actual_class.replace('.', "/");
-        let tgt = target_class.replace('.', "/");
+        let act = normalize_class_name(actual_class);
+        let tgt = normalize_class_name(target_class);
         if act == tgt || tgt == "java/lang/Object" {
             return true;
         }
 
+        let h = fast_hash2(act.as_ref(), tgt.as_ref());
+        if let Some((c1, c2, cached)) = self.instance_of_cache.borrow().get(&h) {
+            if c1 == act.as_ref() && c2 == tgt.as_ref() {
+                return *cached;
+            }
+        }
+
         let mut visited = HashSet::new();
         let mut queue = std::collections::VecDeque::new();
-        queue.push_back(act);
+        queue.push_back(act.to_string());
 
+        let mut result = false;
         while let Some(cls_name) = queue.pop_front() {
             if !visited.insert(cls_name.clone()) {
                 continue;
             }
-            if cls_name == tgt {
-                return true;
+            if cls_name == tgt.as_ref() {
+                result = true;
+                break;
             }
             if let Some(cls) = self.get_class(&cls_name) {
                 if let Some(ref sup) = cls.super_class {
@@ -579,7 +641,10 @@ impl ClassLoader {
                 }
             }
         }
-        false
+        self.instance_of_cache
+            .borrow_mut()
+            .insert(h, (act.to_string(), tgt.to_string(), result));
+        result
     }
 }
 

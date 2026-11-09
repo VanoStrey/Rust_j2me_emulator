@@ -13,6 +13,8 @@ pub enum MidiEventType {
     NoteOff { channel: u8, note: u8, velocity: u8 },
     NoteOn { channel: u8, note: u8, velocity: u8 },
     ProgramChange { channel: u8, program: u8 },
+    ControlChange { channel: u8, controller: u8, value: u8 },
+    PitchBend { channel: u8, value: i16 },
     SetTempo { us_per_quarter: u32 },
     EndOfTrack,
 }
@@ -210,9 +212,13 @@ impl<'a> TrackReader<'a> {
                 None
             }
             0xB0 => {
-                let _controller = self.read_byte();
-                let _value = self.read_byte();
-                None
+                let controller = self.read_byte();
+                let value = self.read_byte();
+                Some(MidiEventType::ControlChange {
+                    channel,
+                    controller,
+                    value,
+                })
             }
             0xC0 => {
                 let program = self.read_byte();
@@ -223,9 +229,13 @@ impl<'a> TrackReader<'a> {
                 None
             }
             0xE0 => {
-                let _lsb = self.read_byte();
-                let _msb = self.read_byte();
-                None
+                let lsb = self.read_byte() as i16;
+                let msb = self.read_byte() as i16;
+                let bend = ((msb << 7) | (lsb & 0x7F)) - 8192;
+                Some(MidiEventType::PitchBend {
+                    channel,
+                    value: bend,
+                })
             }
             0xF0 => {
                 if status == 0xFF {
@@ -262,6 +272,45 @@ impl<'a> TrackReader<'a> {
 // Polyphonic Synthesizer
 // =========================================================================
 
+use std::sync::OnceLock;
+
+const SINE_TABLE_SIZE: usize = 2048;
+static SINE_TABLE: OnceLock<Box<[f32; SINE_TABLE_SIZE]>> = OnceLock::new();
+
+#[inline(always)]
+fn get_sine_table() -> &'static [f32; SINE_TABLE_SIZE] {
+    SINE_TABLE.get_or_init(|| {
+        let mut table = Box::new([0.0f32; SINE_TABLE_SIZE]);
+        for i in 0..SINE_TABLE_SIZE {
+            let p = (i as f32) / (SINE_TABLE_SIZE as f32);
+            table[i] = (p * 2.0 * std::f32::consts::PI).sin();
+        }
+        table
+    })
+}
+
+#[inline(always)]
+fn fast_sin(phase: f32) -> f32 {
+    let table = get_sine_table();
+    let p = (phase - phase.floor()) * (SINE_TABLE_SIZE as f32);
+    let i0 = (p as usize) & (SINE_TABLE_SIZE - 1);
+    let i1 = (i0 + 1) & (SINE_TABLE_SIZE - 1);
+    let frac = p - (p as usize as f32);
+    table[i0] + (table[i1] - table[i0]) * frac
+}
+
+#[inline(always)]
+fn fast_soft_clip(x: f32) -> f32 {
+    let x2 = x * x;
+    if x2 < 9.0 {
+        x * (27.0 + x2) / (27.0 + 9.0 * x2)
+    } else if x > 0.0 {
+        1.0
+    } else {
+        -1.0
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum VoiceState {
     Off,
@@ -278,14 +327,22 @@ struct Voice {
     note: u8,
     velocity: f32,
     program: u8,
+    base_freq: f32,
+    pitch_bend: f32,
+    channel_volume: f32,
     freq: f32,
     phase: f32,
     state: VoiceState,
     envelope: f32,
+    env_attack_rate: f32,
+    env_decay_rate: f32,
+    env_sustain_level: f32,
+    env_release_rate: f32,
     state_time: f32,
     pitch_decay: f32,
     lfsr: u32,
     lpf_state: f32,
+    lpf_alpha: f32,
 }
 
 impl Default for Voice {
@@ -296,25 +353,43 @@ impl Default for Voice {
             note: 60,
             velocity: 0.8,
             program: 0,
+            base_freq: 440.0,
+            pitch_bend: 0.0,
+            channel_volume: 1.0,
             freq: 440.0,
             phase: 0.0,
             state: VoiceState::Off,
             envelope: 0.0,
+            env_attack_rate: 0.001,
+            env_decay_rate: 0.001,
+            env_sustain_level: 0.65,
+            env_release_rate: 0.001,
             state_time: 0.0,
             pitch_decay: 0.0,
             lfsr: 0xACE1,
             lpf_state: 0.0,
+            lpf_alpha: 0.5,
         }
     }
 }
 
 impl Voice {
-    fn note_on(&mut self, channel: u8, note: u8, velocity: u8, program: u8) {
+    fn note_on(
+        &mut self,
+        channel: u8,
+        note: u8,
+        velocity: u8,
+        program: u8,
+        pitch_bend: f32,
+        channel_volume: f32,
+    ) {
         self.active = true;
         self.channel = channel;
         self.note = note;
         self.velocity = (velocity as f32 / 127.0).clamp(0.05, 1.0);
         self.program = program;
+        self.pitch_bend = pitch_bend;
+        self.channel_volume = channel_volume.clamp(0.0, 1.0);
         self.phase = 0.0;
         self.state = VoiceState::Attack;
         self.state_time = 0.0;
@@ -323,7 +398,36 @@ impl Voice {
         self.lpf_state = 0.0;
 
         // Base frequency
-        self.freq = 440.0 * 2.0f32.powf((note as f32 - 69.0) / 12.0);
+        self.base_freq = 440.0 * 2.0f32.powf((note as f32 - 69.0) / 12.0);
+        self.freq = self.base_freq * 2.0f32.powf(pitch_bend / 12.0);
+
+        // Precompute low-pass filter alpha (nominal 44.1kHz sample rate)
+        let cutoff = (self.freq * 4.0).clamp(1200.0, 12000.0);
+        let dt = 1.0 / 44100.0;
+        self.lpf_alpha = (2.0 * std::f32::consts::PI * cutoff * dt).clamp(0.01, 0.95);
+
+        // Precompute ADSR envelope step rates
+        let attack_time = if self.channel == 9 { 0.002 } else { 0.015 };
+        let decay_time = if self.channel == 9 { 0.15 } else { 0.25 };
+        let sustain_level = if self.channel == 9 { 0.0 } else { 0.65 };
+        let release_time = if self.channel == 9 { 0.05 } else { 0.12 };
+
+        self.env_attack_rate = dt / attack_time;
+        self.env_decay_rate = (1.0 - sustain_level) * (dt / decay_time);
+        self.env_sustain_level = sustain_level;
+        self.env_release_rate = (sustain_level.max(0.1) / release_time) * dt;
+    }
+
+    fn update_pitch_bend(&mut self, pitch_bend: f32) {
+        self.pitch_bend = pitch_bend;
+        self.freq = self.base_freq * 2.0f32.powf(pitch_bend / 12.0);
+        let cutoff = (self.freq * 4.0).clamp(1200.0, 12000.0);
+        let dt = 1.0 / 44100.0;
+        self.lpf_alpha = (2.0 * std::f32::consts::PI * cutoff * dt).clamp(0.01, 0.95);
+    }
+
+    fn update_channel_volume(&mut self, channel_volume: f32) {
+        self.channel_volume = channel_volume.clamp(0.0, 1.0);
     }
 
     fn note_off(&mut self) {
@@ -341,44 +445,36 @@ impl Voice {
         let dt = 1.0 / sample_rate;
         self.state_time += dt;
 
-        // 1. Process ADSR Envelope
-        let attack_time = if self.channel == 9 { 0.002 } else { 0.015 };
-        let decay_time = if self.channel == 9 { 0.15 } else { 0.25 };
-        let sustain_level = if self.channel == 9 { 0.0 } else { 0.65 };
-        let release_time = if self.channel == 9 { 0.05 } else { 0.12 };
-
+        // 1. Process ADSR Envelope (Fast zero-division branchless stepping)
         match self.state {
             VoiceState::Attack => {
-                self.envelope += dt / attack_time;
+                self.envelope += self.env_attack_rate;
                 if self.envelope >= 1.0 {
                     self.envelope = 1.0;
                     self.state = VoiceState::Decay;
-                    self.state_time = 0.0;
                 }
             }
             VoiceState::Decay => {
-                let frac = (self.state_time / decay_time).min(1.0);
-                self.envelope = 1.0 - (1.0 - sustain_level) * frac;
-                if frac >= 1.0 {
-                    if sustain_level <= 0.0 {
+                self.envelope -= self.env_decay_rate;
+                if self.envelope <= self.env_sustain_level {
+                    if self.env_sustain_level <= 0.0 {
+                        self.envelope = 0.0;
                         self.state = VoiceState::Off;
                         self.active = false;
                         return 0.0;
                     } else {
+                        self.envelope = self.env_sustain_level;
                         self.state = VoiceState::Sustain;
                     }
                 }
             }
             VoiceState::Sustain => {
-                self.envelope = sustain_level;
-                // Drums automatically decay to zero in sustain
                 if self.channel == 9 {
                     self.state = VoiceState::Release;
-                    self.state_time = 0.0;
                 }
             }
             VoiceState::Release => {
-                self.envelope -= (sustain_level / release_time) * dt;
+                self.envelope -= self.env_release_rate;
                 if self.envelope <= 0.0 {
                     self.envelope = 0.0;
                     self.state = VoiceState::Off;
@@ -400,13 +496,11 @@ impl Voice {
         } else {
             // Melodic Synthesis based on General MIDI Program with Low-Pass Filtering
             let raw = self.render_melodic(dt);
-            let cutoff = (self.freq * 4.0).clamp(1200.0, 12000.0);
-            let alpha = (2.0 * std::f32::consts::PI * cutoff * dt).clamp(0.01, 0.95);
-            self.lpf_state += alpha * (raw - self.lpf_state);
+            self.lpf_state += self.lpf_alpha * (raw - self.lpf_state);
             self.lpf_state
         };
 
-        raw_sample * self.envelope * self.velocity * 0.18
+        raw_sample * self.envelope * self.velocity * self.channel_volume * 0.18
     }
 
     fn render_drum(&mut self, dt: f32) -> f32 {
@@ -424,7 +518,7 @@ impl Voice {
                 if self.phase >= 1.0 {
                     self.phase -= 1.0;
                 }
-                (self.phase * 2.0 * std::f32::consts::PI).sin() * 0.9
+                fast_sin(self.phase) * 0.9
             }
             38 | 40 => {
                 // Snare Drum: Noise + tone
@@ -432,7 +526,7 @@ impl Voice {
                 if self.phase >= 1.0 {
                     self.phase -= 1.0;
                 }
-                let tone = (self.phase * 2.0 * std::f32::consts::PI).sin() * 0.35;
+                let tone = fast_sin(self.phase) * 0.35;
                 noise * 0.5 + tone
             }
             42 | 44 | 46 => {
@@ -451,7 +545,7 @@ impl Voice {
                 if self.phase >= 1.0 {
                     self.phase -= 1.0;
                 }
-                (self.phase * 2.0 * std::f32::consts::PI).sin() * 0.8 + noise * 0.2
+                fast_sin(self.phase) * 0.8 + noise * 0.2
             }
         }
     }
@@ -465,21 +559,21 @@ impl Voice {
         match self.program {
             0..=7 => {
                 // Acoustic Pianos: Sine + warm harmonic
-                let h1 = (self.phase * 2.0 * std::f32::consts::PI).sin();
-                let h2 = (self.phase * 4.0 * std::f32::consts::PI).sin() * 0.25;
+                let h1 = fast_sin(self.phase);
+                let h2 = fast_sin(self.phase * 2.0) * 0.25;
                 h1 * 0.75 + h2
             }
             16..=23 => {
                 // Organs: Hammond drawbar combination (1st, 2nd, 3rd harmonics)
-                let h1 = (self.phase * 2.0 * std::f32::consts::PI).sin();
-                let h2 = (self.phase * 4.0 * std::f32::consts::PI).sin() * 0.35;
-                let h3 = (self.phase * 6.0 * std::f32::consts::PI).sin() * 0.18;
+                let h1 = fast_sin(self.phase);
+                let h2 = fast_sin(self.phase * 2.0) * 0.35;
+                let h3 = fast_sin(self.phase * 3.0) * 0.18;
                 (h1 + h2 + h3) * 0.55
             }
             24..=31 => {
                 // Guitars: Plucked waveform (sawtooth blend)
                 let saw = 2.0 * self.phase - 1.0;
-                let sine = (self.phase * 2.0 * std::f32::consts::PI).sin();
+                let sine = fast_sin(self.phase);
                 saw * 0.5 + sine * 0.5
             }
             32..=39 => {
@@ -489,7 +583,7 @@ impl Voice {
                 } else {
                     3.0 - 4.0 * self.phase
                 };
-                let sine = (self.phase * 2.0 * std::f32::consts::PI).sin();
+                let sine = fast_sin(self.phase);
                 tri * 0.65 + sine * 0.35
             }
             40..=55 => {
@@ -501,7 +595,7 @@ impl Voice {
                 // Brass: 35% duty cycle pulse with zero-mean DC balanced
                 // High for 0.35 of period (0.65), low for 0.65 of period (-0.35): DC offset = 0.35 * 0.65 - 0.65 * 0.35 = 0.0
                 let raw_pulse = if self.phase < 0.35 { 0.65 } else { -0.35 };
-                let sine = (self.phase * 2.0 * std::f32::consts::PI).sin() * 0.25;
+                let sine = fast_sin(self.phase) * 0.25;
                 raw_pulse + sine
             }
             64..=71 => {
@@ -512,7 +606,7 @@ impl Voice {
             }
             72..=79 => {
                 // Pipe: Pure sine with breathy triangle
-                let sine = (self.phase * 2.0 * std::f32::consts::PI).sin();
+                let sine = fast_sin(self.phase);
                 let tri = if self.phase < 0.5 {
                     4.0 * self.phase - 1.0
                 } else {
@@ -522,14 +616,14 @@ impl Voice {
             }
             80..=95 => {
                 // Synth Lead: Bandlimited odd harmonics instead of raw aliased square
-                let s1 = (self.phase * 2.0 * std::f32::consts::PI).sin();
-                let s3 = (self.phase * 6.0 * std::f32::consts::PI).sin() * (1.0 / 3.0);
-                let s5 = (self.phase * 10.0 * std::f32::consts::PI).sin() * (1.0 / 5.0);
+                let s1 = fast_sin(self.phase);
+                let s3 = fast_sin(self.phase * 3.0) * (1.0 / 3.0);
+                let s5 = fast_sin(self.phase * 5.0) * (1.0 / 5.0);
                 (s1 + s3 + s5) * 0.6
             }
             _ => {
                 // Default: Triangle + sine
-                let sine = (self.phase * 2.0 * std::f32::consts::PI).sin();
+                let sine = fast_sin(self.phase);
                 sine * 0.8
             }
         }
@@ -541,7 +635,9 @@ use super::manager::DcBlockingFilter;
 pub struct MidiSynthesizer {
     sequence: MidiSequence,
     voices: [Voice; 32],
-    programs: [u8; 16], // Current program per channel
+    programs: [u8; 16],        // Current program per channel
+    pitch_bends: [f32; 16],    // Pitch bend in semitones per channel
+    channel_volumes: [f32; 16],// Volume scale (0.0..1.0) per channel
     current_tick: u64,
     event_idx: usize,
     sample_rate: u32,
@@ -559,6 +655,8 @@ impl MidiSynthesizer {
             sequence,
             voices: std::array::from_fn(|_| Voice::default()),
             programs: [0; 16],
+            pitch_bends: [0.0; 16],
+            channel_volumes: [1.0; 16],
             current_tick: 0,
             event_idx: 0,
             sample_rate,
@@ -592,6 +690,17 @@ impl MidiSynthesizer {
         for voice in &mut self.voices {
             voice.active = false;
             voice.state = VoiceState::Off;
+        }
+    }
+
+    /// Smoothly transitions all currently active sounding voices to release phase,
+    /// preventing note accumulation/sticking across track loop iterations.
+    pub fn all_notes_off(&mut self) {
+        for voice in &mut self.voices {
+            if voice.active && voice.state != VoiceState::Off && voice.state != VoiceState::Release {
+                voice.state = VoiceState::Release;
+                voice.state_time = 0.0;
+            }
         }
     }
 
@@ -650,10 +759,14 @@ impl MidiSynthesizer {
     }
 
     fn allocate_voice(&mut self, channel: u8, note: u8, velocity: u8, program: u8) {
+        let ch_idx = (channel as usize).min(self.pitch_bends.len() - 1);
+        let bend = self.pitch_bends[ch_idx];
+        let vol = self.channel_volumes[ch_idx];
+
         // 1. Try to find an inactive voice
         for voice in &mut self.voices {
             if !voice.active {
-                voice.note_on(channel, note, velocity, program);
+                voice.note_on(channel, note, velocity, program, bend, vol);
                 return;
             }
         }
@@ -661,7 +774,7 @@ impl MidiSynthesizer {
         // 2. Try to find a voice in Release state
         for voice in &mut self.voices {
             if voice.state == VoiceState::Release {
-                voice.note_on(channel, note, velocity, program);
+                voice.note_on(channel, note, velocity, program, bend, vol);
                 return;
             }
         }
@@ -675,7 +788,7 @@ impl MidiSynthesizer {
                 min_idx = i;
             }
         }
-        self.voices[min_idx].note_on(channel, note, velocity, program);
+        self.voices[min_idx].note_on(channel, note, velocity, program, bend, vol);
     }
 
     fn release_voice(&mut self, channel: u8, note: u8) {
@@ -733,6 +846,53 @@ impl MidiSynthesizer {
                                 self.programs[channel as usize] = program;
                             }
                         }
+                        MidiEventType::ControlChange {
+                            channel,
+                            controller,
+                            value,
+                        } => {
+                            let ch_idx = channel as usize;
+                            if ch_idx < self.channel_volumes.len() {
+                                if controller == 7 {
+                                    // Channel Volume
+                                    let vol = value as f32 / 127.0;
+                                    self.channel_volumes[ch_idx] = vol;
+                                    for voice in &mut self.voices {
+                                        if voice.active && voice.channel == channel {
+                                            voice.update_channel_volume(vol);
+                                        }
+                                    }
+                                } else if controller == 11 {
+                                    // Expression Controller
+                                    let exp = value as f32 / 127.0;
+                                    self.channel_volumes[ch_idx] = exp;
+                                    for voice in &mut self.voices {
+                                        if voice.active && voice.channel == channel {
+                                            voice.update_channel_volume(exp);
+                                        }
+                                    }
+                                } else if controller == 120 || controller == 123 {
+                                    // All Sound Off / All Notes Off
+                                    for voice in &mut self.voices {
+                                        if voice.active && voice.channel == channel {
+                                            voice.note_off();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        MidiEventType::PitchBend { channel, value } => {
+                            let ch_idx = channel as usize;
+                            if ch_idx < self.pitch_bends.len() {
+                                let semitones = (value as f32 / 8192.0) * 2.0;
+                                self.pitch_bends[ch_idx] = semitones;
+                                for voice in &mut self.voices {
+                                    if voice.active && voice.channel == channel {
+                                        voice.update_pitch_bend(semitones);
+                                    }
+                                }
+                            }
+                        }
                         MidiEventType::SetTempo { us_per_quarter } => {
                             if us_per_quarter > 0 {
                                 self.tempo_us_per_quarter = us_per_quarter;
@@ -748,12 +908,12 @@ impl MidiSynthesizer {
                 if self.event_idx >= self.sequence.events.len()
                     || self.current_tick >= self.sequence.total_ticks
                 {
-                    if self.loop_count < 0 {
-                        // Infinite loop
-                        self.current_tick = 0;
-                        self.event_idx = 0;
-                    } else if self.loop_count > 1 {
-                        self.loop_count -= 1;
+                    if self.loop_count < 0 || self.loop_count > 1 {
+                        if self.loop_count > 1 {
+                            self.loop_count -= 1;
+                        }
+                        // Reset stuck notes before restarting timeline to avoid stacking polyphony
+                        self.all_notes_off();
                         self.current_tick = 0;
                         self.event_idx = 0;
                     } else {
@@ -766,17 +926,26 @@ impl MidiSynthesizer {
 
             // Mix active voices
             let mut sample_sum = 0.0f32;
+            let mut active_count = 0usize;
             let sr = self.sample_rate as f32;
             for voice in &mut self.voices {
                 if voice.active {
+                    active_count += 1;
                     sample_sum += voice.render_sample(sr);
                 }
             }
 
-            // Soft clipper / compressor with DC blocking to eliminate ground hum and asymmetry
-            let scaled = sample_sum * vol_scale;
+            if active_count == 0 {
+                dest.push(0.0);
+                continue;
+            }
+
+            // Dynamic polyphony normalization (Headroom Normalization)
+            // Psychoacoustic power-summation scaling prevents +20dB overdrive when many voices sound simultaneously
+            let headroom = (active_count as f32).sqrt();
+            let scaled = (sample_sum / headroom) * vol_scale;
             let dc_blocked = self.dc_blocker.process(scaled);
-            let clipped = dc_blocked.tanh();
+            let clipped = fast_soft_clip(dc_blocked);
             dest.push(clipped);
         }
     }
@@ -1017,7 +1186,7 @@ mod tests {
     #[test]
     fn test_brass_waveform_dc_offset_is_zero_mean() {
         let mut voice = Voice::default();
-        voice.note_on(0, 60, 100, 56); // Trumpet (Brass family, program 56)
+        voice.note_on(0, 60, 100, 56, 0.0, 1.0); // Trumpet (Brass family, program 56)
         let sr = 44100.0;
         let mut sum = 0.0f32;
         let samples = 44100;

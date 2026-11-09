@@ -37,10 +37,13 @@ pub struct Scheduler {
     pub total_completed_instructions: u64,
     pub total_completed_exceptions_thrown: u64,
     pub total_completed_exceptions_caught: u64,
+    pub total_completed_critical_exceptions_caught: u64,
+    pub completed_caught_exception_classes: std::collections::HashSet<String>,
     pub total_completed_exceptions_uncaught: u64,
     pub total_completed_auto_healings: u32,
     pub last_auto_healing_signature: Option<String>,
     pub monitors: HashMap<ObjectId, MonitorState>,
+    pub strict_mode: bool,
     next_id: u32,
 }
 
@@ -56,10 +59,13 @@ impl Default for Scheduler {
             total_completed_instructions: 0,
             total_completed_exceptions_thrown: 0,
             total_completed_exceptions_caught: 0,
+            total_completed_critical_exceptions_caught: 0,
+            completed_caught_exception_classes: std::collections::HashSet::new(),
             total_completed_exceptions_uncaught: 0,
             total_completed_auto_healings: 0,
             last_auto_healing_signature: None,
             monitors: HashMap::new(),
+            strict_mode: false,
             next_id: 1,
         }
     }
@@ -90,7 +96,8 @@ impl Scheduler {
         }
         let id = self.allocate_thread_id();
         let sync_monitor = initial_frame.sync_monitor;
-        let thread = GreenThread::new(id, name.to_string(), initial_frame, java_obj);
+        let mut thread = GreenThread::new(id, name.to_string(), initial_frame, java_obj);
+        thread.strict_mode = self.strict_mode;
         self.threads.push(thread);
         if let Some(m) = sync_monitor {
             if !self.try_acquire_monitor(id, m) {
@@ -154,11 +161,11 @@ impl Scheduler {
         for t in &self.threads {
             if let ThreadState::Waiting {
                 monitor: Some(mon),
-                timeout_wake_ms,
+                timeout_wake_ms: Some(wake_ms),
                 saved_recursion,
             } = t.state
             {
-                let is_time_elapsed = timeout_wake_ms.map_or(false, |wake_ms| self.current_time_ms >= wake_ms);
+                let is_time_elapsed = self.current_time_ms >= wake_ms;
                 let is_inst_elapsed = total_inst.saturating_sub(t.wait_start_instructions) > 200_000;
                 if is_time_elapsed || is_inst_elapsed {
                     timed_out.push((t.id, mon, saved_recursion));
@@ -494,22 +501,23 @@ impl Scheduler {
 
     /// Wakes any threads waiting on the target object (e.g. following Thread.join or thread termination).
     pub fn wake_threads_waiting_for(&mut self, target_obj: ObjectId) {
-        for t in &mut self.threads {
-            if let ThreadState::Waiting { monitor: Some(m), .. } = t.state {
-                if m == target_obj {
-                    t.state = ThreadState::Ready;
-                }
-            }
-        }
         if let Some(monitor) = self.monitors.get_mut(&target_obj) {
-            let mut woken = Vec::new();
-            monitor.wait_set.retain(|&(w_tid, _)| {
-                woken.push(w_tid);
-                false
-            });
-            for w_tid in woken {
-                if let Some(t) = self.threads.iter_mut().find(|t| t.id == w_tid) {
-                    t.state = ThreadState::Ready;
+            while !monitor.wait_set.is_empty() {
+                let (w_tid, saved_rec) = monitor.wait_set.remove(0);
+                if monitor.owner.is_none() {
+                    monitor.owner = Some(w_tid);
+                    monitor.recursion = saved_rec;
+                    if let Some(t) = self.threads.iter_mut().find(|t| t.id == w_tid) {
+                        t.state = ThreadState::Ready;
+                    }
+                } else {
+                    monitor.entry_set.push((w_tid, saved_rec));
+                    if let Some(t) = self.threads.iter_mut().find(|t| t.id == w_tid) {
+                        t.state = ThreadState::Blocked {
+                            monitor: target_obj,
+                            pending_recursion: saved_rec,
+                        };
+                    }
                 }
             }
         }
@@ -529,6 +537,10 @@ impl Scheduler {
             self.total_completed_instructions += t.instructions_executed;
             self.total_completed_exceptions_thrown += t.exceptions_thrown;
             self.total_completed_exceptions_caught += t.exceptions_caught;
+            self.total_completed_critical_exceptions_caught += t.critical_exceptions_caught;
+            for c in &t.caught_exception_classes {
+                self.completed_caught_exception_classes.insert(c.clone());
+            }
             self.total_completed_exceptions_uncaught += t.exceptions_uncaught;
             self.total_completed_auto_healings += t.auto_healing_count;
             if t.last_auto_healing_signature.is_some() {
@@ -594,6 +606,27 @@ impl Scheduler {
                 .iter()
                 .map(|t| t.exceptions_caught)
                 .sum::<u64>()
+    }
+
+    pub fn total_critical_exceptions_caught(&self) -> u64 {
+        self.total_completed_critical_exceptions_caught
+            + self
+                .threads
+                .iter()
+                .map(|t| t.critical_exceptions_caught)
+                .sum::<u64>()
+    }
+
+    pub fn unique_caught_exception_classes(&self) -> Vec<String> {
+        let mut set = self.completed_caught_exception_classes.clone();
+        for t in &self.threads {
+            for c in &t.caught_exception_classes {
+                set.insert(c.clone());
+            }
+        }
+        let mut list: Vec<String> = set.into_iter().collect();
+        list.sort();
+        list
     }
 
     pub fn total_exceptions_uncaught(&self) -> u64 {

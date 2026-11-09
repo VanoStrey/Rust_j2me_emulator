@@ -125,40 +125,41 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        frame.push(JavaValue::Int(0));
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Int(0));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     let val = match heap.get(arr_ref) {
-                        Some(crate::heap::object::ObjectData::Array(arr)) => match arr {
-                            ArrayData::Int(v) => v.get(index as usize).copied().map(JavaValue::Int),
-                            ArrayData::Byte(v) => v
-                                .get(index as usize)
-                                .copied()
-                                .map(|b| JavaValue::Int(b as i32)),
-                            ArrayData::Boolean(v) => v
-                                .get(index as usize)
-                                .copied()
-                                .map(|b| JavaValue::Int(if b { 1 } else { 0 })),
-                            ArrayData::Char(v) => v
-                                .get(index as usize)
-                                .copied()
-                                .map(|c| JavaValue::Int(c as i32)),
-                            ArrayData::Short(v) => v
-                                .get(index as usize)
-                                .copied()
-                                .map(|s| JavaValue::Int(s as i32)),
-                            _ => None,
-                        },
-                        _ => None,
+                        Some(crate::heap::object::ObjectData::Array(arr)) => {
+                            if (index as usize) >= arr.len() {
+                                return Self::throw_aiobe(thread, heap, class_loader);
+                            }
+                            match arr {
+                                ArrayData::Int(v) => v.get(index as usize).copied().map(JavaValue::Int),
+                                ArrayData::Byte(v) => v
+                                    .get(index as usize)
+                                    .copied()
+                                    .map(|b| JavaValue::Int(b as i32)),
+                                ArrayData::Boolean(v) => v
+                                    .get(index as usize)
+                                    .copied()
+                                    .map(|b| JavaValue::Int(if b { 1 } else { 0 })),
+                                ArrayData::Char(v) => v
+                                    .get(index as usize)
+                                    .copied()
+                                    .map(|c| JavaValue::Int(c as i32)),
+                                ArrayData::Short(v) => v
+                                    .get(index as usize)
+                                    .copied()
+                                    .map(|s| JavaValue::Int(s as i32)),
+                                _ => None,
+                            }
+                        }
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     };
                     match val {
                         Some(v) => frame.push(v),
@@ -172,29 +173,26 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        frame.push(JavaValue::Long(0));
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Long(0));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     match heap.get(arr_ref) {
-                        Some(crate::heap::object::ObjectData::Array(ArrayData::Long(v))) => {
-                            if let Some(&l) = v.get(index as usize) {
-                                frame.push(JavaValue::Long(l));
+                        Some(crate::heap::object::ObjectData::Array(arr)) => {
+                            if (index as usize) >= arr.len() {
+                                return Self::throw_aiobe(thread, heap, class_loader);
+                            }
+                            if let ArrayData::Long(v) = arr {
+                                frame.push(JavaValue::Long(v[index as usize]));
                             } else {
                                 frame.push(JavaValue::Long(0));
                             }
                         }
-                        _ => {
-                            frame.push(JavaValue::Long(0));
-                        }
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     }
                 }
                 Instruction::FALoad => {
@@ -202,29 +200,26 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        frame.push(JavaValue::Float(0.0));
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Float(0.0));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     match heap.get(arr_ref) {
-                        Some(crate::heap::object::ObjectData::Array(ArrayData::Float(v))) => {
-                            if let Some(&f) = v.get(index as usize) {
-                                frame.push(JavaValue::Float(f));
+                        Some(crate::heap::object::ObjectData::Array(arr)) => {
+                            if (index as usize) >= arr.len() {
+                                return Self::throw_aiobe(thread, heap, class_loader);
+                            }
+                            if let ArrayData::Float(v) = arr {
+                                frame.push(JavaValue::Float(v[index as usize]));
                             } else {
                                 frame.push(JavaValue::Float(0.0));
                             }
                         }
-                        _ => {
-                            frame.push(JavaValue::Float(0.0));
-                        }
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     }
                 }
                 Instruction::DALoad => {
@@ -232,29 +227,26 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        frame.push(JavaValue::Double(0.0));
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Double(0.0));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     match heap.get(arr_ref) {
-                        Some(crate::heap::object::ObjectData::Array(ArrayData::Double(v))) => {
-                            if let Some(&d) = v.get(index as usize) {
-                                frame.push(JavaValue::Double(d));
+                        Some(crate::heap::object::ObjectData::Array(arr)) => {
+                            if (index as usize) >= arr.len() {
+                                return Self::throw_aiobe(thread, heap, class_loader);
+                            }
+                            if let ArrayData::Double(v) = arr {
+                                frame.push(JavaValue::Double(v[index as usize]));
                             } else {
                                 frame.push(JavaValue::Double(0.0));
                             }
                         }
-                        _ => {
-                            frame.push(JavaValue::Double(0.0));
-                        }
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     }
                 }
                 Instruction::AALoad => {
@@ -262,29 +254,26 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        frame.push(JavaValue::Object(None));
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Object(None));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     match heap.get(arr_ref) {
-                        Some(crate::heap::object::ObjectData::Array(ArrayData::Reference(v))) => {
-                            if let Some(&r) = v.get(index as usize) {
-                                frame.push(JavaValue::Object(r));
+                        Some(crate::heap::object::ObjectData::Array(arr)) => {
+                            if (index as usize) >= arr.len() {
+                                return Self::throw_aiobe(thread, heap, class_loader);
+                            }
+                            if let ArrayData::Reference(v) = arr {
+                                frame.push(JavaValue::Object(v[index as usize]));
                             } else {
                                 frame.push(JavaValue::Object(None));
                             }
                         }
-                        _ => {
-                            frame.push(JavaValue::Object(None));
-                        }
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     }
                 }
 
@@ -337,53 +326,39 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => continue,
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     if let Some(crate::heap::object::ObjectData::Array(arr)) = heap.get_mut(arr_ref) {
+                        let idx = index as usize;
+                        if idx >= arr.len() {
+                            return Self::throw_aiobe(thread, heap, class_loader);
+                        }
                         match arr {
                             ArrayData::Int(v) => {
-                                let idx = index as usize;
-                                if idx >= v.len() {
-                                    v.resize(idx + 1, 0);
-                                }
                                 v[idx] = val;
                             }
                             ArrayData::Byte(v) => {
-                                let idx = index as usize;
-                                if idx >= v.len() {
-                                    v.resize(idx + 1, 0);
-                                }
                                 v[idx] = val as i8;
                             }
                             ArrayData::Boolean(v) => {
-                                let idx = index as usize;
-                                if idx >= v.len() {
-                                    v.resize(idx + 1, false);
-                                }
                                 v[idx] = val != 0;
                             }
                             ArrayData::Char(v) => {
-                                let idx = index as usize;
-                                if idx >= v.len() {
-                                    v.resize(idx + 1, 0);
-                                }
                                 v[idx] = val as u16;
                             }
                             ArrayData::Short(v) => {
-                                let idx = index as usize;
-                                if idx >= v.len() {
-                                    v.resize(idx + 1, 0);
-                                }
                                 v[idx] = val as i16;
                             }
                             _ => {}
                         }
+                    } else {
+                        return Self::throw_npe(thread, heap, class_loader);
                     }
                 }
                 Instruction::LAStore => {
@@ -395,22 +370,24 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => continue,
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     if let Some(crate::heap::object::ObjectData::Array(ArrayData::Long(v))) =
                         heap.get_mut(arr_ref)
                     {
                         let idx = index as usize;
                         if idx >= v.len() {
-                            v.resize(idx + 1, 0);
+                            return Self::throw_aiobe(thread, heap, class_loader);
                         }
                         v[idx] = val;
+                    } else {
+                        return Self::throw_npe(thread, heap, class_loader);
                     }
                 }
                 Instruction::FAStore => {
@@ -422,22 +399,24 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => continue,
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     if let Some(crate::heap::object::ObjectData::Array(ArrayData::Float(v))) =
                         heap.get_mut(arr_ref)
                     {
                         let idx = index as usize;
                         if idx >= v.len() {
-                            v.resize(idx + 1, 0.0);
+                            return Self::throw_aiobe(thread, heap, class_loader);
                         }
                         v[idx] = val;
+                    } else {
+                        return Self::throw_npe(thread, heap, class_loader);
                     }
                 }
                 Instruction::DAStore => {
@@ -449,22 +428,24 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => continue,
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     if let Some(crate::heap::object::ObjectData::Array(ArrayData::Double(v))) =
                         heap.get_mut(arr_ref)
                     {
                         let idx = index as usize;
                         if idx >= v.len() {
-                            v.resize(idx + 1, 0.0);
+                            return Self::throw_aiobe(thread, heap, class_loader);
                         }
                         v[idx] = val;
+                    } else {
+                        return Self::throw_npe(thread, heap, class_loader);
                     }
                 }
                 Instruction::AAStore => {
@@ -476,22 +457,24 @@ impl Interpreter {
                         Ok(i) => i,
                         Err(e) => return StepResult::Error(e),
                     };
-                    if index < 0 {
-                        continue;
-                    }
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => continue,
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
+                    if index < 0 {
+                        return Self::throw_aiobe(thread, heap, class_loader);
+                    }
                     if let Some(crate::heap::object::ObjectData::Array(ArrayData::Reference(v))) =
                         heap.get_mut(arr_ref)
                     {
                         let idx = index as usize;
                         if idx >= v.len() {
-                            v.resize(idx + 1, None);
+                            return Self::throw_aiobe(thread, heap, class_loader);
                         }
                         v[idx] = val;
+                    } else {
+                        return Self::throw_npe(thread, heap, class_loader);
                     }
                 }
 
@@ -1557,15 +1540,12 @@ impl Interpreter {
                 Instruction::ArrayLength => {
                     let arr_ref = match frame.pop_ref() {
                         Ok(Some(id)) => id,
-                        Ok(None) => {
-                            frame.push(JavaValue::Int(0));
-                            continue;
-                        }
+                        Ok(None) => return Self::throw_npe(thread, heap, class_loader),
                         Err(e) => return StepResult::Error(e),
                     };
                     let len = match heap.get(arr_ref) {
                         Some(crate::heap::object::ObjectData::Array(arr)) => arr.len(),
-                        _ => 0,
+                        _ => return Self::throw_npe(thread, heap, class_loader),
                     };
                     frame.push(JavaValue::Int(len as i32));
                 }
@@ -1657,15 +1637,27 @@ impl Interpreter {
                     frame.push(JavaValue::Int(if is_inst { 1 } else { 0 }));
                 }
                 Instruction::MonitorEnter => {
-                    let r = frame.pop_ref().unwrap();
+                    let r = match frame.pop_ref() {
+                        Ok(r) => r,
+                        Err(e) => return StepResult::Error(e),
+                    };
                     if let Some(id) = r {
                         return StepResult::MonitorEnter(id);
+                    } else {
+                        let exc = heap.alloc_instance("java/lang/NullPointerException");
+                        return Self::handle_athrow(thread, heap, class_loader, exc);
                     }
                 }
                 Instruction::MonitorExit => {
-                    let r = frame.pop_ref().unwrap();
+                    let r = match frame.pop_ref() {
+                        Ok(r) => r,
+                        Err(e) => return StepResult::Error(e),
+                    };
                     if let Some(id) = r {
                         return StepResult::MonitorExit(id);
+                    } else {
+                        let exc = heap.alloc_instance("java/lang/NullPointerException");
+                        return Self::handle_athrow(thread, heap, class_loader, exc);
                     }
                 }
                 Instruction::MultiANewArray {
@@ -1862,7 +1854,6 @@ impl Interpreter {
         Self::handle_athrow(thread, heap, class_loader, id)
     }
 
-    #[allow(dead_code)]
     fn throw_aiobe(
         thread: &mut GreenThread,
         heap: &mut Heap,
@@ -2039,6 +2030,21 @@ impl Interpreter {
             }
             if let Some(frame) = thread.call_stack.last_mut() {
                 thread.exceptions_caught += 1;
+                thread.caught_exception_classes.insert(exc_name.clone());
+                let is_critical = exc_name == "java/lang/NullPointerException"
+                    || exc_name == "java/lang/NoClassDefFoundError"
+                    || exc_name == "java/lang/ClassNotFoundException"
+                    || exc_name == "java/lang/NoSuchMethodError"
+                    || exc_name == "java/lang/NoSuchFieldError"
+                    || exc_name == "java/lang/ArrayIndexOutOfBoundsException"
+                    || exc_name == "java/lang/ArrayStoreException"
+                    || exc_name == "java/lang/IllegalStateException";
+                if is_critical {
+                    thread.critical_exceptions_caught += 1;
+                    if std::env::var_os("J2ME_LOG_CRIT_EXC").is_some() {
+                        eprintln!("[CRIT_EXC] Caught {} msg={:?} at {}.{}:{} in thread {}", exc_name, exc_msg, throw_class, throw_method, throw_pc, thread.name);
+                    }
+                }
                 thread.last_exception_event = Some(ExceptionEvent {
                     exception_class: exc_name,
                     message: exc_msg,
@@ -2075,7 +2081,7 @@ impl Interpreter {
             stack_trace: stack_trace.clone(),
         });
 
-        if thread.call_stack.len() > 1 {
+        if !thread.strict_mode && thread.call_stack.len() > 1 {
             thread.auto_healing_count += 1;
             thread.last_auto_healing_signature = Some(signature);
             if let Some(ref ev) = thread.last_exception_event {

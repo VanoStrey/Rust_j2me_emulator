@@ -90,6 +90,16 @@ impl UiEventQueue {
         self.paint_pending = Some(displayable_id);
     }
 
+    /// Defers a repaint for the specified displayable to the front of the queue,
+    /// marking it as pending so subsequent request_repaint calls coalesce into it.
+    pub fn defer_paint(&mut self, displayable_id: ObjectId) {
+        if self.paint_pending == Some(displayable_id) {
+            return;
+        }
+        self.events.push_front(UiEvent::Paint(displayable_id));
+        self.paint_pending = Some(displayable_id);
+    }
+
     /// Posts a keyboard input event with explicit bounded capacity.
     pub fn post_key(&mut self, key: i32, action: KeyAction, displayable: ObjectId) -> bool {
         self.posted += 1;

@@ -45,6 +45,11 @@ impl GarbageCollector {
             }
         }
 
+        // 2b. Class loader class objects (java/lang/Class instances)
+        for id in class_loader.class_objects.values() {
+            roots.push(*id);
+        }
+
         // 3. Extra native roots
         roots.extend_from_slice(extra_roots);
 

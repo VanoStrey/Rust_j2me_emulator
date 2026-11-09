@@ -46,8 +46,10 @@ pub struct VmContext {
     pub layer_managers: HashMap<ObjectId, LayerManagerState>,
     pub rms: RmsManager,
     pub audio: AudioRingBuffer,
+    pub audio_api_invoked: bool,
     pub players: HashMap<ObjectId, Player>,
     pub current_displayable: Option<ObjectId>,
+    pub is_app_paused: bool,
     pub key_states: i32,
     pub latched_key_states: i32,
     pub suppress_key_events: bool,
@@ -69,6 +71,7 @@ pub struct VmContext {
     pub lights_level: i32,
     pub jar: Option<JarArchive>,
     pub jad: Option<j2me_core::jar::Jad>,
+    pub jar_filename: Option<String>,
     pub rng_seed: u64,
     pub displayable_commands: HashMap<ObjectId, DisplayableCommands>,
     pub native_calls_count: u64,
@@ -124,6 +127,8 @@ pub struct AutoHealingEvent {
 pub struct ExceptionTelemetry {
     pub guest_exceptions_thrown: u64,
     pub guest_exceptions_caught: u64,
+    pub critical_exceptions_caught: u64,
+    pub caught_exception_classes: Vec<String>,
     pub guest_exceptions_uncaught: u64,
     pub auto_healing_count: u32,
     pub last_auto_healing_signature: Option<String>,
@@ -187,6 +192,8 @@ pub struct RuntimeObservabilityReport {
     pub fb_publishes_count: u64,
     pub fb_changes_count: u64,
     pub input_events_count: u64,
+    pub swallowed_exceptions_count: usize,
+    pub unique_swallowed_classes: Vec<String>,
     pub auto_healing_events: Vec<AutoHealingEvent>,
     pub last_uncaught_exception: Option<GuestExceptionRecord>,
     pub host_crash_error: Option<String>,
@@ -333,8 +340,10 @@ impl VmContext {
             layer_managers: HashMap::new(),
             rms: RmsManager::new(),
             audio: AudioRingBuffer::new(sample_rate),
+            audio_api_invoked: false,
             players: HashMap::new(),
             current_displayable: None,
+            is_app_paused: false,
             key_states: 0,
             latched_key_states: 0,
             suppress_key_events: false,
@@ -356,6 +365,7 @@ impl VmContext {
             lights_level: 100,
             jar: None,
             jad: None,
+            jar_filename: None,
             rng_seed: 0x123456789ABCDEF0,
             displayable_commands: HashMap::new(),
             native_calls_count: 0,
@@ -584,17 +594,19 @@ impl VmContext {
             -4 | 54 | 5 => 1 << 5,           // RIGHT (or KEY_NUM6 or Canvas.RIGHT)
             -2 | 56 | 6 => 1 << 6,           // DOWN (or KEY_NUM8 or Canvas.DOWN)
             -5 | 53 | 8 | 13 | 32 => 1 << 8, // FIRE (or KEY_NUM5, Enter(13), Space(32) or Canvas.FIRE)
-            49 | -6 | 9 => 1 << 9,           // GAME_A / SOFT1 / Canvas.GAME_A
-            51 | -7 | 10 => 1 << 10,         // GAME_B / SOFT2 / Canvas.GAME_B
+            49 | -6 | -21 | 9 => 1 << 9,     // GAME_A / SOFT1 / Canvas.GAME_A / Motorola -21
+            51 | -7 | -22 | 10 => 1 << 10,   // GAME_B / SOFT2 / Canvas.GAME_B / Motorola -22
             55 | 11 => 1 << 11,              // GAME_C / KEY_NUM7 / Canvas.GAME_C
             57 | 12 => 1 << 12,              // GAME_D / KEY_NUM9 / Canvas.GAME_D
             _ => 0,
         };
-        if pressed {
-            self.key_states |= bit;
-            self.latched_key_states |= bit;
-        } else {
-            self.key_states &= !bit;
+        if bit != 0 {
+            if pressed {
+                self.key_states |= bit;
+                self.latched_key_states |= bit;
+            } else {
+                self.key_states &= !bit;
+            }
         }
     }
 

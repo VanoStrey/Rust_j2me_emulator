@@ -235,3 +235,45 @@ fn test_sprite_set_transform_preserves_reference_pixel_position() {
     assert_eq!(spr.x, 100, "Sprite x must restore to 100");
     assert_eq!(spr.y, 100, "Sprite y must restore to 100");
 }
+
+#[test]
+fn test_strict_mode_prevents_auto_healing_and_returns_unhandled_exception() {
+    let mut heap = Heap::new();
+    let cl = ClassLoader::new();
+
+    let parent_frame = Frame::new(
+        "com/game/Engine".to_string(),
+        "run".to_string(),
+        "()V".to_string(),
+        Arc::new(vec![Instruction::Nop, Instruction::Return]),
+        4,
+        4,
+        vec![],
+        Arc::new(HashMap::new()),
+    );
+    let mut thread = GreenThread::new(ThreadId(1), "main".to_string(), parent_frame, None);
+    thread.strict_mode = true; // Strict mode enabled
+
+    let child_frame = Frame::new(
+        "com/game/Physics".to_string(),
+        "step".to_string(),
+        "()I".to_string(),
+        Arc::new(vec![Instruction::AThrow]),
+        4,
+        4,
+        vec![], // No catch block
+        Arc::new(HashMap::new()),
+    );
+    thread.call_stack.push(child_frame);
+
+    let exc_id = heap.alloc_instance("java/lang/NullPointerException");
+    let step_res = Interpreter::handle_athrow(&mut thread, &mut heap, &cl, exc_id);
+
+    // In strict mode, Auto-Healing MUST NOT intervene: it must return UnhandledException
+    assert!(
+        matches!(step_res, StepResult::UnhandledException(_)),
+        "Strict mode must return UnhandledException instead of auto-healing"
+    );
+    assert_eq!(thread.auto_healing_count, 0, "Auto-healing count must remain 0 in strict mode");
+}
+

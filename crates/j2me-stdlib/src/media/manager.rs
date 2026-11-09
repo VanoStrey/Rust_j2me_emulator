@@ -64,6 +64,7 @@ pub struct AudioRingBuffer {
     pub overflow_count: u64,
     pub peak_level: f32,
     pub clipped_samples: u64,
+    pub total_energy: f64,
     pub dc_blocker: DcBlockingFilter,
 }
 
@@ -80,6 +81,7 @@ impl AudioRingBuffer {
             overflow_count: 0,
             peak_level: 0.0,
             clipped_samples: 0,
+            total_energy: 0.0,
             dc_blocker: DcBlockingFilter::new(0.995),
         }
     }
@@ -87,6 +89,7 @@ impl AudioRingBuffer {
     pub fn write_sample(&mut self, raw_sample: f32) {
         self.generated_samples += 1;
         let sample = self.dc_blocker.process(raw_sample);
+        self.total_energy += (sample * sample) as f64;
         let abs = sample.abs();
         if abs > self.peak_level {
             self.peak_level = abs;
@@ -321,17 +324,13 @@ impl Player {
         0
     }
 
-    pub fn render_audio_into_buffer(&mut self, count: usize, audio: &mut AudioRingBuffer) {
+    pub fn render_audio_samples(&mut self, count: usize, dest: &mut Vec<f32>) {
         if self.state != STATE_STARTED {
             return;
         }
 
         if let Some(ref mut synth) = self.midi_synth {
-            let mut samples = Vec::new();
-            synth.render_samples(count, &mut samples);
-            for s in samples {
-                audio.write_sample(s);
-            }
+            synth.render_samples(count, dest);
         } else if let Some(ref wav) = self.wav_decoder {
             let vol = self.volume.clamp(0, 100) as f32 / 100.0;
             let available = wav.samples.len().saturating_sub(self.wav_play_head);
@@ -339,6 +338,7 @@ impl Player {
             let total_len = wav.samples.len();
             let fade_len = ((self.sample_rate as f32 * 0.0025).round() as usize).clamp(8, (total_len / 4).max(8));
 
+            dest.reserve(chunk_size);
             for i in 0..chunk_size {
                 let current_idx = self.wav_play_head + i;
                 let mut s = wav.samples[current_idx];
@@ -356,7 +356,7 @@ impl Player {
                     }
                 }
 
-                audio.write_sample(s * vol);
+                dest.push(s * vol);
             }
             self.wav_play_head += chunk_size;
 
@@ -370,6 +370,14 @@ impl Player {
                     self.state = STATE_PREFETCHED;
                 }
             }
+        }
+    }
+
+    pub fn render_audio_into_buffer(&mut self, count: usize, audio: &mut AudioRingBuffer) {
+        let mut samples = Vec::with_capacity(count);
+        self.render_audio_samples(count, &mut samples);
+        for s in samples {
+            audio.write_sample(s);
         }
     }
 }

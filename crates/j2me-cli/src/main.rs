@@ -19,11 +19,391 @@ use std::env;
 use std::fs;
 use std::time::Instant;
 
+mod fuzzer;
+mod gui_server;
 mod market;
 mod scenario;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    // 0. Subcommand Dispatch: fuzz or batch-fuzz
+    if args.len() > 1 && (args[1] == "fuzz" || args[1] == "--fuzz" || args[1] == "batch-fuzz" || args[1] == "--batch-fuzz") {
+        let is_batch_cmd = args[1] == "batch-fuzz" || args[1] == "--batch-fuzz";
+        let mut target_jar: Option<String> = None;
+        let mut target_dir: Option<String> = if is_batch_cmd {
+            Some("/Users/foolvan/Desktop/j2me_market/roms/Games".to_string())
+        } else {
+            None
+        };
+        let mut target_ticks: usize = if is_batch_cmd { 1500 } else { 500 };
+        let mut target_count: usize = 50;
+        let mut seed: u64 = 42;
+        let mut f_dump_dir = "./dumps/fuzz".to_string();
+        let mut crashes_dir = "./crashes".to_string();
+        let mut report_path: Option<String> = None;
+
+        let mut idx = 2;
+        while idx < args.len() {
+            match args[idx].as_str() {
+                "--jar" => {
+                    if idx + 1 < args.len() {
+                        target_jar = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--dir" | "--batch" => {
+                    if idx + 1 < args.len() {
+                        target_dir = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--count" | "--limit" => {
+                    if idx + 1 < args.len() {
+                        target_count = args[idx + 1].parse().unwrap_or(50);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--ticks" => {
+                    if idx + 1 < args.len() {
+                        target_ticks = args[idx + 1].parse().unwrap_or(500);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--seed" => {
+                    if idx + 1 < args.len() {
+                        seed = args[idx + 1].parse().unwrap_or(42);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--dump-dir" => {
+                    if idx + 1 < args.len() {
+                        f_dump_dir = args[idx + 1].clone();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--crashes-dir" => {
+                    if idx + 1 < args.len() {
+                        crashes_dir = args[idx + 1].clone();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--report" => {
+                    if idx + 1 < args.len() {
+                        report_path = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                other => {
+                    if !other.starts_with('-') {
+                        let path = std::path::Path::new(other);
+                        if path.is_dir() && target_dir.is_none() {
+                            target_dir = Some(other.to_string());
+                        } else if target_jar.is_none() {
+                            target_jar = Some(other.to_string());
+                        }
+                    }
+                    idx += 1;
+                }
+            }
+        }
+
+        // Batch Mode
+        if let Some(dir_path) = target_dir {
+            match fuzzer::run_batch_fuzzer(
+                &dir_path,
+                target_count,
+                target_ticks,
+                seed,
+                &crashes_dir,
+                report_path.as_deref(),
+            ) {
+                Ok(summary) => {
+                    if summary.panics > 0 {
+                        std::process::exit(3);
+                    } else if summary.hard_anomalies > 0 {
+                        std::process::exit(2);
+                    } else {
+                        std::process::exit(0);
+                    }
+                }
+                Err(e) => {
+                    eprintln!("[FATAL] Batch fuzzing error: {}", e);
+                    std::process::exit(1);
+                }
+            }
+        }
+
+        // Single Mode
+        let jar = match target_jar {
+            Some(j) => j,
+            None => {
+                eprintln!("[ERROR] fuzz requires --jar <path_to_jar> or --dir <path_to_roms_dir>");
+                std::process::exit(1);
+            }
+        };
+
+        match fuzzer::run_fuzzer(&jar, target_ticks, seed, &f_dump_dir) {
+            Ok(summary) => {
+                if summary.anomaly.is_some() {
+                    std::process::exit(2);
+                } else {
+                    std::process::exit(0);
+                }
+            }
+            Err(e) => {
+                eprintln!("[FATAL] Fuzzing error: {}", e);
+                std::process::exit(1);
+            }
+        }
+    }
+
+    // 0b. Subcommand Dispatch: replay
+    if args.len() > 1 && (args[1] == "replay" || args[1] == "--replay") {
+        let mut replay_file: Option<String> = None;
+        let mut custom_ticks: Option<usize> = None;
+
+        let mut idx = 2;
+        while idx < args.len() {
+            match args[idx].as_str() {
+                "--file" => {
+                    if idx + 1 < args.len() {
+                        replay_file = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--ticks" => {
+                    if idx + 1 < args.len() {
+                        custom_ticks = args[idx + 1].parse().ok();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                other => {
+                    if !other.starts_with('-') && replay_file.is_none() {
+                        replay_file = Some(other.to_string());
+                    }
+                    idx += 1;
+                }
+            }
+        }
+
+        let file = match replay_file {
+            Some(f) => f,
+            None => {
+                eprintln!("[ERROR] replay requires --file <path_to_json> or positional path");
+                std::process::exit(1);
+            }
+        };
+
+        if let Err(e) = fuzzer::run_replay(&file, custom_ticks) {
+            eprintln!("[FATAL] Replay error: {}", e);
+            std::process::exit(1);
+        }
+        return;
+    }
+
+    // 0c. Subcommand Dispatch: triage-manual
+    if args.len() > 1 && (args[1] == "triage-manual" || args[1] == "--triage-manual") {
+        let mut roms_dir = "/Users/foolvan/Desktop/j2me_market/roms/Games".to_string();
+        let mut batch_size: usize = 100;
+        let mut select_count: usize = 10;
+        let mut ticks: usize = 500;
+        let mut seed: u64 = 42;
+        let mut crashes_dir = "crashes/".to_string();
+        let mut output_path = "reports/manual_review_queue.md".to_string();
+
+        let mut idx = 2;
+        while idx < args.len() {
+            match args[idx].as_str() {
+                "--batch-size" | "--batch" | "--count" => {
+                    if idx + 1 < args.len() {
+                        batch_size = args[idx + 1].parse().unwrap_or(100);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--select" | "--select-count" | "--top" => {
+                    if idx + 1 < args.len() {
+                        select_count = args[idx + 1].parse().unwrap_or(10);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--output" | "--report" => {
+                    if idx + 1 < args.len() {
+                        output_path = args[idx + 1].clone();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--dir" | "--roms-dir" => {
+                    if idx + 1 < args.len() {
+                        roms_dir = args[idx + 1].clone();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--ticks" => {
+                    if idx + 1 < args.len() {
+                        ticks = args[idx + 1].parse().unwrap_or(500);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--seed" => {
+                    if idx + 1 < args.len() {
+                        seed = args[idx + 1].parse().unwrap_or(42);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--crashes-dir" => {
+                    if idx + 1 < args.len() {
+                        crashes_dir = args[idx + 1].clone();
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                other => {
+                    if !other.starts_with('-') && std::path::Path::new(other).is_dir() {
+                        roms_dir = other.to_string();
+                    }
+                    idx += 1;
+                }
+            }
+        }
+
+        match fuzzer::run_triage_manual(
+            &roms_dir,
+            batch_size,
+            select_count,
+            ticks,
+            seed,
+            &crashes_dir,
+            &output_path,
+        ) {
+            Ok(candidates) => {
+                println!(
+                    "\n✅ [TRIAGE COMPLETE] Successfully ranked {} Grey Zone candidates in {}",
+                    candidates.len(),
+                    output_path
+                );
+                std::process::exit(0);
+            }
+            Err(e) => {
+                eprintln!("[FATAL] Triage error: {}", e);
+                std::process::exit(1);
+            }
+        }
+    }
+
+    // 0d. Subcommand Dispatch: gui
+    if args.len() > 1 && (args[1] == "gui" || args[1] == "--gui") {
+        let mut jar_path: Option<String> = None;
+        let mut jad_path: Option<String> = None;
+        let mut port: u16 = 8080;
+        let mut no_browser = false;
+
+        let mut idx = 2;
+        while idx < args.len() {
+            match args[idx].as_str() {
+                "--jar" => {
+                    if idx + 1 < args.len() {
+                        jar_path = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--jad" => {
+                    if idx + 1 < args.len() {
+                        jad_path = Some(args[idx + 1].clone());
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--port" => {
+                    if idx + 1 < args.len() {
+                        port = args[idx + 1].parse().unwrap_or(8080);
+                        idx += 2;
+                    } else {
+                        idx += 1;
+                    }
+                }
+                "--no-browser" => {
+                    no_browser = true;
+                    idx += 1;
+                }
+                other => {
+                    if !other.starts_with('-') && jar_path.is_none() {
+                        jar_path = Some(other.to_string());
+                    }
+                    idx += 1;
+                }
+            }
+        }
+
+        let jar = match jar_path {
+            Some(j) => j,
+            None => {
+                eprintln!("[ERROR] gui requires a path to a .jar file, e.g.: cargo run -p j2me-cli -- gui <game.jar>");
+                std::process::exit(1);
+            }
+        };
+
+        let jad_candidate = jad_path
+            .map(std::path::PathBuf::from)
+            .or_else(|| {
+                let cand = std::path::Path::new(&jar).with_extension("jad");
+                if cand.is_file() {
+                    Some(cand)
+                } else {
+                    None
+                }
+            });
+
+        let opts = gui_server::GuiServerOptions {
+            jar_path: std::path::PathBuf::from(jar),
+            jad_path: jad_candidate,
+            port,
+            open_browser: !no_browser,
+        };
+
+        if let Err(e) = gui_server::launch_gui(opts) {
+            eprintln!("[FATAL] GUI server error: {}", e);
+            std::process::exit(1);
+        }
+        return;
+    }
+
     println!("============================================================");
     println!(" Rust J2ME Emulator (CLDC 1.1 / MIDP 2.0 / Nokia UI / MMAPI)");
     println!(" Native Runner & Verification Test Suite");
@@ -32,6 +412,8 @@ fn main() {
     let mut jar_path: Option<String> = None;
     let mut jad_path: Option<String> = None;
     let mut ticks: usize = 300;
+    let mut ticks_specified: bool = false;
+    let mut headless: bool = false;
     let mut dump_dir: String = "./dumps".to_string();
     let mut audio_dump: Option<String> = None;
     let mut input_script: Option<String> = None;
@@ -40,6 +422,10 @@ fn main() {
     let mut i = 1;
     while i < args.len() {
         match args[i].as_str() {
+            "--headless" => {
+                headless = true;
+                i += 1;
+            }
             "--jar" => {
                 if i + 1 < args.len() {
                     jar_path = Some(args[i + 1].clone());
@@ -57,6 +443,7 @@ fn main() {
                 }
             }
             "--ticks" => {
+                ticks_specified = true;
                 if i + 1 < args.len() {
                     ticks = args[i + 1].parse().unwrap_or(300);
                     i += 2;
@@ -254,6 +641,33 @@ fn main() {
     }
 
     if let Some(path) = jar_path {
+        // If not explicitly headless/benchmark and no custom input script/ticks, launch interactive phone GUI
+        if !headless && !ticks_specified && input_script.is_none() && audio_dump.is_none() {
+            let jad_candidate = jad_path
+                .map(std::path::PathBuf::from)
+                .or_else(|| {
+                    let cand = std::path::Path::new(&path).with_extension("jad");
+                    if cand.is_file() {
+                        Some(cand)
+                    } else {
+                        None
+                    }
+                });
+
+            let opts = gui_server::GuiServerOptions {
+                jar_path: std::path::PathBuf::from(&path),
+                jad_path: jad_candidate,
+                port: 8080,
+                open_browser: true,
+            };
+
+            if let Err(e) = gui_server::launch_gui(opts) {
+                eprintln!("[FATAL] GUI server error: {}", e);
+                std::process::exit(1);
+            }
+            return;
+        }
+
         run_jar(
             &path,
             jad_path.as_deref(),
@@ -854,7 +1268,10 @@ fn run_jar(
             }
 
             let t_load_start = Instant::now();
-            let load_res = emu.load_jar(&bytes);
+            let jar_fname = std::path::Path::new(path)
+                .file_name()
+                .and_then(|s| s.to_str());
+            let load_res = emu.load_jar_with_filename(&bytes, jar_fname);
             let load_time_ms = t_load_start.elapsed().as_secs_f64() * 1000.0;
 
             match load_res {
@@ -910,6 +1327,8 @@ fn run_jar(
                                 241 => emu.key_event(-6, false),
                                 270 => emu.key_event(-5, true),
                                 271 => emu.key_event(-5, false),
+                                f if f > 271 && f % 60 == 0 => emu.key_event(-5, true),
+                                f if f > 271 && f % 60 == 5 => emu.key_event(-5, false),
                                 _ => {}
                             }
                         }
@@ -949,10 +1368,16 @@ fn run_jar(
                                 }
                             }
 
+                            let thread_info = emu.scheduler.threads.iter().filter(|t| t.is_alive()).map(|t| {
+                                let top = t.current_frame().map(|f| format!("{}.{}:{}", f.class_name, f.method_name, f.pc)).unwrap_or_default();
+                                format!("{}(inst={}, top={})", t.name, t.instructions_executed, top)
+                            }).collect::<Vec<_>>().join(", ");
+
                             println!(
-                                "Frame {:03}/{} ticked. Threads: {} | Screen non-black: {}/{} pixels (colors: {}{})",
+                                "Frame {:03}/{} ticked. Threads: {} [{}] | Screen non-black: {}/{} pixels (colors: {}{})",
                                 frame, ticks,
                                 emu.scheduler.active_thread_count(),
+                                thread_info,
                                 non_black, fb.len(),
                                 unique_colors.len(),
                                 if unique_colors.len() > 100 { "+" } else { "" }
@@ -996,16 +1421,24 @@ fn run_jar(
                                 let audible =
                                     captured_audio.iter().filter(|s| s.abs() > 0.001).count();
                                 let clipped =
-                                    captured_audio.iter().filter(|s| s.abs() >= 0.999).count();
+                                    captured_audio.iter().filter(|s| s.abs() >= 0.990).count();
+                                let rms = if !captured_audio.is_empty() {
+                                    (captured_audio.iter().map(|s| s * s).sum::<f32>() / captured_audio.len() as f32).sqrt()
+                                } else {
+                                    0.0
+                                };
+                                let clip_pct = clipped as f32 * 100.0 / captured_audio.len().max(1) as f32;
                                 println!(
-                                    "  => Audio dump: {} | {} samples @ {} Hz ({:.2}s) | audible {:.1}% | peak {:.3} | clipped {}",
+                                    "  => Audio dump: {} | {} samples @ {} Hz ({:.2}s) | RMS {:.4} | peak {:.3} | clipped {} ({:.3}%) | audible {:.1}%",
                                     audio_path,
                                     captured_audio.len(),
                                     rate,
                                     captured_audio.len() as f32 / rate.max(1) as f32,
-                                    audible as f32 * 100.0 / captured_audio.len().max(1) as f32,
+                                    rms,
                                     peak,
-                                    clipped
+                                    clipped,
+                                    clip_pct,
+                                    audible as f32 * 100.0 / captured_audio.len().max(1) as f32,
                                 );
                             }
                             Err(e) => eprintln!("Failed to write audio dump {}: {}", audio_path, e),

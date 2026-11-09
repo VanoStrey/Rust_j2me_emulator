@@ -1237,7 +1237,7 @@ pub fn run_single_midlet(
     let unhandled_native = emu.context.unhandled_native_calls;
 
     let obs = emu.evaluate_observability(timed_out_wall);
-    let mut runtime_status = match obs.verdict {
+    let runtime_status = match obs.verdict {
         j2me_stdlib::bridge::context::TestVerdict::Pass => "COMPLETED_WINDOW".to_string(),
         j2me_stdlib::bridge::context::TestVerdict::Partial => "PARTIAL".to_string(),
         j2me_stdlib::bridge::context::TestVerdict::Degraded => "DEGRADED".to_string(),
@@ -1461,6 +1461,7 @@ pub fn repair_and_sanitize_jsonl(path: &str) -> std::io::Result<usize> {
     Ok(valid_boundary)
 }
 
+#[allow(dead_code)]
 pub fn build_full_run_key(
     jar_sha256: &str,
     jad_sha256: Option<&str>,
@@ -1480,6 +1481,7 @@ pub fn build_full_run_key(
     )
 }
 
+#[allow(dead_code)]
 pub fn validate_experiment_manifest_compatibility(
     manifest_path: &str,
     current_exe_sha256: &str,

@@ -65,14 +65,21 @@ impl TimerManager {
         is_fixed_rate: bool,
         current_time_ms: u64,
     ) -> Result<(), &'static str> {
-        // A task cannot be scheduled more than once or if already cancelled
+        // A task cannot be scheduled more than once if currently scheduled
         if let Some(existing_timer_id) = self.task_to_timer.get(&task_id) {
             if let Some(existing_timer) = self.timers.get(existing_timer_id) {
                 if let Some(t) = existing_timer.tasks.iter().find(|t| t.task_id == task_id) {
-                    if t.state != TaskState::Virgin {
-                        return Err("IllegalStateException: Task already scheduled or cancelled");
+                    if t.state == TaskState::Scheduled {
+                        return Err("IllegalStateException: Task already scheduled");
                     }
                 }
+            }
+        }
+
+        // Clear any old completed or cancelled task entry if this ObjectId was recycled by GC
+        if let Some(existing_timer_id) = self.task_to_timer.remove(&task_id) {
+            if let Some(existing_timer) = self.timers.get_mut(&existing_timer_id) {
+                existing_timer.tasks.retain(|t| t.task_id != task_id);
             }
         }
 
@@ -130,6 +137,16 @@ impl TimerManager {
             }
         }
         false
+    }
+
+    pub fn purge_dead_objects(&mut self, heap: &j2me_core::heap::Heap) {
+        for timer in self.timers.values_mut() {
+            timer.tasks.retain(|t| heap.get(t.task_id).is_some());
+        }
+        self.timers.retain(|id, _| heap.get(*id).is_some());
+        self.task_to_timer.retain(|task_id, timer_id| {
+            heap.get(*task_id).is_some() && heap.get(*timer_id).is_some()
+        });
     }
 
     pub fn scheduled_execution_time(&self, task_id: ObjectId) -> Option<u64> {
